@@ -3,7 +3,7 @@
  * 頭に _ のついてないローカル変数はすべて EXPORT の対象となる
  */
 
-function foobar0() {
+function commonFoobar0() {
 }
 
 function _notExported() {

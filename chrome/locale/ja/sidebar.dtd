@@ -1,9 +1,1 @@
-<!ENTITY Matchfox.sidebar.loginDescription "はてなブックマークサイドバーを利用するには、はてなへログインする必要があります">
-<!ENTITY Matchfox.sidebar.loginLabel "はてなへログイン">
-<!ENTITY Matchfox.sidebar.loginURI "https://www.hatena.ne.jp/login?via=1000018&amp;location=http&#37;3A&#37;2F&#37;2Fb.hatena.ne.jp&#37;2F&#37;3Ffrom&#37;3Dfirefox">
-
-<!ENTITY Matchfox.sidebar.title "はてなブックマークサイドバー">
-<!ENTITY Matchfox.sidebar.searchLabel "検索:">
-<!ENTITY Matchfox.sidebar.tagsLabel "タグ">
-<!ENTITY Matchfox.sidebar.tagCountLabel "件数">
-<!ENTITY Matchfox.sidebar.bookmarksLabel "ブックマーク">
+<!ENTITY Matchfox.sidebar.title "Matchfoxサイドバー">

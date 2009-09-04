@@ -14,7 +14,7 @@
     >
   <prefpane 
      image="chrome://matchfox/skin/images/transparent.png"
-     id="prefpane-locationbar" label="&Matchfox.config.general;" flex="1">
+     id="prefpane0" label="&Matchfox.config.pane0;" flex="1">
     <preferences>
       <preference 
          id="extensions.matchfox.version"
@@ -23,12 +23,12 @@
     </preferences>
     <vbox>
       <groupbox orient="vertical">
-        <caption label="&Matchfox.config.toolbar;" />
+        <caption label="&Matchfox.config.version;" />
         <vbox flex="1">
           <hbox flex="1" align="center">
-            <label value="&Matchfox.config.toolbarMaxItem;"
-                   control="recentItemCount"/>
-            <textbox id="recentItemCount"
+            <label value="&Matchfox.config.versionNumber;"
+                   control="versionNumber0"/>
+            <textbox id="versionNumber0"
                      preference="extensions.matchfox.version"
                      type="number" min="1" increment="1" max="200"
                      style="width: 5em;"
@@ -41,7 +41,7 @@
 
   <prefpane 
      image="chrome://matchfox/skin/images/transparent.png"
-     id="prefpane-locationbar1" label="&Matchfox.config.browsing;" flex="1">
+     id="prefpane1" label="&Matchfox.config.pane1;" flex="1">
     <preferences>
       <preference 
          id="extensions.matchfox.version"
@@ -50,12 +50,12 @@
     </preferences>
     <vbox>
       <groupbox orient="vertical">
-        <caption label="&Matchfox.config.toolbar;" />
+        <caption label="&Matchfox.config.version;" />
         <vbox flex="1">
           <hbox flex="1" align="center">
-            <label value="&Matchfox.config.toolbarMaxItem;"
-                   control="recentItemCount1"/>
-            <textbox id="recentItemCount1"
+            <label value="&Matchfox.config.versionNumber;"
+                   control="versionNumber1"/>
+            <textbox id="versionNumber1"
                      preference="extensions.matchfox.version"
                      type="number" min="1" increment="1" max="200"
                      style="width: 5em;"

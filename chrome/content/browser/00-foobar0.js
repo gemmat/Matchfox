@@ -1,6 +1,6 @@
-const EXPORT = ['foobar0'];
+const EXPORT = ['browserFoobar0'];
 
-function foobar0() {
+function browserFoobar0() {
 }
 
 function notExported() {
