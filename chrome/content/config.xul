@@ -12,6 +12,60 @@
     xmlns:html="http://www.w3.org/1999/xhtml"
     title="&hBookmark.config.title;"
     >
+  <prefpane 
+     image="chrome://matchfox/skin/images/transparent.png"
+     id="prefpane-locationbar" label="&hBookmark.config.general;" flex="1">
+    <preferences>
+      <preference 
+         id="extensions.matchfox.version"
+         name="extensions.matchfox.version"
+         type="int"/>
+    </preferences>
+    <vbox>
+      <groupbox orient="vertical">
+        <caption label="&hBookmark.config.toolbar;" />
+        <vbox flex="1">
+          <hbox flex="1" align="center">
+            <label value="&hBookmark.config.toolbarMaxItem;"
+                   control="recentItemCount"/>
+            <textbox id="recentItemCount"
+                     preference="extensions.matchfox.version"
+                     type="number" min="1" increment="1" max="200"
+                     style="width: 5em;"
+                     />
+          </hbox>
+        </vbox>
+      </groupbox>
+    </vbox>
+  </prefpane>
+
+  <prefpane 
+     image="chrome://matchfox/skin/images/transparent.png"
+     id="prefpane-locationbar1" label="&hBookmark.config.browsing;" flex="1">
+    <preferences>
+      <preference 
+         id="extensions.matchfox.version"
+         name="extensions.matchfox.version"
+         type="int"/>
+    </preferences>
+    <vbox>
+      <groupbox orient="vertical">
+        <caption label="&hBookmark.config.toolbar;" />
+        <vbox flex="1">
+          <hbox flex="1" align="center">
+            <label value="&hBookmark.config.toolbarMaxItem;"
+                   control="recentItemCount1"/>
+            <textbox id="recentItemCount1"
+                     preference="extensions.matchfox.version"
+                     type="number" min="1" increment="1" max="200"
+                     style="width: 5em;"
+                     />
+          </hbox>
+        </vbox>
+      </groupbox>
+    </vbox>
+  </prefpane>
+
   <script type="application/x-javascript" src="chrome://browser/content/utilityOverlay.js"></script>
   <script type="application/javascript; version=1.8" charset="utf-8" src="chrome://matchfox/content/autoloader.js" />
 </prefwindow>
