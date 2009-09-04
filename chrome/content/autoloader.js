@@ -5,10 +5,11 @@ Components.utils.import("resource://matchfox/modules/00-utils.jsm",
                         Matchfox);
 
 /**
- * 指定されたURIのスクリプトを読み込む。
+ * load script files at the specified URI.
  *
- * @param {String} uri スクリプトのURI。"/"で終わっていた場合は
- *                     そのディレクトリ直下のすべてのスクリプトを読み込む。
+ * @param {String} uri the URI of the script file.
+ *                     When it's terminated with "/",
+ *                     loads the directory recursively.
  */
 Matchfox.load = function (uri) {
     if (uri.charAt(uri.length - 1) === "/") {
@@ -35,7 +36,7 @@ Matchfox.load.getScriptURIs = function (dirURI) {
     var em = Cc["@mozilla.org/extensions/manager;1"]
                  .getService(Ci.nsIExtensionManager);
     var baseURI = 'chrome://matchfox/' + dirPath;
-    // XXX jarファイルに固めるのならnsIZipReaderを使ってごにょごにょする。
+    // XXX if you want to package them in the jar file, the nsIZipReader will be some help.
     var dir = em.getInstallLocation(EXTENSION_ID)
                 .getItemFile(EXTENSION_ID, "chrome/" + dirPath);
     if (!dir.exists() || !dir.isDirectory()) return uris;

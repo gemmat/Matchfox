@@ -1,4 +1,8 @@
-// エクスポートしたくないメンバの名前はアンダースコア(_)からはじめること。
+/*
+ * In this utils file,
+ * global variables and functions are exported,
+ * unless the name is prefixed with "_".
+ */
 
 const Cc = Components.classes;
 const Ci = Components.interfaces;

@@ -1,6 +1,7 @@
 /*
- * utils 内部では、
- * 頭に _ のついてないローカル変数はすべて EXPORT の対象となる
+ * In this utils file,
+ * global variables and functions are exported,
+ * unless the name is prefixed with "_".
  */
 
 function commonFoobar0() {
