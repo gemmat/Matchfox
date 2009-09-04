@@ -1,12 +1,30 @@
 <?xml version="1.0" ?>
-<?xml-stylesheet type="text/css" href="chrome://matchfox/skin/toolbar.css"?>
 <?xml-stylesheet type="text/css" href="chrome://matchfox/skin/browser.css"?>
-<!DOCTYPE overlay SYSTEM "chrome://matchfox/locale/browser.dtd" [
-    <!ENTITY % toolbar SYSTEM "chrome://matchfox/locale/toolbar.dtd">
-    %toolbar;
-]>
+<!DOCTYPE overlay SYSTEM "chrome://matchfox/locale/browser.dtd">
 <overlay id="HatenabookmarkOverlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
     xmlns:html="http://www.w3.org/1999/xhtml"
 >
     <script type="application/javascript" src="autoloader.js"></script>
+
+    <menupopup id="viewSidebarMenu">
+        <menuitem key="key_viewHBookmarkSidebar" observes="viewHBookmarkSidebar" />
+    </menupopup>
+
+    <keyset id="mainKeyset">
+      <key id="key_viewHBookmarkSidebar" command="viewHBookmarkSidebar"
+           key="&hBookmark.sidebar.key;"
+           modifiers="&hBookmark.sidebar.modifiers;"/>
+    </keyset>
+
+    <broadcasterset id="mainBroadcasterSet">
+        <broadcaster id="viewHBookmarkSidebar"
+                     label="&hBookmark.sidebar.label;"
+                     autoCheck="false"
+                     type="checkbox"
+                     group="sidebar"
+                     sidebarurl="chrome://matchfox/content/sidebar.xul"
+                     sidebartitle="&hBookmark.sidebar.label;"
+                     oncommand="toggleSidebar('viewHBookmarkSidebar');"/>
+    </broadcasterset>
+
 </overlay>
