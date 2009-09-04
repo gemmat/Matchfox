@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE bindings SYSTEM "chrome://hatenabookmark/locale/toolbar.dtd" [
-    <!ENTITY % browser SYSTEM "chrome://hatenabookmark/locale/browser.dtd">
+<!DOCTYPE bindings SYSTEM "chrome://matchfox/locale/toolbar.dtd" [
+    <!ENTITY % browser SYSTEM "chrome://matchfox/locale/browser.dtd">
     %browser;
 ]>
 <bindings xmlns="http://www.mozilla.org/xbl"
@@ -295,7 +295,7 @@
             </field>
 
             <field name="strings">
-                new hBookmark.Strings("chrome://hatenabookmark/locale/toolbar.properties")
+                new hBookmark.Strings("chrome://matchfox/locale/toolbar.properties")
             </field>
             <field name="control">null</field>
 
@@ -364,7 +364,7 @@
                 <body><![CDATA[
                     let selected = {};
                     window.openDialog(
-                        "chrome://hatenabookmark/content/selectTagDialog.xul",
+                        "chrome://matchfox/content/selectTagDialog.xul",
                         "",
                         "chrome, dialog, modal, resizable, centerscreen",
                         selected).focus();

@@ -1,6 +1,6 @@
 /*
 #tag-tree > treechildren::-moz-tree-image(tag) {
-   list-style-image: url("chrome://hatenabookmark/skin/images/buttons.png") !important;
+   list-style-image: url("chrome://matchfox/skin/images/buttons.png") !important;
    -moz-image-region: rect(46px 196px 62px 180px);
    -moz-margin-end: 3px;
 }

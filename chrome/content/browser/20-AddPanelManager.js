@@ -55,7 +55,7 @@ var AddPanelManager = {
             panel.show(bookmark);
         } else {
             this.currentPanel = window.openDialog(
-                "chrome://hatenabookmark/content/addPanel.xul",
+                "chrome://matchfox/content/addPanel.xul",
                 "_blank",
                 "chrome, dialog, resizable, alwaysRaised, centerscreen",
                 { bookmark: bookmark });

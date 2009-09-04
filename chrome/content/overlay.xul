@@ -1,12 +1,12 @@
 <?xml version="1.0" ?>
-<?xml-stylesheet type="text/css" href="chrome://hatenabookmark/content/toolbar.css"?>
-<?xml-stylesheet type="text/css" href="chrome://hatenabookmark/skin/toolbar.css"?>
-<?xml-stylesheet type="text/css" href="chrome://hatenabookmark/skin/commentViewer.css"?>
-<?xml-stylesheet type="text/css" href="chrome://hatenabookmark/content/widgets.css"?>
-<?xml-stylesheet type="text/css" href="chrome://hatenabookmark/skin/browser.css"?>
-<?xul-overlay href="chrome://hatenabookmark/content/popupsOverlay.xul"?>
-<!DOCTYPE overlay SYSTEM "chrome://hatenabookmark/locale/browser.dtd" [
-    <!ENTITY % toolbar SYSTEM "chrome://hatenabookmark/locale/toolbar.dtd">
+<?xml-stylesheet type="text/css" href="chrome://matchfox/content/toolbar.css"?>
+<?xml-stylesheet type="text/css" href="chrome://matchfox/skin/toolbar.css"?>
+<?xml-stylesheet type="text/css" href="chrome://matchfox/skin/commentViewer.css"?>
+<?xml-stylesheet type="text/css" href="chrome://matchfox/content/widgets.css"?>
+<?xml-stylesheet type="text/css" href="chrome://matchfox/skin/browser.css"?>
+<?xul-overlay href="chrome://matchfox/content/popupsOverlay.xul"?>
+<!DOCTYPE overlay SYSTEM "chrome://matchfox/locale/browser.dtd" [
+    <!ENTITY % toolbar SYSTEM "chrome://matchfox/locale/toolbar.dtd">
     %toolbar;
 ]>
 <overlay id="HatenabookmarkOverlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
@@ -248,7 +248,7 @@
                id="hBookmark-comment-list-container"
             >
                 <html:div id="hBookmark-comment-div">
-                    <html:img alt="close" title="close" src="chrome://hatenabookmark/skin/images/close-comment.png" id="hBookmark-comment-close" mousethrough="never" />
+                    <html:img alt="close" title="close" src="chrome://matchfox/skin/images/close-comment.png" id="hBookmark-comment-close" mousethrough="never" />
                     <html:ul
                         id="hBookmark-comment-list"
                     />
@@ -263,7 +263,7 @@
                 <label flex="1" id="hBookmark-comment-title" crop="end" />
                 <label onclick="hBookmark.CommentViewer.goEntry(event);" id="hBookmark-comment-users" />
                 <label onclick="hBookmark.CommentViewer.goEntry(event);" id="hBookmark-comment-pub-pri-users" />
-                <image onclick="hBookmark.CommentViewer.filterToggle(event);" src="chrome://hatenabookmark/skin/images/comment-viewer-toggle-on.png" id="hBookmark-comment-toggle" />
+                <image onclick="hBookmark.CommentViewer.filterToggle(event);" src="chrome://matchfox/skin/images/comment-viewer-toggle-on.png" id="hBookmark-comment-toggle" />
             </hbox>
         </vbox>
         </panel>
@@ -287,7 +287,7 @@
                      autoCheck="false"
                      type="checkbox"
                      group="sidebar"
-                     sidebarurl="chrome://hatenabookmark/content/sidebar.xul"
+                     sidebarurl="chrome://matchfox/content/sidebar.xul"
                      sidebartitle="&hBookmark.sidebar.label;"
                      key="hBookmark-key-sidebar"
                      oncommand="toggleSidebar('viewHBookmarkSidebar');"/>

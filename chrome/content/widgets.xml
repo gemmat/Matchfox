@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE bindings [
-    <!ENTITY % browser SYSTEM "chrome://hatenabookmark/locale/browser.dtd">
+    <!ENTITY % browser SYSTEM "chrome://matchfox/locale/browser.dtd">
     %browser;
 ]>
 <bindings xmlns="http://www.mozilla.org/xbl"

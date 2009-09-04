@@ -3,7 +3,7 @@
 }
 
 .username-line {
-    background: #eee url("chrome://hatenabookmark/skin/images/logo-text.png") no-repeat 10px center;
+    background: #eee url("chrome://matchfox/skin/images/logo-text.png") no-repeat 10px center;
     padding: 5px;
     border-bottom: 1px solid #ddd;
     margin-bottom: 5px;
@@ -76,7 +76,7 @@ hbox[anonid="messageRow"] {
 }
 
 label[anonid="usersField"] {
-  background: url(chrome://hatenabookmark/skin/images/page.gif) left 0px no-repeat;
+  background: url(chrome://matchfox/skin/images/page.gif) left 0px no-repeat;
   color: #FF6e6e !important;
   font-weight: bold;
   padding-left: 14px;
@@ -90,7 +90,7 @@ textbox {
 button[anonid="editTitleButton"],
 button[anonid="cancelEditTitleButton"] {
   font-size: 11px;
-  list-style-image: url(chrome://hatenabookmark/skin/images/buttons.png);
+  list-style-image: url(chrome://matchfox/skin/images/buttons.png);
   -moz-image-region: rect(46px 147px 62px 131px);
   -moz-appearance: none !important;
   border: none !important;
@@ -114,7 +114,7 @@ button[anonid="cancelEditTitleButton"] {
 }
 
 [anonid="editTitleNotification"] description {
-  background: url(chrome://hatenabookmark/skin/images/caution.png) left center no-repeat;
+  background: url(chrome://matchfox/skin/images/caution.png) left center no-repeat;
   padding-left: 20px;
 }
 
@@ -137,7 +137,7 @@ panel[anonid="popup"] {
 
 [anonid="editImageNotification"] {
   padding: 5px 5px 5px 25px;
-  background: #eee url(chrome://hatenabookmark/skin/images/caution.png) 5px center no-repeat;
+  background: #eee url(chrome://matchfox/skin/images/caution.png) 5px center no-repeat;
   border-top: 1px solid #ddd;
 }
 
@@ -222,7 +222,7 @@ groupbox {
 
 [anonid="showCommentsButton"] {
    margin-right: 5px;
-   list-style-image: url("chrome://hatenabookmark/skin/images/buttons.png");
+   list-style-image: url("chrome://matchfox/skin/images/buttons.png");
    -moz-image-region: rect(46px 130px 62px 114px);
    cursor: pointer;
 }
@@ -272,5 +272,5 @@ image[anonid="icon"] {
 
 .hBookmarkURLSuggestor > hbox > [anonid="descriptionField"] {
   padding-left: 16px;
-  background: url("chrome://hatenabookmark/skin/images/hints.gif") left no-repeat;
+  background: url("chrome://matchfox/skin/images/hints.gif") left no-repeat;
 }

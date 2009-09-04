@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <?xml-stylesheet type="text/css" href="chrome://global/skin/"?>
-<?xml-stylesheet type="text/css" href="chrome://hatenabookmark/skin/selectTagDialog.css"?>
-<!DOCTYPE dialog SYSTEM "chrome://hatenabookmark/locale/selectTagDialog.dtd">
+<?xml-stylesheet type="text/css" href="chrome://matchfox/skin/selectTagDialog.css"?>
+<!DOCTYPE dialog SYSTEM "chrome://matchfox/locale/selectTagDialog.dtd">
 <dialog xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
         id="hBookmarkSelectTagDialog"
         title="&hBookmark.selectTag.title;"
@@ -13,7 +13,7 @@
         onunload="document.documentElement.manager.destroy();"
         ondialogaccept="return document.documentElement.manager.onAccept(event);">
     <script type="application/javascript"
-            src="chrome://hatenabookmark/content/autoloader.js"/>
+            src="chrome://matchfox/content/autoloader.js"/>
 
     <vbox flex="1">
         <description>&hBookmark.selectTag.description;</description>

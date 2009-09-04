@@ -1,28 +1,28 @@
 .hBookmarkAddPanel {
-    -moz-binding: url("chrome://hatenabookmark/content/addPanel.xml#add-panel");
+    -moz-binding: url("chrome://matchfox/content/addPanel.xml#add-panel");
 }
 
 .hBookmarkTagComplete {
-   -moz-binding: url("chrome://hatenabookmark/content/addPanel.xml#tag-complete");
+   -moz-binding: url("chrome://matchfox/content/addPanel.xml#tag-complete");
 }
 .hBookmarkTagSelector {
    display: block;
-   -moz-binding: url("chrome://hatenabookmark/content/addPanel.xml#tag-selector");
+   -moz-binding: url("chrome://matchfox/content/addPanel.xml#tag-selector");
 }
 .hBookmarkImageSelector {
-   -moz-binding: url("chrome://hatenabookmark/content/addPanel.xml#image-selector");
+   -moz-binding: url("chrome://matchfox/content/addPanel.xml#image-selector");
 }
 .hBookmarkURLSuggestor {
-   -moz-binding: url("chrome://hatenabookmark/content/addPanel.xml#url-suggestor");
+   -moz-binding: url("chrome://matchfox/content/addPanel.xml#url-suggestor");
 }
 #hBookmarkFavoriteBookmarkTooltip {
-   -moz-binding: url("chrome://hatenabookmark/content/addPanel.xml#favorite-bookmark-tooltip");
+   -moz-binding: url("chrome://matchfox/content/addPanel.xml#favorite-bookmark-tooltip");
 }
 label[emptytext] {
-   -moz-binding: url("chrome://hatenabookmark/content/addPanel.xml#placeholder-label");
+   -moz-binding: url("chrome://matchfox/content/addPanel.xml#placeholder-label");
 }
 checkbox[preference] {
-   -moz-binding: url("chrome://hatenabookmark/content/addPanel.xml#preference-checkbox");
+   -moz-binding: url("chrome://matchfox/content/addPanel.xml#preference-checkbox");
 }
 
 

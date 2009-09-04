@@ -1,7 +1,7 @@
 
 const EXPORT = ['StatusBar'];
 
-// local utility 
+// local utility
 this.__defineGetter__('aWin', function() getTopWin());
 this.__defineGetter__('aDoc', function() getTopWin().gBrowser.contentDocument);
 this.__defineGetter__('locationURL', function() {
@@ -15,7 +15,7 @@ elementGetter(this, 'statusCount', 'hBookmark-status-count', document);
 elementGetter(this, 'statusCountLabel', 'hBookmark-status-count-label', document);
 elementGetter(this, 'statusComment', 'hBookmark-status-comment', document);
 
-let strings = new Strings('chrome://hatenabookmark/locale/browser.properties');
+let strings = new Strings('chrome://matchfox/locale/browser.properties');
 
 var StatusBar = {
     goEntry: function StatusBar_goEntry(ev) {
@@ -91,12 +91,12 @@ var StatusBar = {
         if (val > 0) {
             let counts = val.toString().split('');
             counts.forEach(function(i) {
-                StatusBar.appendCountImage('chrome://hatenabookmark/skin/images/counter_' + i + '.png');
+                StatusBar.appendCountImage('chrome://matchfox/skin/images/counter_' + i + '.png');
             });
         } else if (val == 0) {
-            StatusBar.appendCountImage('chrome://hatenabookmark/skin/images/counter_disable.png');
+            StatusBar.appendCountImage('chrome://matchfox/skin/images/counter_disable.png');
         } else {
-            StatusBar.appendCountImage('chrome://hatenabookmark/skin/images/counter_ignored.png');
+            StatusBar.appendCountImage('chrome://matchfox/skin/images/counter_ignored.png');
         }
 
         if (val >= 5) {

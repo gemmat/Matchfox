@@ -6,13 +6,13 @@ const PrefsBackgroundImage = 'extensions.hatenabookmark.addPanel.backgroundImage
 let Config = {
     get strings() {
         if (!Config._strings) {
-            Config._strings = new Strings("chrome://hatenabookmark/locale/config.properties"); 
-        } 
+            Config._strings = new Strings("chrome://matchfox/locale/config.properties");
+        }
         return Config._strings;
     },
     openURLEditor: function() {
         let features = 'chrome,titlebar,toolbar,centerscreen,modal';
-        window.openDialog('chrome://hatenabookmark/content/urlEditor.xul', 'URLEditor', features);
+        window.openDialog('chrome://matchfox/content/urlEditor.xul', 'URLEditor', features);
     },
     openDialog: function() {
         let features;
@@ -21,7 +21,7 @@ let Config = {
         } else {
             features = 'chrome,titlebar,toolbar,centerscreen,modal';
         }
-        window.openDialog('chrome://hatenabookmark/content/config.xul', 'Preferences', features);
+        window.openDialog('chrome://matchfox/content/config.xul', 'Preferences', features);
     },
     initDataPane: function() {
         let login = document.getElementById('pref-login');
@@ -185,7 +185,7 @@ Config.ShortCut = {
     set: function(aNode) {
         let keyData = {};
         window.openDialog(
-            'chrome://hatenabookmark/content/keyDetecter.xul',
+            'chrome://matchfox/content/keyDetecter.xul',
             '_blank',
             'chrome,modal,resizable=no,titlebar=no,centerscreen',
             keyData,

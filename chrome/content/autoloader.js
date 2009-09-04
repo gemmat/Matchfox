@@ -6,7 +6,7 @@ Components.utils.import("resource://hatenabookmark/modules/00-utils.jsm",
 
 /**
  * 指定されたURIのスクリプトを読み込む。
- * 
+ *
  * @param {String} uri スクリプトのURI。"/"で終わっていた場合は
  *                     そのディレクトリ直下のすべてのスクリプトを読み込む。
  */
@@ -34,7 +34,7 @@ hBookmark.load.getScriptURIs = function (dirURI) {
     var dirPath = dirURI.replace(/^[\w-]+:\/\/[\w.:-]+\//, "");
     var em = Cc["@mozilla.org/extensions/manager;1"]
                  .getService(Ci.nsIExtensionManager);
-    var baseURI = 'chrome://hatenabookmark/' + dirPath;
+    var baseURI = 'chrome://matchfox/' + dirPath;
     // XXX jarファイルに固めるのならnsIZipReaderを使ってごにょごにょする。
     var dir = em.getInstallLocation(EXTENSION_ID)
                 .getItemFile(EXTENSION_ID, "chrome/" + dirPath);
@@ -50,6 +50,6 @@ hBookmark.load.getScriptURIs = function (dirURI) {
 
 if (!("autoload" in hBookmark) || hBookmark.autoload) {
     hBookmark.loadModules();
-    hBookmark.load("chrome://hatenabookmark/content/common/");
+    hBookmark.load("chrome://matchfox/content/common/");
     hBookmark.load(location.href.replace(/\.\w+$/, "/"));
 }

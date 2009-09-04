@@ -33,7 +33,7 @@ toolbarpaletteitem[place="toolbar"] .hBookmark-toolbar-dynamic-item {
 }
 
 #hBookmark-toolbar-sidebar-button {
-  list-style-image: url("chrome://hatenabookmark/skin/images/buttons.png");
+  list-style-image: url("chrome://matchfox/skin/images/buttons.png");
   -moz-image-region: rect(0px 208px 23px 183px);
 }
 
@@ -50,7 +50,7 @@ toolbar[iconsize="small"] #hBookmark-toolbar-sidebar-button[checked="true"] {
 }
 
 #hBookmark-toolbar-add-button {
-  list-style-image: url("chrome://hatenabookmark/skin/images/buttons.png");
+  list-style-image: url("chrome://matchfox/skin/images/buttons.png");
   -moz-image-region: rect(0px 25px 23px 0px);
 }
 
@@ -67,7 +67,7 @@ toolbar[iconsize="small"] #hBookmark-toolbar-add-button:active {
 }
 
 #hBookmark-toolbar-home-button {
-  list-style-image: url("chrome://hatenabookmark/skin/images/buttons.png");
+  list-style-image: url("chrome://matchfox/skin/images/buttons.png");
   -moz-image-region: rect(0px 50px 23px 25px);
 }
 
@@ -84,7 +84,7 @@ toolbar[iconsize="small"] #hBookmark-toolbar-home-button:active {
 }
 
 #hBookmark-toolbar-recent-button {
-  list-style-image: url("chrome://hatenabookmark/skin/images/buttons.png");
+  list-style-image: url("chrome://matchfox/skin/images/buttons.png");
   -moz-image-region: rect(0px 75px 23px 50px);
 }
 
@@ -103,13 +103,13 @@ toolbar[iconsize="small"] #hBookmark-toolbar-recent-button:active {
 .paletteRow > #wrapper-hBookmark-toolbar-recent-line > .toolbarpaletteitem-box {
   width: 25px;
   height: 23px;
-  background: url("chrome://hatenabookmark/skin/images/buttons.png") -244px 0px no-repeat;
+  background: url("chrome://matchfox/skin/images/buttons.png") -244px 0px no-repeat;
   /* -moz-image-region doesn't work for background images */
   /* -moz-image-region: rect(0px 269px 23px 244px); */
 }
 
 .hBookmark-tag-filter-button {
-  list-style-image: url("chrome://hatenabookmark/skin/images/buttons.png");
+  list-style-image: url("chrome://matchfox/skin/images/buttons.png");
   -moz-image-region: rect(46px 196px 62px 180px);
 }
 

@@ -18,7 +18,7 @@ function TagContext() {
 }
 
 extend(TagContext.prototype, {
-    strings: new Strings("chrome://hatenabookmark/locale/popups.properties"),
+    strings: new Strings("chrome://matchfox/locale/popups.properties"),
 
     build: function TC_build(popup) {
         let target = document.popupNode;

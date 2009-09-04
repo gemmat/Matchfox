@@ -1,7 +1,7 @@
 
 const EXPORT = ['CommentViewer'];
 
-// local utility 
+// local utility
 this.__defineGetter__('aWin', function() getTopWin());
 this.__defineGetter__('aDoc', function() getTopWin().gBrowser.contentDocument);
 this.__defineGetter__('isHttp', function() aDoc && aDoc.location.protocol.indexOf('http') == 0);
@@ -51,9 +51,9 @@ var CommentViewer = {
     updateImage: function(filterd) {
         let src;
         if (filterd) {
-             src = "chrome://hatenabookmark/skin/images/comment-viewer-toggle-off.png";
+             src = "chrome://matchfox/skin/images/comment-viewer-toggle-off.png";
         } else {
-             src = "chrome://hatenabookmark/skin/images/comment-viewer-toggle-on.png";
+             src = "chrome://matchfox/skin/images/comment-viewer-toggle-on.png";
         }
         toggleImage.src = src;
     },
@@ -69,7 +69,7 @@ var CommentViewer = {
             if (!isHttp) return;
             url = aDoc.location.href;
         }
-        commentButton.setAttribute('loading', 'true'); 
+        commentButton.setAttribute('loading', 'true');
         var self = this;
         HTTPCache.comment.async_get(url, function(data) {
             if (!data || !data.title) {
@@ -96,7 +96,7 @@ var CommentViewer = {
         if (!CommentViewer.prefs.get('autoHoverShow')) return;
 
         let url;
-        if (!url && isHttp) 
+        if (!url && isHttp)
             url = aDoc.location.href;
 
         if (!HTTPCache.counter.isValid(url)) {
@@ -130,10 +130,10 @@ var CommentViewer = {
         panelComment.setAttribute('hTransparent', true);
         panelComment.openPopup(statusbar, 'before_end', -20, 0,false,false);
         CommentViewer.updateViewer(data);
-        commentButton.setAttribute('loading', 'false'); 
+        commentButton.setAttribute('loading', 'false');
     },
     renderComment: function(bookmarks, limit, fragment) {
-        if (!fragment) 
+        if (!fragment)
             fragment = document.createDocumentFragment();
         let i = 0;
         let len = bookmarks.length;
@@ -141,7 +141,7 @@ var CommentViewer = {
         let isFilter = CommentViewer.isFilter;
         let eid = bookmarks.eid;
         let div = E('div');
-        let URLRegex = new RegExp("((?:http|https|ftp)://[A-Za-z0-9~/._\?\&=\\-%#\+:\;,\@\']+)", 'g'); 
+        let URLRegex = new RegExp("((?:http|https|ftp)://[A-Za-z0-9~/._\?\&=\\-%#\+:\;,\@\']+)", 'g');
         while (i++ < Math.min(limit, len)) {
             let b = bookmarks.shift();
             let li = E('li');

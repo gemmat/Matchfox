@@ -3,7 +3,7 @@
 
 #hBookmark-menu-addlink,
 #hBookmark-menu-addentry {
-  list-style-image: url("chrome://hatenabookmark/skin/images/buttons.png");
+  list-style-image: url("chrome://matchfox/skin/images/buttons.png");
   -moz-image-region: rect(46px 16px 62px 0px);
 }
 
@@ -14,7 +14,7 @@
 }
 
 #hBookmark-status-home {
-  list-style-image: url("chrome://hatenabookmark/skin/images/home.gif");
+  list-style-image: url("chrome://matchfox/skin/images/home.gif");
 }
 
 #hBookmarkAddButton {
@@ -22,7 +22,7 @@
 }
 
 #hBookmarkAddButton[added="false"] {
-  list-style-image: url("chrome://hatenabookmark/skin/images/buttons.png");
+  list-style-image: url("chrome://matchfox/skin/images/buttons.png");
   -moz-image-region: rect(46px 16px 62px 0px);
   cursor: pointer;
 }
@@ -32,7 +32,7 @@
 }
 
 #hBookmarkAddButton[added="true"] {
-  list-style-image: url("chrome://hatenabookmark/skin/images/buttons.png");
+  list-style-image: url("chrome://matchfox/skin/images/buttons.png");
   -moz-image-region: rect(46px 64px 62px 48px);
   cursor: pointer;
 }
@@ -43,7 +43,7 @@
 
 #hBookmark-status-count {
   cursor: pointer;
-  /*background-image: url("chrome://hatenabookmark/skin/images/nbookmarks.png");*/
+  /*background-image: url("chrome://matchfox/skin/images/nbookmarks.png");*/
   width: 32px;
   height: 16px;
   padding-right: 2px;
@@ -89,7 +89,7 @@
 }
     
 #hBookmark-status-comment {
-  list-style-image: url("chrome://hatenabookmark/skin/images/buttons.png");
+  list-style-image: url("chrome://matchfox/skin/images/buttons.png");
   -moz-image-region: rect(62px 130px 78px 114px);
   cursor: normal;
 }
@@ -106,7 +106,7 @@
 
 #hBookmark-status-comment[loading="true"] {
   cursor: pointer;
-  list-style-image: url("chrome://hatenabookmark/skin/images/comment_loading.png");
+  list-style-image: url("chrome://matchfox/skin/images/comment_loading.png");
   -moz-image-region: auto;
 }
 
@@ -205,11 +205,11 @@ width: 800px;
 }
 
 #hBookmark-search-icon {
-  list-style-image: url("chrome://hatenabookmark/skin/images/search_on.png");
+  list-style-image: url("chrome://matchfox/skin/images/search_on.png");
   visibility: inherit !important;
 }
 #hBookmark-search-icon[searchdisabled="true"] {
-  list-style-image: url("chrome://hatenabookmark/skin/images/search.png");
+  list-style-image: url("chrome://matchfox/skin/images/search.png");
   visibility: inherit !important;
 }
 
@@ -243,13 +243,13 @@ width: 800px;
 }
 
 .hBookmark-urlbar-entrylink {
-  list-style-image: url("chrome://hatenabookmark/skin/images/b_link.gif");
+  list-style-image: url("chrome://matchfox/skin/images/b_link.gif");
   cursor: pointer;
   display: none;
 }
 
 .hBookmark-urlbar-entryedit {
-  list-style-image: url("chrome://hatenabookmark/skin/images/edit.gif");
+  list-style-image: url("chrome://matchfox/skin/images/edit.gif");
   cursor: pointer;
   margin-top: 3px;
 }

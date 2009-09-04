@@ -6,9 +6,9 @@ let PS = Cc["@mozilla.org/embedcomp/prompt-service;1"].
          getService(Ci.nsIPromptService);
 
 var UIUtils = {
-    popupStrings: new Strings("chrome://hatenabookmark/locale/popups.properties"),
-    errorStrings: new Strings("chrome://hatenabookmark/locale/errors.properties"),
-    addPanelStrings: new Strings("chrome://hatenabookmark/locale/addPanel.properties"),
+    popupStrings: new Strings("chrome://matchfox/locale/popups.properties"),
+    errorStrings: new Strings("chrome://matchfox/locale/errors.properties"),
+    addPanelStrings: new Strings("chrome://matchfox/locale/addPanel.properties"),
 
     confirm: function UIU_confirm(message) {
         return PS.confirm(window, this.popupStrings.get("prompt.title"), message);

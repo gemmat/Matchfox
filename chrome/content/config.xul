@@ -3,10 +3,10 @@
 <?xml-stylesheet href="chrome://global/skin" type="text/css"?>
 <?xml-stylesheet href="chrome://mozapps/content/preferences/preferences.css"?>
 <?xml-stylesheet href="chrome://browser/skin/preferences/preferences.css"?>
-<?xml-stylesheet href="chrome://hatenabookmark/skin/config.css"?>
-<?xml-stylesheet type="text/css" href="chrome://hatenabookmark/content/widgets.css"?>
+<?xml-stylesheet href="chrome://matchfox/skin/config.css"?>
+<?xml-stylesheet type="text/css" href="chrome://matchfox/content/widgets.css"?>
 
-<!DOCTYPE dialog SYSTEM "chrome://hatenabookmark/locale/config.dtd">
+<!DOCTYPE dialog SYSTEM "chrome://matchfox/locale/config.dtd">
 <prefwindow id="hBookmark-config"
     xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
     xmlns:html="http://www.w3.org/1999/xhtml"
@@ -14,7 +14,7 @@
     >
 
 <prefpane 
-    image="chrome://hatenabookmark/skin/images/transparent.png"
+    image="chrome://matchfox/skin/images/transparent.png"
     id="prefpane-locationbar" label="&hBookmark.config.general;" flex="1">
     <preferences>
         <preference 
@@ -91,10 +91,10 @@
                     orient="horizontal">
                     <radio value="false" label="&hBookmark.config.sidebarNormal;"
                         class="image" align="center"
-                        src="chrome://hatenabookmark/skin/images/config_search_bottom.png"
+                        src="chrome://matchfox/skin/images/config_search_bottom.png"
                         />
                     <radio value="true" label="&hBookmark.config.sidebarReverse;"
-                        src="chrome://hatenabookmark/skin/images/config_search_top.png"
+                        src="chrome://matchfox/skin/images/config_search_top.png"
                         class="image" align="center"
                         />
                 </radiogroup>
@@ -112,7 +112,7 @@
 </prefpane>
 
 <prefpane 
-    image="chrome://hatenabookmark/skin/images/transparent.png"
+    image="chrome://matchfox/skin/images/transparent.png"
     id="prefpane-browsing" label="&hBookmark.config.browsing;" flex="1"
     onpaneload="hBookmark.Config.updateBrowsingStatus();">
     <preferences>
@@ -184,17 +184,17 @@
             <checkbox id="extensions.hatenabookmark.embed.counter-check"
                       label="&hBookmark.config.browsing.embedCounter;"
                       preference="extensions.hatenabookmark.embed.counter"
-                      src="chrome://hatenabookmark/skin/images/10-users.gif"
+                      src="chrome://matchfox/skin/images/10-users.gif"
                       class="indent"/>
             <checkbox id="extensions.hatenabookmark.embed.comments-check"
                       label="&hBookmark.config.browsing.embedComments;"
                       preference="extensions.hatenabookmark.embed.comments"
-                      src="chrome://hatenabookmark/skin/images/b-comment-balloon.png"
+                      src="chrome://matchfox/skin/images/b-comment-balloon.png"
                       class="indent"/>
             <checkbox id="extensions.hatenabookmark.embed.addButton-check"
                       label="&hBookmark.config.browsing.embedAddButton;"
                       preference="extensions.hatenabookmark.embed.addButton"
-                      src="chrome://hatenabookmark/skin/images/b_add.gif"
+                      src="chrome://matchfox/skin/images/b_add.gif"
                       class="indent"/>
         </groupbox>
 
@@ -203,11 +203,11 @@
             <checkbox id="link.captureAddition"
                       label="&hBookmark.config.link.captureAddition;"
                       preference="extensions.hatenabookmark.link.captureAddition"
-                      src="chrome://hatenabookmark/skin/images/b_add.gif"/>
+                      src="chrome://matchfox/skin/images/b_add.gif"/>
             <checkbox id="link.captureComments"
                       label="&hBookmark.config.link.captureComments;"
                       preference="extensions.hatenabookmark.link.captureComments"
-                      src="chrome://hatenabookmark/skin/images/view-comment.gif"/>
+                      src="chrome://matchfox/skin/images/view-comment.gif"/>
         </groupbox>
 
         <groupbox>
@@ -239,7 +239,7 @@
 </prefpane>
 
 <prefpane 
-    image="chrome://hatenabookmark/skin/images/transparent.png"
+    image="chrome://matchfox/skin/images/transparent.png"
     id="prefpane-statusbar" label="&hBookmark.config.statusbar;" flex="1" onpaneload="hBookmark.Config.updateStatus();">
 
     <preferences>
@@ -286,7 +286,7 @@
             <checkbox id="extensions.hatenabookmark.statusbar.counter-check" flex="1"
                 label="&hBookmark.config.statusbarCounter;"
                 preference="extensions.hatenabookmark.statusbar.counter"/>
-                <!-- src="chrome://hatenabookmark/skin/images/nbookmarks.png" -->
+                <!-- src="chrome://matchfox/skin/images/nbookmarks.png" -->
             <hbox align="center">
             <spacer style="width: 3em;" />
             <label value="&hBookmark.config.statusbarURLEdit;" />
@@ -344,7 +344,7 @@
 </prefpane>
 
 <prefpane 
-    image="chrome://hatenabookmark/skin/images/transparent.png"
+    image="chrome://matchfox/skin/images/transparent.png"
     id="prefpane-addPanel" label="&hBookmark.config.addPanel;" flex="1" onpaneload="hBookmark.Config.updateUI();">
     <preferences>
         <preference 
@@ -449,7 +449,7 @@
 </prefpane>
 
 <prefpane 
-    image="chrome://hatenabookmark/skin/images/transparent.png"
+    image="chrome://matchfox/skin/images/transparent.png"
     onpaneload="hBookmark.Config.ShortCut.initPane();"
     id="prefpane-shortcut" label="&hBookmark.config.shortcut;" flex="1">
 
@@ -523,7 +523,7 @@
 </prefpane>
 
 <prefpane 
-    image="chrome://hatenabookmark/skin/images/transparent.png"
+    image="chrome://matchfox/skin/images/transparent.png"
     id="prefpane-sync" 
     label="&hBookmark.config.data;" 
     flex="1"
@@ -580,6 +580,6 @@
 </prefpane>
 
 <script type="application/x-javascript" src="chrome://browser/content/utilityOverlay.js"></script>
-<script type="application/javascript; version=1.8" charset="utf-8" src="chrome://hatenabookmark/content/autoloader.js" />
+<script type="application/javascript; version=1.8" charset="utf-8" src="chrome://matchfox/content/autoloader.js" />
 </prefwindow>
 

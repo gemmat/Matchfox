@@ -16,7 +16,7 @@ SearchEmbedder.STATE_EMBED_READY = SearchEmbedder.STATE_LOAD_DONE |
 SearchEmbedder.STATE_COMPLETE    = -1;
 
 extend(SearchEmbedder.prototype, {
-    strings: new Strings("chrome://hatenabookmark/locale/embed.properties"),
+    strings: new Strings("chrome://matchfox/locale/embed.properties"),
 
     get doc SE_get_doc() this.site.doc,
     get win SE_get_win() this.site.win,

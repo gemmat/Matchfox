@@ -20,7 +20,7 @@ function WidgetEmbedder(doc) {
 }
 
 const embedStrings =
-    new Strings("chrome://hatenabookmark/locale/embed.properties");
+    new Strings("chrome://matchfox/locale/embed.properties");
 
 
 extend(WidgetEmbedder, {

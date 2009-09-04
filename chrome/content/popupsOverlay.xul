@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <?xml-stylesheet type="text/css" href="popups.css"?>
-<!DOCTYPE overlay SYSTEM "chrome://hatenabookmark/locale/popups.dtd">
+<!DOCTYPE overlay SYSTEM "chrome://matchfox/locale/popups.dtd">
 <overlay xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 
     <popupset id="mainPopupSet">

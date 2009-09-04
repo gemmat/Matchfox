@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <?xml-stylesheet type="text/css" href="chrome://global/skin/"?>
 <?xml-stylesheet type="text/css" href="addPanel.css"?>
-<?xml-stylesheet type="text/css" href="chrome://hatenabookmark/content/widgets.css"?>
-<?xml-stylesheet type="text/css" href="chrome://hatenabookmark/skin/addPanel.css"?>
-<?xml-stylesheet type="text/css" href="chrome://hatenabookmark/skin/browser.css"?>
-<!DOCTYPE dialog SYSTEM "chrome://hatenabookmark/locale/addPanel.dtd">
+<?xml-stylesheet type="text/css" href="chrome://matchfox/content/widgets.css"?>
+<?xml-stylesheet type="text/css" href="chrome://matchfox/skin/addPanel.css"?>
+<?xml-stylesheet type="text/css" href="chrome://matchfox/skin/browser.css"?>
+<!DOCTYPE dialog SYSTEM "chrome://matchfox/locale/addPanel.dtd">
 <dialog xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
         id="hBookmarkAddPanelWindow"
         buttonlabelextra2="&hBookmark.addPanel.deleteLabel;"
@@ -19,7 +19,7 @@
         ondialogaccept="document.getElementById('hBookmarkAddPanelContent').saveBookmark();"
         ondialogextra2="document.getElementById('hBookmarkAddPanelContent').deleteBookmark();">
     <script type="application/javascript"
-            src="chrome://hatenabookmark/content/autoloader.js"/>
+            src="chrome://matchfox/content/autoloader.js"/>
     <script type="application/javascript"
             src="chrome://browser/content/utilityOverlay.js"/>
     <popupset>

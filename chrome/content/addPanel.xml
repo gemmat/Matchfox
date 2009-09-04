@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE bindings SYSTEM "chrome://hatenabookmark/locale/addPanel.dtd">
+<!DOCTYPE bindings SYSTEM "chrome://matchfox/locale/addPanel.dtd">
 <bindings xmlns="http://www.mozilla.org/xbl"
           xmlns:xbl="http://www.mozilla.org/xbl"
           xmlns:xul="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
@@ -277,7 +277,7 @@
             </field>
 
             <field name="strings">
-                new hBookmark.Strings("chrome://hatenabookmark/locale/addPanel.properties")
+                new hBookmark.Strings("chrome://matchfox/locale/addPanel.properties")
             </field>
             <field name="maxCommentLength">
                 hBookmark.User.user.maxCommentLength
@@ -874,7 +874,7 @@
         <content>
             <xul:vbox anonid="iconContainer" align="center" pack="center">
                 <xul:image anonid="icon"
-                           src="chrome://hatenabookmark/skin/images/noimages.png"/>
+                           src="chrome://matchfox/skin/images/noimages.png"/>
             </xul:vbox>
             <xul:popupset>
                 <xul:panel anonid="popup"
@@ -884,7 +884,7 @@
                               style="display: block;">
                         <xul:image anonid="noImage"
                                    class="hBookmarkImageSelectorItem"
-                                   src="chrome://hatenabookmark/skin/images/noimages.png"
+                                   src="chrome://matchfox/skin/images/noimages.png"
                                    originalsrc="http://b.hatena.ne.jp/images/noimages.gif"/>
                     </xul:hbox>
                     <xul:hbox anonid="editImageNotification" align="center">
@@ -1157,7 +1157,7 @@
             </field>
 
             <field name="strings">
-                new hBookmark.Strings("chrome://hatenabookmark/locale/addPanel.properties")
+                new hBookmark.Strings("chrome://matchfox/locale/addPanel.properties")
             </field>
 
             <property name="type"
