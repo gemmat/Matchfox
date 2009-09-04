@@ -5,8 +5,8 @@
 <!DOCTYPE page SYSTEM "chrome://matchfox/locale/sidebar.dtd">
 
 <page xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
-      id="hBookmarkSidebar"
-      title="&hBookmark.sidebar.title;">
+      id="MatchfoxSidebar"
+      title="&Matchfox.sidebar.title;">
 
     <script type="application/javascript" src="autoloader.js"/>
     <script type="application/javascript" src="chrome://browser/content/utilityOverlay.js"/>

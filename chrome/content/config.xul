@@ -7,14 +7,14 @@
 
 <!DOCTYPE dialog SYSTEM "chrome://matchfox/locale/config.dtd">
 
-<prefwindow id="hBookmark-config"
+<prefwindow id="Matchfox-config"
     xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
     xmlns:html="http://www.w3.org/1999/xhtml"
-    title="&hBookmark.config.title;"
+    title="&Matchfox.config.title;"
     >
   <prefpane 
      image="chrome://matchfox/skin/images/transparent.png"
-     id="prefpane-locationbar" label="&hBookmark.config.general;" flex="1">
+     id="prefpane-locationbar" label="&Matchfox.config.general;" flex="1">
     <preferences>
       <preference 
          id="extensions.matchfox.version"
@@ -23,10 +23,10 @@
     </preferences>
     <vbox>
       <groupbox orient="vertical">
-        <caption label="&hBookmark.config.toolbar;" />
+        <caption label="&Matchfox.config.toolbar;" />
         <vbox flex="1">
           <hbox flex="1" align="center">
-            <label value="&hBookmark.config.toolbarMaxItem;"
+            <label value="&Matchfox.config.toolbarMaxItem;"
                    control="recentItemCount"/>
             <textbox id="recentItemCount"
                      preference="extensions.matchfox.version"
@@ -41,7 +41,7 @@
 
   <prefpane 
      image="chrome://matchfox/skin/images/transparent.png"
-     id="prefpane-locationbar1" label="&hBookmark.config.browsing;" flex="1">
+     id="prefpane-locationbar1" label="&Matchfox.config.browsing;" flex="1">
     <preferences>
       <preference 
          id="extensions.matchfox.version"
@@ -50,10 +50,10 @@
     </preferences>
     <vbox>
       <groupbox orient="vertical">
-        <caption label="&hBookmark.config.toolbar;" />
+        <caption label="&Matchfox.config.toolbar;" />
         <vbox flex="1">
           <hbox flex="1" align="center">
-            <label value="&hBookmark.config.toolbarMaxItem;"
+            <label value="&Matchfox.config.toolbarMaxItem;"
                    control="recentItemCount1"/>
             <textbox id="recentItemCount1"
                      preference="extensions.matchfox.version"

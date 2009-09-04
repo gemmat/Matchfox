@@ -1,8 +1,8 @@
-if (!hBookmark)
-    var hBookmark = {};
+if (!Matchfox)
+    var Matchfox = {};
 
 Components.utils.import("resource://matchfox/modules/00-utils.jsm",
-                        hBookmark);
+                        Matchfox);
 
 /**
  * 指定されたURIのスクリプトを読み込む。
@@ -10,7 +10,7 @@ Components.utils.import("resource://matchfox/modules/00-utils.jsm",
  * @param {String} uri スクリプトのURI。"/"で終わっていた場合は
  *                     そのディレクトリ直下のすべてのスクリプトを読み込む。
  */
-hBookmark.load = function (uri) {
+Matchfox.load = function (uri) {
     if (uri.charAt(uri.length - 1) === "/") {
         var load = arguments.callee;
         load.getScriptURIs(uri)
@@ -26,7 +26,7 @@ hBookmark.load = function (uri) {
         env.EXPORT.forEach(function (name) this[name] = env[name], this);
 };
 
-hBookmark.load.getScriptURIs = function (dirURI) {
+Matchfox.load.getScriptURIs = function (dirURI) {
     const Cc = Components.classes;
     const Ci = Components.interfaces;
     const EXTENSION_ID = "matchfox@mozdev.org";
@@ -48,8 +48,8 @@ hBookmark.load.getScriptURIs = function (dirURI) {
     return uris.sort();
 };
 
-if (!("autoload" in hBookmark) || hBookmark.autoload) {
-    hBookmark.loadModules();
-    hBookmark.load("chrome://matchfox/content/common/");
-    hBookmark.load(location.href.replace(/\.\w+$/, "/"));
+if (!("autoload" in Matchfox) || Matchfox.autoload) {
+    Matchfox.loadModules();
+    Matchfox.load("chrome://matchfox/content/common/");
+    Matchfox.load(location.href.replace(/\.\w+$/, "/"));
 }
