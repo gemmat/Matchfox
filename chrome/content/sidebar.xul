@@ -1,98 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <?xml-stylesheet href="chrome://global/skin/" type="text/css" ?>
 <?xml-stylesheet href="chrome://browser/skin/browser.css" type="text/css" ?>
-<?xml-stylesheet href="chrome://browser/skin/places/places.css" type="text/css" ?>
-<?xml-stylesheet href="chrome://matchfox/content/widgets.css" type="text/css" ?>
 <?xml-stylesheet href="chrome://matchfox/skin/sidebar.css" type="text/css" ?>
-<?xul-overlay href="chrome://matchfox/content/popupsOverlay.xul"?>
-<!DOCTYPE page SYSTEM "chrome://matchfox/locale/sidebar.dtd" [
-    <!ENTITY % hBookmark.popups SYSTEM "chrome://matchfox/locale/popups.dtd">
-    %hBookmark.popups;
-]>
+<!DOCTYPE page SYSTEM "chrome://matchfox/locale/sidebar.dtd">
+
 <page xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
       id="hBookmarkSidebar"
       title="&hBookmark.sidebar.title;">
 
     <script type="application/javascript" src="autoloader.js"/>
     <script type="application/javascript" src="chrome://browser/content/utilityOverlay.js"/>
-
-    <popupset id="mainPopupSet">
-        <menupopup id="hBookmark-tag-context"
-                   onpopupshowing="return this._context.build(this);"
-                   onpopuphiding="this._context.destroy();">
-            <menuitem id="hBookmark-tag-context-openBookmarks"
-                      oncommand="this.parentNode._context.openBookmarks(event);"/>
-            <menuseparator id="hBookmark-tag-context-openBookmarksSeparator"/>
-            <menuitem id="hBookmark-tag-context-open"
-                      label="&hBookmark.tagContext.openLabel;"
-                      accesskey="&hBookmark.tagContext.openKey;"
-                      oncommand="this.parentNode._context.openIn('current');"/>
-            <menuitem id="hBookmark-tag-context-openInNewTab"
-                      label="&hBookmark.tagContext.openInNewTabLabel;"
-                      accesskey="&hBookmark.tagContext.openInNewTabKey;"
-                      oncommand="this.parentNode._context.openIn('tab');"/>
-            <menuseparator id="hBookmark-tag-context-openSeparator"/>
-            <menuitem id="hBookmark-tag-context-filterToolbar"
-                      oncommand="this.parentNode._context.filterToolbar();"/>
-            <!--
-            <menuitem id="hBookmark-tag-context-editTag"
-                      oncommand="this.parentNode._context.editTag(event);"
-                      onclick="checkForMiddleClick(this, event);"/>
-            -->
-            <menuitem id="hBookmark-tag-context-rename"
-                      oncommand="this.parentNode._context.rename();"/>
-            <menuitem id="hBookmark-tag-context-delete"
-                      oncommand="this.parentNode._context.delete();"/>
-            <menuseparator id="hBookmark-tag-context-editSeparator"/>
-            <menuitem id="hBookmark-tag-context-deleteBookmarks"
-                      oncommand="this.parentNode._context.deleteBookmarks();"/>
-        </menupopup>
-    </popupset>
-
-    <vbox id="login-notification" collapsed="true">
-        <description>&hBookmark.sidebar.loginDescription;</description>
-        <hbox pack="start">
-            <label class="text-link hBookmarkLink"
-                   value="&hBookmark.sidebar.loginLabel;"
-                   href="&hBookmark.sidebar.loginURI;"/>
-        </hbox>
-    </vbox>
-    <vbox id="main-content" flex="1" persist="dir">
-        <tree id="tag-tree" seltype="single" hidecolumnpicker="true"
-              contextmenu="hBookmark-tag-context" flex="1" persist="height">
-            <treecols>
-                <treecol id="hBookmarkTagTree_currentTag"
-                         label="&hBookmark.sidebar.tagsLabel;"
-                         primary="true" flex="1"
-                         persist="width sortDirection sortActive"/>
-                <splitter class="tree-splitter"/>
-                <treecol id="hBookmarkTagTree_count"
-                         label="&hBookmark.sidebar.tagCountLabel;"
-                         minwidth="50"
-                         persist="width sortDirection sortActive"/>
-            </treecols>
-            <treechildren/>
-        </tree>
-
-        <splitter resizebefore="flex" resizeafter="flex"/>
-
-        <tree id="bookmark-tree" seltype="single"
-              hidecolumnpicker="true" flex="1" persist="height">
-            <treecols>
-                <treecol id="bookmark-tree-col-bookmark"
-                         label="&hBookmark.sidebar.bookmarksLabel;"
-                         flex="1"
-                         sortDirection="descending"
-                         persist="sortDirection"/>
-            </treecols>
-            <treechildren context="hBookmark-bookmark-context"
-                          tooltip="hBookmark-bookmark-tooltip"/>
-        </tree>
-
-        <hbox align="center">
-            <label value="&hBookmark.sidebar.searchLabel;"/>
-            <textbox id="searchBox" flex="1"/>
-        </hbox>
-    </vbox>
 
 </page>

@@ -1,7 +1,7 @@
 if (!hBookmark)
     var hBookmark = {};
 
-Components.utils.import("resource://hatenabookmark/modules/00-utils.jsm",
+Components.utils.import("resource://matchfox/modules/00-utils.jsm",
                         hBookmark);
 
 /**
@@ -29,7 +29,7 @@ hBookmark.load = function (uri) {
 hBookmark.load.getScriptURIs = function (dirURI) {
     const Cc = Components.classes;
     const Ci = Components.interfaces;
-    const EXTENSION_ID = "bookmark@hatena.ne.jp";
+    const EXTENSION_ID = "matchfox@mozdev.org";
     var uris = [];
     var dirPath = dirURI.replace(/^[\w-]+:\/\/[\w.:-]+\//, "");
     var em = Cc["@mozilla.org/extensions/manager;1"]
