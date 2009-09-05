@@ -10,18 +10,99 @@
 
     <script type="application/javascript" src="autoloader.js"/>
     <script type="application/javascript" src="chrome://browser/content/utilityOverlay.js"/>
+    <grid>
+      <columns>
+        <column/>
+        <column flex="1"/>
+      </columns>
+      <rows>
+        <row>
+          <label control="textbox-install-dir" value="&Matchfox.sidebar.label.installdir.value;"/>
+          <hbox flex="1">
+            <textbox id="textbox-install-dir"
+                     flex="1"/>
+            <button oncommand="Matchfox.browseToInstallDirectory()"
+                    label="&Matchfox.sidebar.button.browse.label;"/>
+          </hbox>
+        </row>
+        <row>
+          <label>&Matchfox.sidebar.label.key;</label>
+          <textbox id="textbox-key" value="!"/>
+        </row>
+        <row>
+          <label>&Matchfox.sidebar.label.modifiers;</label>
+          <textbox id="textbox-modifiers" value="control"/>
+        </row>
+        <row>
+          <label control="textbox-rootname">&Matchfox.sidebar.label.rootname;</label>
+          <textbox id="textbox-rootname" value="sample"/>
+        </row>
+        <row>
+          <label>&Matchfox.sidebar.label.namespace;</label>
+          <textbox id="textbox-namespace" value="Sample"/>
+        </row>
+        <row>
+          <label>&Matchfox.sidebar.label.extensionId;</label>
+          <textbox id="textbox-extensionId" value="sample@mozdev.org"/>
+        </row>
+        <row>
+          <label>&Matchfox.sidebar.label.extensionVer;</label>
+          <textbox id="textbox-extensionVer" value="1.0.0"/>
+        </row>
+        <row>
+          <label>&Matchfox.sidebar.label.extensionType;</label>
+          <textbox id="textbox-extensionType" value="2"/>
+        </row>
+        <row>
+          <label>&Matchfox.sidebar.label.descEnName;</label>
+          <textbox id="textbox-descEnName" value="&Matchfox.sidebar.textbox.descEnName.value;"/>
+        </row>
+        <row>
+          <label>&Matchfox.sidebar.label.descEnDesc;</label>
+          <textbox id="textbox-descEnDesc" value="&Matchfox.sidebar.textbox.descEnDesc.value;"/>
+        </row>
+        <row>
+          <label>&Matchfox.sidebar.label.descEnCreater;</label>
+          <textbox id="textbox-descEnCreater" value="&Matchfox.sidebar.textbox.descEnCreater.value;"/>
+        </row>
+        <row>
+          <label>&Matchfox.sidebar.label.descEnHomepageURL;</label>
+          <textbox id="textbox-descEnHomepageURL" value="&Matchfox.sidebar.textbox.descEnHomepageURL.value;"/>
+        </row>
+        <row>
+          <label>&Matchfox.sidebar.label.descJaName;</label>
+          <textbox id="textbox-descJaName" value="&Matchfox.sidebar.textbox.descJaName.value;"/>
+        </row>
+        <row>
+          <label>&Matchfox.sidebar.label.descJaDesc;</label>
+          <textbox id="textbox-descJaDesc" value="&Matchfox.sidebar.textbox.descJaDesc.value;"/>
+        </row>
+        <row>
+          <label>&Matchfox.sidebar.label.descJaCreater;</label>
+          <textbox id="textbox-descJaCreater" value="&Matchfox.sidebar.textbox.descJaCreater.value;"/>
+        </row>
+        <row>
+          <label>&Matchfox.sidebar.label.descJaHomepageURL;</label>
+          <textbox id="textbox-descJaHomepageURL" value="&Matchfox.sidebar.textbox.descJaHomepageURL.value;"/>
+        </row>
+        <row>
+          <label>&Matchfox.sidebar.label.targetApplicationId;</label>
+          <textbox id="textbox-targetApplicationId" value="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}"/>
+        </row>
+        <row>
+          <label>&Matchfox.sidebar.label.targetApplicationMinVersion;</label>
+          <textbox id="textbox-targetApplicationMinVersion" value="3.0"/>
+        </row>
+        <row>
+          <label>&Matchfox.sidebar.label.targetApplicationMaxVersion;</label>
+          <textbox id="textbox-targetApplicationMaxVersion" value="3.7a1pre"/>
+        </row>
+      </rows>
+    </grid>
     <vbox>
-      <button oncommand="Matchfox.prefsForDeveloppers()"
-              label="&Matchfox.sidebar.button.prefset.label;"/>
-      <hbox>
-        <textbox id="textbox-install-dir"
-                 emptytext="&Matchfox.sidebar.textbox.installdir.emptytext;"
-                 flex="9"/>
-        <button oncommand="Matchfox.browseToInstallDirectory()"
-                label="&Matchfox.sidebar.button.browse.label;"
-                flex="1"/>
-      </hbox>
       <button oncommand="Matchfox.test();"
               label="&Matchfox.sidebar.button.create.label;"/>
+      <button oncommand="Matchfox.prefsForDeveloppers()"
+              label="&Matchfox.sidebar.button.prefset.label;"/>
     </vbox>
 </page>

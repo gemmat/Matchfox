@@ -1,15 +1,12 @@
 const EXPORT = ["autoloaderjs"];
 
-var addonName = "matchfox";
-var ns = "Matchfox";
-var extensionId = "matchfox@mozdev.org";
 var file =
 <file>
-if (!{ns})
-  var {ns} = {"{}"};
+if (!{Matchfox.template.ns})
+  var {Matchfox.template.ns} = {"{}"};
 
-Components.utils.import("resource://{addonName}/modules/00-utils.jsm",
-                        {ns});
+Components.utils.import("resource://{Matchfox.template.rootname}/modules/00-utils.jsm",
+                        {Matchfox.template.ns});
 
 /**
  * load script files at the specified URI.
@@ -18,7 +15,7 @@ Components.utils.import("resource://{addonName}/modules/00-utils.jsm",
  *                     When it's terminated with "/",
  *                     loads the directory recursively.
  */
-{ns}.load = function (uri) {"{"}
+{Matchfox.template.ns}.load = function (uri) {"{"}
   if (uri.charAt(uri.length - 1) === "/") {"{"}
     var load = arguments.callee;
     load.getScriptURIs(uri)
@@ -34,15 +31,15 @@ Components.utils.import("resource://{addonName}/modules/00-utils.jsm",
       env.EXPORT.forEach(function (name) this[name] = env[name], this);
 {"}"};
 
-{ns}.load.getScriptURIs = function (dirURI) {"{"}
+{Matchfox.template.ns}.load.getScriptURIs = function (dirURI) {"{"}
   const Cc = Components.classes;
   const Ci = Components.interfaces;
-  const EXTENSION_ID = {extensionId};
+  const EXTENSION_ID = {Matchfox.template.extensionId};
   var uris = [];
   var dirPath = dirURI.replace(/^[\w-]+:\/\/[\w.:-]+\//, "");
   var em = Cc["@mozilla.org/extensions/manager;1"]
              .getService(Ci.nsIExtensionManager);
-  var baseURI = 'chrome://{addonName}/' + dirPath;
+  var baseURI = 'chrome://{Matchfox.template.rootname}/' + dirPath;
   // XXX if you want to package them in the jar file, the nsIZipReader will be some help.
   var dir = em.getInstallLocation(EXTENSION_ID)
               .getItemFile(EXTENSION_ID, "chrome/" + dirPath);
@@ -56,10 +53,10 @@ Components.utils.import("resource://{addonName}/modules/00-utils.jsm",
   return uris.sort();
 {"}"};
 
-if (!("autoload" in {ns}) || {ns}.autoload) {"{"}
-  {ns}.loadModules();
-  {ns}.load("chrome://{addonName}/content/common/");
-  {ns}.load(location.href.replace(/\.\w+$/, "/"));
+if (!("autoload" in {Matchfox.template.ns}) || {Matchfox.template.ns}.autoload) {"{"}
+  {Matchfox.template.ns}.loadModules();
+  {Matchfox.template.ns}.load("chrome://{Matchfox.template.rootname}/content/common/");
+  {Matchfox.template.ns}.load(location.href.replace(/\.\w+$/, "/"));
 {"}"}
 </file>;
 

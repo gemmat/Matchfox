@@ -1,6 +1,5 @@
 const EXPORT = ["resourcesmodules00utilsjsm"];
 
-var addonName = "matchfox";
 var file =
 <file>
 /*
@@ -27,7 +26,7 @@ const StorageStatementWrapper = Components.Constructor(
                                   "mozIStorageStatementWrapper",
                                   "initialize");
 
-const _MODULE_BASE_URI = "resource://{addonName}/modules/";
+const _MODULE_BASE_URI = "resource://{Matchfox.template.rootname}/modules/";
 
 function loadModules() {"{"}
     var uris = _getModuleURIs();

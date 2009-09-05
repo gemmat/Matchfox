@@ -1,5 +1,31 @@
 <!ENTITY Matchfox.sidebar.title "Matchfox Sidebar">
-<!ENTITY Matchfox.sidebar.button.create.label "create a scaffold">
-<!ENTITY Matchfox.sidebar.button.prefset.label "(Bonus)set the Firefox's preference for developpers.">
-<!ENTITY Matchfox.sidebar.textbox.installdir.emptytext "Install directory">
+<!ENTITY Matchfox.sidebar.label.installdir.value "A directory to install">
 <!ENTITY Matchfox.sidebar.button.browse.label "Browse...">
+<!ENTITY Matchfox.sidebar.label.key "A shortcut key to open the sidebar">
+<!ENTITY Matchfox.sidebar.label.modifiers "A shortcut key modifiers">
+<!ENTITY Matchfox.sidebar.label.rootname "A Chrome directory name for the extension">
+<!ENTITY Matchfox.sidebar.label.namespace "A Javascript namespace for the extension">
+<!ENTITY Matchfox.sidebar.label.extensionId "A id of the extension">
+<!ENTITY Matchfox.sidebar.label.extensionVer "A version of the extension">
+<!ENTITY Matchfox.sidebar.label.extensionType "A type of the extension">
+<!ENTITY Matchfox.sidebar.label.descEnName "A name of the extension(for English)">
+<!ENTITY Matchfox.sidebar.textbox.descEnName.value "Sample">
+<!ENTITY Matchfox.sidebar.label.descEnDesc "A description of the extension(for English)">
+<!ENTITY Matchfox.sidebar.textbox.descEnDesc.value "This is a sample.">
+<!ENTITY Matchfox.sidebar.label.descEnCreater "A creater(s) of the extension(for English)">
+<!ENTITY Matchfox.sidebar.textbox.descEnCreater.value "John Doe">
+<!ENTITY Matchfox.sidebar.label.descEnHomepageURL "A Homepage URL for the extension(for English)">
+<!ENTITY Matchfox.sidebar.textbox.descEnHomepageURL.value "http://www.mozdev.org/">
+<!ENTITY Matchfox.sidebar.label.descJaName "A name of the extension(for Japanese)">
+<!ENTITY Matchfox.sidebar.textbox.descJaName.value "Sample">
+<!ENTITY Matchfox.sidebar.label.descJaDesc "A description of the extension(for Japanese)">
+<!ENTITY Matchfox.sidebar.textbox.descJaDesc.value "This is a sample.">
+<!ENTITY Matchfox.sidebar.label.descJaCreater "A creater(s) of the extension(for Japanese)">
+<!ENTITY Matchfox.sidebar.textbox.descJaCreater.value "John Doe">
+<!ENTITY Matchfox.sidebar.label.descJaHomepageURL "A Homepage URL for the extension(for Japanese)">
+<!ENTITY Matchfox.sidebar.textbox.descJaHomepageURL.value "http://www.mozdev.jp/">
+<!ENTITY Matchfox.sidebar.label.targetApplicationId "targetApplicationId">
+<!ENTITY Matchfox.sidebar.label.targetApplicationMinVersion "targetApplicationMinVersion">
+<!ENTITY Matchfox.sidebar.label.targetApplicationMaxVersion "targetApplicationMaxVersion">
+<!ENTITY Matchfox.sidebar.button.create.label "Create the scaffold">
+<!ENTITY Matchfox.sidebar.button.prefset.label "(Bonus)Set the preference of the Firefox for developpers.">

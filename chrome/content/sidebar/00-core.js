@@ -1,13 +1,42 @@
 //const EXPORT = ["test", "prefsForDeveloppers"];
 
+var template = {
+  rootname:                    "matchfox",
+  namespace:                   "Matchfox",
+  key:                         "!",
+  modifiers:                   "control",
+  extensionId:                 "matchfox@mozdev.org",
+  extensionVer:                "20.0.0",
+  extensionType:               "2",
+  descEnName:                  "Matchfox Firefox Extension",
+  descEnDesc:                  "Generates a scaffold for the Firefox Add-on",
+  descEnCreater:               "Teruaki Gemma",
+  descEnHomepageURL:           "http://d.hatena.ne.jp/Gemma",
+  descJaName:                  "Matchfox Firefox Extension",
+  descJaCreater:               "Teruaki Gemma",
+  descJaHomepageURL:           "http://d.hatena.ne.jp/Gemma",
+  targetApplicationId:         "{ec8030f7-c20a-464f-9b0e-13a3a9e97384}",
+  targetApplicationMinVersion: "3.0",
+  targetApplicationMaxVersion: "3.7a1pre"
+};
+
 function browseToInstallDirectory() {
   var filePicker = Cc['@mozilla.org/filepicker;1']
                      .createInstance(Ci.nsIFilePicker);
   filePicker.init(window,
                   "Install to...",
                   Ci.nsIFilePicker.modeGetFolder);
-  filePicker.show();
-  document.getElementById("textbox-install-dir").value = filePicker.file.path;
+  var result = filePicker.show();
+  switch (result) {
+  case Ci.nsIFilePicker.returnOK:       //FALLTHROUGH
+  case Ci.nsIFilePicker.returnReplace:
+    if (filePicker.file) {
+      document.getElementById("textbox-install-dir").value = filePicker.file.path;
+    }
+    break;
+  case Ci.nsIFilePicker.returnCancel:
+    break;
+  }
 }
 
 function makeDirectoryTree() {

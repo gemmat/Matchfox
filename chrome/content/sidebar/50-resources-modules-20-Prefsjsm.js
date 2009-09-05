@@ -1,10 +1,9 @@
 const EXPORT = ["resourcesmodules20Prefsjsm"];
 
-var addonName = "matchfox";
 var file =
 <file>
 const EXPORTED_SYMBOLS = ["Prefs"];
-Components.utils.import("resource://{addonName}/modules/00-utils.jsm");
+Components.utils.import("resource://{Matchfox.template.rootname}/modules/00-utils.jsm");
 
 function Prefs(aBranchName) {"{"}
   if (aBranchName {"&&"} aBranchName[aBranchName.length - 1] != ".")

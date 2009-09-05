@@ -1,5 +1,32 @@
 <!ENTITY Matchfox.sidebar.title "Matchfoxサイドバー">
+<!ENTITY Matchfox.sidebar.label.installdir.value "インストール先のディレクトリ">
+<!ENTITY Matchfox.sidebar.button.browse.label "参照...">
+<!ENTITY Matchfox.sidebar.label.key "サイドバーを開くショートカットキー">
+<!ENTITY Matchfox.sidebar.label.modifiers "サイドバーを開くショートカットキー修飾">
+<!ENTITY Matchfox.sidebar.label.rootname "拡張のChromeディレクトリ名">
+<!ENTITY Matchfox.sidebar.label.namespace "拡張のJavascriptの名前空間">
+<!ENTITY Matchfox.sidebar.label.extensionId "拡張のID">
+<!ENTITY Matchfox.sidebar.label.extensionVer "拡張のバージョン">
+<!ENTITY Matchfox.sidebar.label.extensionType "拡張のカテゴリ">
+<!ENTITY Matchfox.sidebar.label.descEnName "拡張の名前(英語)">
+<!ENTITY Matchfox.sidebar.textbox.descEnName.value "Sample">
+<!ENTITY Matchfox.sidebar.label.descEnDesc "拡張の説明(英語)">
+<!ENTITY Matchfox.sidebar.textbox.descEnDesc.value "This is a sample.">
+<!ENTITY Matchfox.sidebar.label.descEnCreater "拡張の開発者(英語)">
+<!ENTITY Matchfox.sidebar.textbox.descEnCreater.value "Taro Yamada">
+<!ENTITY Matchfox.sidebar.label.descEnHomepageURL "拡張のホームページ(英語)">
+<!ENTITY Matchfox.sidebar.textbox.descEnHomepageURL.value "http://www.mozdev.org/">
+<!ENTITY Matchfox.sidebar.label.descJaName "拡張の名前(日本語)">
+<!ENTITY Matchfox.sidebar.textbox.descJaName.value "Sample">
+<!ENTITY Matchfox.sidebar.label.descJaDesc "拡張の説明(日本語)">
+<!ENTITY Matchfox.sidebar.textbox.descJaDesc.value "これはサンプルです。">
+<!ENTITY Matchfox.sidebar.label.descJaCreater "拡張の開発者(日本語)">
+<!ENTITY Matchfox.sidebar.textbox.descJaCreater.value "やまだ たろう">
+<!ENTITY Matchfox.sidebar.label.descJaHomepageURL "拡張のホームページ(日本語)">
+<!ENTITY Matchfox.sidebar.textbox.descJaHomepageURL.value "http://www.mozdev.jp/">
+<!ENTITY Matchfox.sidebar.label.targetApplicationId "targetApplicationId">
+<!ENTITY Matchfox.sidebar.label.targetApplicationMinVersion "targetApplicationMinVersion">
+<!ENTITY Matchfox.sidebar.label.targetApplicationMaxVersion "targetApplicationMaxVersion">
 <!ENTITY Matchfox.sidebar.button.create.label "骨組みを作る">
 <!ENTITY Matchfox.sidebar.button.prefset.label "(おまけ)Firefoxを開発者向けに設定する">
-<!ENTITY Matchfox.sidebar.textbox.installdir.emptytext "インストール先のディレクトリ">
-<!ENTITY Matchfox.sidebar.button.browse.label "参照...">
+
