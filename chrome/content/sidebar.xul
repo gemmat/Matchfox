@@ -10,5 +10,18 @@
 
     <script type="application/javascript" src="autoloader.js"/>
     <script type="application/javascript" src="chrome://browser/content/utilityOverlay.js"/>
-
+    <vbox>
+      <button oncommand="Matchfox.prefsForDeveloppers()"
+              label="&Matchfox.sidebar.button.prefset.label;"/>
+      <hbox>
+        <textbox id="textbox-install-dir"
+                 emptytext="&Matchfox.sidebar.textbox.installdir.emptytext;"
+                 flex="9"/>
+        <button oncommand="Matchfox.browseToInstallDirectory()"
+                label="&Matchfox.sidebar.button.browse.label;"
+                flex="1"/>
+      </hbox>
+      <button oncommand="Matchfox.test();"
+              label="&Matchfox.sidebar.button.create.label;"/>
+    </vbox>
 </page>

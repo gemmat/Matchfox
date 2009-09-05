@@ -1,1 +1,5 @@
 <!ENTITY Matchfox.sidebar.title "Matchfox Sidebar">
+<!ENTITY Matchfox.sidebar.button.create.label "create a scaffold">
+<!ENTITY Matchfox.sidebar.button.prefset.label "(Bonus)set the Firefox's preference for developpers.">
+<!ENTITY Matchfox.sidebar.textbox.installdir.emptytext "Install directory">
+<!ENTITY Matchfox.sidebar.button.browse.label "Browse...">
