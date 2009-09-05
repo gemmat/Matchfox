@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet href="chrome://global/skin/" type="text/css" ?>
+<?xml-stylesheet href="chrome://browser/skin/browser.css" type="text/css" ?>
+<?xml-stylesheet href="chrome://matchfox/skin/sidebar.css" type="text/css" ?>
+<!DOCTYPE page SYSTEM "chrome://matchfox/locale/sidebar.dtd">
+
+<page xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+      id="MatchfoxSidebar"
+      title="&Matchfox.sidebar.title;">
+
+    <script type="application/javascript" src="autoloader.js"/>
+    <script type="application/javascript" src="chrome://browser/content/utilityOverlay.js"/>
+
+</page>

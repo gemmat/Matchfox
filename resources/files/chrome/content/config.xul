@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+
+<?xml-stylesheet href="chrome://global/skin" type="text/css"?>
+<?xml-stylesheet href="chrome://mozapps/content/preferences/preferences.css"?>
+<?xml-stylesheet href="chrome://browser/skin/preferences/preferences.css"?>
+<?xml-stylesheet href="chrome://matchfox/skin/config.css"?>
+
+<!DOCTYPE dialog SYSTEM "chrome://matchfox/locale/config.dtd">
+
+<prefwindow id="Matchfox-config"
+    xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+    xmlns:html="http://www.w3.org/1999/xhtml"
+    title="&Matchfox.config.title;"
+    >
+  <prefpane 
+     image="chrome://matchfox/skin/images/transparent.png"
+     id="prefpane0" label="&Matchfox.config.pane0;" flex="1">
+    <preferences>
+      <preference 
+         id="extensions.matchfox.version"
+         name="extensions.matchfox.version"
+         type="int"/>
+    </preferences>
+    <vbox>
+      <groupbox orient="vertical">
+        <caption label="&Matchfox.config.version;" />
+        <vbox flex="1">
+          <hbox flex="1" align="center">
+            <label value="&Matchfox.config.versionNumber;"
+                   control="versionNumber0"/>
+            <textbox id="versionNumber0"
+                     preference="extensions.matchfox.version"
+                     type="number" min="1" increment="1" max="200"
+                     style="width: 5em;"
+                     />
+          </hbox>
+        </vbox>
+      </groupbox>
+    </vbox>
+  </prefpane>
+
+  <prefpane 
+     image="chrome://matchfox/skin/images/transparent.png"
+     id="prefpane1" label="&Matchfox.config.pane1;" flex="1">
+    <preferences>
+      <preference 
+         id="extensions.matchfox.version"
+         name="extensions.matchfox.version"
+         type="int"/>
+    </preferences>
+    <vbox>
+      <groupbox orient="vertical">
+        <caption label="&Matchfox.config.version;" />
+        <vbox flex="1">
+          <hbox flex="1" align="center">
+            <label value="&Matchfox.config.versionNumber;"
+                   control="versionNumber1"/>
+            <textbox id="versionNumber1"
+                     preference="extensions.matchfox.version"
+                     type="number" min="1" increment="1" max="200"
+                     style="width: 5em;"
+                     />
+          </hbox>
+        </vbox>
+      </groupbox>
+    </vbox>
+  </prefpane>
+
+  <script type="application/x-javascript" src="chrome://browser/content/utilityOverlay.js"></script>
+  <script type="application/javascript; version=1.8" charset="utf-8" src="chrome://matchfox/content/autoloader.js" />
+</prefwindow>
+
