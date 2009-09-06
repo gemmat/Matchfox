@@ -22,18 +22,6 @@ function Database(file) {"{"}
 extend(Database, {"{"}
     LIST_DELIMITER : ',',
 
-    /**
-     * クエリにパラメーターをバインドする。
-     *
-     * @param {"{"}mozIStorageStatementWrapper{"}"} wrapper クエリ。
-     * @param {"{"}Object || Array || String || Number{"}"} params
-     *        パラメーター。
-     *        Objectの場合、名前付きパラメーターとみなされる。
-     *        Arrayの場合、出現順に先頭からバインドされる。
-     *        単値の場合、先頭のパラメーターにバインドされる。
-     *        この値がnullの場合、処理は行われない。
-     * @return {"{"}mozIStorageStatementWrapper{"}"} バインド済みのクエリ。
-     */
     bindParams : function bindParams(wrapper, params) {"{"}
         if(params==null)
             return wrapper;
@@ -47,13 +35,13 @@ extend(Database, {"{"}
                 if(typeof(param)=='undefined')
                     continue;
 
-                // 日付型の場合、数値をバインドする
+                // If param type is Date, bind the Integer.
                 if(param instanceof Date){"{"}
                     wrapper.params[name] = param.getTime();
                     continue;
                 {"}"}
 
-                // 配列型の場合、結合し文字列をバインドする
+                // If param type is Array, join and bind the String.
                 if(param instanceof Array){"{"}
                     wrapper.params[name] = this.LIST_DELIMITER + param.join(this.LIST_DELIMITER) + this.LIST_DELIMITER;
                     continue;
@@ -75,12 +63,6 @@ extend(Database, {"{"}
         return wrapper;
     {"}"},
 
-    /**
-     * クエリ内に含まれる名前付きパラメーターのリストを取得する。
-     *
-     * @param {"{"}mozIStorageStatementWrapper{"}"} wrapper クエリ。
-     * @return {"{"}Array{"}"} パラメーター名のリスト。
-     */
     getParamNames : function getParamNames(wrapper) {"{"}
         var paramNames = [];
         var statement = wrapper.statement;
@@ -90,12 +72,6 @@ extend(Database, {"{"}
         return paramNames;
     {"}"},
 
-    /**
-     * クエリ結果値の列名のリストを取得する。
-     *
-     * @param {"{"}mozIStorageStatement || mozIStorageStatementWrapper{"}"} statement クエリ。
-     * @return {"{"}Array{"}"} 列名のリスト。
-     */
     getColumnNames : function getColumnNames(statement) {"{"}
         statement = statement.statement || statement;
 
@@ -106,13 +82,6 @@ extend(Database, {"{"}
         return columnNames;
     {"}"},
 
-    /**
-     * テーブル行をオブジェクトに変換する。
-     *
-     * @param {"{"}mozIStorageStatementRow{"}"} row テーブル行。
-     * @param {"{"}Array{"}"} columnNames 列名のリスト。
-     * @return {"{"}Object{"}"} 列名をプロパティとして値を格納したオブジェクト。
-     */
     getRow : function getRow(row, columnNames){"{"}
         var result = {"{}"};
         for(var i=0,len=columnNames.length ; i{"<"}len ; i++){"{"}
@@ -126,35 +95,18 @@ extend(Database, {"{"}
 
 extend(Database.prototype, {"{"}
 
-    /**
-     * データベースのバージョンを取得する。
-     * PRAGMAのuser_versionに相当する(schema_versionではない)。
-     *
-     * @return {"{"}Number{"}"} データベースバージョン。
-     */
     get version(){"{"}
         return this.getPragma('user_version');
     {"}"},
 
-    /**
-     * データベースのバージョンを設定する。
-     */
     set version(ver){"{"}
         return this.setPragma('user_version', ver);
     {"}"},
 
-    /**
-     * PRAGMAの値を取得する。
-     * Firefox 2でPRAGMA user_versionを使うステートメントを
-     * StorageStatementWrapperに渡すと不正終了したため暫定的に設けられた。
-     */
     setPragma : function setPragma(name, val){"{"}
         this.connection.executeSimpleSQL('PRAGMA ' + name + '=' + val);
     {"}"},
 
-    /**
-     * PRAGMAの値を取得する。
-     */
     getPragma : function getPragma(name){"{"}
         try {"{"}
             var sql = 'PRAGMA ' + name;
@@ -170,22 +122,10 @@ extend(Database.prototype, {"{"}
         {"}"}
     {"}"},
 
-    /**
-     * ステートメントを生成する。
-     *
-     * @param {"{"}String{"}"} SQL。
-     */
     createStatement : function createStatement(sql) {"{"}
         return new StorageStatementWrapper(this.connection.createStatement(sql));
     {"}"},
 
-    /**
-     * SQLを実行する。
-     * DDL/DML共に利用できる。
-     *
-     * @param {"{"}String || mozIStorageStatementWrapper{"}"} sql SQL。
-     * @param {"{"}Object || Array || String{"}"} params。
-     */
     execute : function execute(sql, params) {"{"}
         sql+='';
         var sqls = sql.split(';').map(Entity.compactSQL).filter(function(a){"{"} return !!a; {"}"});
@@ -220,9 +160,9 @@ extend(Database.prototype, {"{"}
             var columnNames;
             var result = [];
 
-            // 全ての行を繰り返す
+            // Iterate all rows.
             while (statement.step()){"{"}
-                // 列名はパフォーマンスを考慮しキャッシュする
+                // Cache the column names for the performance reason.
                 if (!columnNames)
                     columnNames = Database.getColumnNames(statement);
 
@@ -233,8 +173,8 @@ extend(Database.prototype, {"{"}
         {"}"} catch(e) {"{"}
             this.throwException(e);
         {"}"} finally {"{"}
-            // ステートメントを終了させる
-            // これを怠ると、データベースをクローズできなくなる
+            // Finalize the statement.
+            // This prevents from a failure to close the database.
             if(statement){"{"}
                 statement.reset();
                 statement.statement.finalize {"&&"} statement.statement.finalize();
@@ -243,15 +183,6 @@ extend(Database.prototype, {"{"}
         return null;
     {"}"},
 
-    /**
-     * トランザクション内で処理を実行する。
-     * パフォーマンスを考慮する必要のある一括追加部分などで用いる。
-     * エラーが発生した場合は、トランザクションがロールバックされる。
-     * それ以外は、自動的にコミットされる。
-     * 既にトランザクションが始まっていたら新たなトランザクションは開始されない。
-     *
-     * @param {"{"}Function{"}"} handler 処理。
-     */
     transaction : function transaction(handler) {"{"}
         var d = succeed();
 
@@ -277,36 +208,18 @@ extend(Database.prototype, {"{"}
         return d;
     {"}"},
 
-    /**
-     * トランザクションを開始する。
-     * トランザクションが既に開始されていた場合でも、エラーを発生させない。
-     */
     beginTransaction : function beginTransaction(){"{"}
       this.connection.transactionInProgress || this.connection.beginTransaction();
     {"}"},
 
-    /**
-     * トランザクションをコミットする。
-     * トランザクションが開始されていない場合でも、エラーを発生させない。
-     */
     commitTransaction : function commitTransaction(){"{"}
       this.connection.transactionInProgress {"&&"} this.connection.commitTransaction();
     {"}"},
 
-    /**
-     * トランザクションをロールバックする。
-     * トランザクションが開始されていない場合でも、エラーを発生させない。
-     */
     rollbackTransaction : function rollbackTransaction(){"{"}
       this.connection.transactionInProgress {"&&"} this.connection.rollbackTransaction();
     {"}"},
 
-    /**
-     * データベース例外を解釈し再発生させる。
-     *
-     * @param {"{"}Exception{"}"} e データベース例外。
-     * @throws エラー内容に即した例外。未定義のものは汎用的な例外となる。
-     */
     throwException : function throwException(e){"{"}
         var code = this.connection.lastError;
         var message = this.connection.lastErrorString;
@@ -323,30 +236,18 @@ extend(Database.prototype, {"{"}
         {"}"}
     {"}"},
 
-    /**
-     * データベースをクローズする。
-     * クローズしない場合、ファイルがロックされ削除できない。
-     */
     close : function close(){"{"}
-        // Firefox 2ではcloseは存在しない
+        // The Firefox2 doesn't have "close"
         this.connection.close {"&&"} this.connection.close();
     {"}"},
 
-    /**
-     * テーブルが存在するかを確認する。
-     *
-     * @param {"{"}String{"}"} name テーブル名。
-     */
     tableExists : function tableExists(name){"{"}
-        // Firefox 2ではtableExistsは存在しない
+        // The Firefox2 doesn't have "tableExists".
         return this.connection.tableExists?
             this.connection.tableExists(name) :
             !!this.execute('PRAGMA table_info('+name+')').length;
     {"}"},
 
-    /**
-     * データベースの無駄な領域を除去する。
-     */
     vacuum : function vacuum(){"{"}
         this.connection.executeSimpleSQL('vacuum');
     {"}"}
@@ -380,7 +281,7 @@ function Entity(def) {"{"}
                 Model.insert(this);
                 this.temporary=false;
                 if (Model.db.connection.lastInsertRowID) {"{"}
-                    // id と固定されてしまう…
+                    // This assumes the property name is "id" but...
                     this.id = Model.db.connection.lastInsertRowID;
                 {"}"}
             {"}"} else {"{"}
@@ -606,13 +507,6 @@ extend(Entity, {"{"}
         {"</>"});
     {"}"},
 
-    /**
-     * SQL文から不要な空白などを取り除き短く整形する。
-     * 表記のぶれを無くし、解析後の文のキャッシュヒットを増やす目的がある。
-     *
-     * @param {"{"}String{"}"} sql SQL文。
-     * @return {"{"}String{"}"} 整形されたSQL文。
-     */
     compactSQL: function compactSQL(sql){"{"}
         sql+='';
         return sql.
