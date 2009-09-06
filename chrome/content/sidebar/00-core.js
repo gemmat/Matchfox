@@ -1,20 +1,21 @@
-//const EXPORT = ["test", "prefsForDeveloppers"];
+const EXPORT = ["insDir", "template", "browseToInstallDirectory", "createTheScaffold"];
+
+var insDir = null; //nsILocalFlie
 
 var template = {
-  installdir:                  "/home/teruaki/sample",
   key:                         "!",
   modifiers:                   "control",
-  rootname:                    "matchfox",
-  namespace:                   "Matchfox",
-  extensionId:                 "matchfox@mozdev.org",
-  extensionVer:                "20.0.0",
+  rootname:                    "default",
+  namespace:                   "Default",
+  extensionId:                 "default@mozdev.org",
+  extensionVer:                "0.0.0",
   extensionType:               "2",
-  descEnName:                  "Matchfox Firefox Extension",
+  descEnName:                  "Default Firefox Extension",
   descEnDesc:                  "Generates a scaffold for the Firefox Add-on",
   descEnCreater:               "Teruaki Gemma",
   descEnHomepageURL:           "http://d.hatena.ne.jp/Gemma",
-  descJaName:                  "Matchfox Firefox Extension",
-  descJaDesc:                  "description in Japanese",
+  descJaName:                  "Default Firefox Extension",
+  descJaDesc:                  "Generates a scaffold for the Firefox Add-on",
   descJaCreater:               "Teruaki Gemma",
   descJaHomepageURL:           "http://d.hatena.ne.jp/Gemma",
   targetApplicationId:         "{ec8030f7-c20a-464f-9b0e-13a3a9e97384}",
@@ -25,15 +26,14 @@ var template = {
 function browseToInstallDirectory() {
   var filePicker = Cc['@mozilla.org/filepicker;1']
                      .createInstance(Ci.nsIFilePicker);
-  filePicker.init(window,
-                  "Install to...",
-                  Ci.nsIFilePicker.modeGetFolder);
+  filePicker.init(window, "Install to...", Ci.nsIFilePicker.modeGetFolder);
   var result = filePicker.show();
   switch (result) {
   case Ci.nsIFilePicker.returnOK:       //FALLTHROUGH
   case Ci.nsIFilePicker.returnReplace:
     if (filePicker.file) {
-      document.getElementById("textbox-installdir").value = filePicker.file.path;
+      document.getElementById("label-installdir").value = filePicker.file.path;
+      Matchfox.insDir = filePicker.file.clone();
     }
     break;
   case Ci.nsIFilePicker.returnCancel:
@@ -45,9 +45,8 @@ function checkForm() {
   function checkValue(id) {
     return document.getElementById(id).value.length;
   }
-  return ["textbox-installdir",
-          "textbox-key",
-          "textbox-modifiers",
+  return Matchfox.insDir &&
+         ["textbox-key",
           "textbox-rootname",
           "textbox-namespace",
           "textbox-extensionId",
@@ -78,7 +77,6 @@ function readForm() {
     return res.join(" ");
   }
   return {
-    installdir:                  f("textbox-installdir"),
     key:                         f("textbox-key"),
     modifiers:                   readmodifires(),
     rootname:                    f("textbox-rootname"),
@@ -102,9 +100,6 @@ function readForm() {
 
 
 function makeDirectoryTree() {
-  var insDir =  Cc["@mozilla.org/file/local;1"]
-                  .createInstance(Ci.nsILocalFile);
-  insDir.initWithPath(template.installdir);
   ["chrome",
    "chrome/content",
    "chrome/content/browser",
@@ -125,7 +120,7 @@ function makeDirectoryTree() {
    "resources/modules",
    "tests",
    "tests/javascripts"].forEach(function(x) {
-     var f = appendPath(insDir, x);
+     var f = appendPath(Matchfox.insDir, x);
      if (!f.exists() || !f.isDirectory()) {
        f.create(f.DIRECTORY_TYPE, 0775);
      }
@@ -133,12 +128,8 @@ function makeDirectoryTree() {
 }
 
 function exportSourceFiles() {
-  var insDir =  Cc["@mozilla.org/file/local;1"]
-                  .createInstance(Ci.nsILocalFile);
-  insDir.initWithPath(template.installdir);
-
   function cat(obj) {
-    var f = appendPath(insDir, obj.path);
+    var f = appendPath(Matchfox.insDir, obj.path);
     var stream = Cc['@mozilla.org/network/file-output-stream;1']
                    .createInstance(Ci.nsIFileOutputStream);
     stream.init(f, 0x02 | 0x08 | 0x20, 0664, 0); // write, create, truncate
@@ -192,13 +183,8 @@ function copySkinClassicImages() {
                        .getService(Components.interfaces.nsIExtensionManager)
                        .getInstallLocation(extensionId)
                        .getItemLocation(extensionId);
-  var imageDir = appendPath(extensionDir, "chrome/skin/classic/images");
-
-  var insDir =  Cc["@mozilla.org/file/local;1"]
-                  .createInstance(Ci.nsILocalFile);
-  insDir.initWithPath(template.installdir);
-  var destDir = appendPath(insDir, "chrome/skin/classic/images");
-
+  var imageDir = appendPath(extensionDir,    "chrome/skin/classic/images");
+  var destDir  = appendPath(Matchfox.insDir, "chrome/skin/classic/images");
   ["favicon.ico", "favicon32.png", "transparent.png"].forEach(function(x) {
     appendPath(imageDir, x).copyTo(destDir, null);
   });
@@ -214,16 +200,3 @@ function createTheScaffold() {
   exportSourceFiles();
   copySkinClassicImages();
 }
-
-function prefsForDeveloppers() {
-  var p0 = new Matchfox.Prefs("javascript.options.");
-  p0.set("showInConsole", true);
-  p0.set("strict", true);
-  var p1 = new Matchfox.Prefs("browser.dom.window.dump.");
-  p1.set("enabled", true);
-  var p2 = new Matchfox.Prefs("nglayout.debug.");
-  p2.set("disable_xul_cache", true);
-}
-
-var EXPORT = [m for (m in new Iterator(this, true))
-                          if (m[0] !== "_" && m !== "EXPORT")];

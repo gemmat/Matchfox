@@ -69,7 +69,9 @@
     <preferences>
     </preferences>
     <vbox>
-      <label>Under construction.</label>
+      <label value="&Matchfox.config.label.about;"/>
+      <label value="&Matchfox.config.label.ackknowledge0;"/>
+      <label value="&Matchfox.config.label.ackknowledge1;"/>
     </vbox>
   </prefpane>
   <script type="application/x-javascript" src="chrome://browser/content/utilityOverlay.js"></script>

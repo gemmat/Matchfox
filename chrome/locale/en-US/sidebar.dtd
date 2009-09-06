@@ -28,4 +28,4 @@
 <!ENTITY Matchfox.sidebar.label.targetApplicationMinVersion "targetApplicationMinVersion">
 <!ENTITY Matchfox.sidebar.label.targetApplicationMaxVersion "targetApplicationMaxVersion">
 <!ENTITY Matchfox.sidebar.button.create.label "Create the scaffold">
-<!ENTITY Matchfox.sidebar.button.prefset.label "(Bonus)Set the preference of the Firefox for developpers.">
+

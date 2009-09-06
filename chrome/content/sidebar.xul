@@ -19,13 +19,12 @@
       </columns>
       <rows>
         <row>
-          <label control="textbox-installdir" value="&Matchfox.sidebar.label.installdir.value;"/>
-          <hbox flex="1">
-            <textbox id="textbox-installdir"
-                     flex="1"/>
+          <label control="label-installdir" value="&Matchfox.sidebar.label.installdir.value;"/>
+          <vbox flex="1">
+            <label id="label-installdir" value="..."/>
             <button oncommand="Matchfox.browseToInstallDirectory()"
                     label="&Matchfox.sidebar.button.browse.label;"/>
-          </hbox>
+          </vbox>
         </row>
         <row>
           <label control="textbox-key">&Matchfox.sidebar.label.key;</label>

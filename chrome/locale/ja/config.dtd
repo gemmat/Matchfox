@@ -1,7 +1,11 @@
 <!ENTITY Matchfox.config.title "Matchfoxの設定">
 <!ENTITY Matchfox.config.pane0 "about:config">
-<!ENTITY Matchfox.config.pane1 "pane1">
+<!ENTITY Matchfox.config.pane1 "About">
 <!ENTITY Matchfox.config.prefsfordev "開発者におすすめの設定">
+<!ENTITY Matchfox.config.label.about "Special Thanks to ...">
+<!ENTITY Matchfox.config.label.ackknowledge0 "はてなブックマーク拡張 制作スタッフのみなさん">
+<!ENTITY Matchfox.config.label.ackknowledge1 "Tombloo 開発者のみなさん">
+
 
 
 

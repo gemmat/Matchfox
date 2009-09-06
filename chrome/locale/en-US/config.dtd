@@ -1,8 +1,9 @@
-<!-- XXX: -->
-
 <!ENTITY Matchfox.config.title "Settings for the Matchfox Extension">
 <!ENTITY Matchfox.config.pane0 "about:config">
-<!ENTITY Matchfox.config.pane1 "pane1">
+<!ENTITY Matchfox.config.pane1 "About">
 <!ENTITY Matchfox.config.prefsfordev "Recommended preferences for developpers">
+<!ENTITY Matchfox.config.label.about "Acknowledgements">
+<!ENTITY Matchfox.config.label.ackknowledge0 "The Hatena Bookmark Extension Dev-Team">
+<!ENTITY Matchfox.config.label.ackknowledge1 "The Tombloo Dev-Team">
 
 
