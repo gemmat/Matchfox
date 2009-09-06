@@ -3,7 +3,7 @@ const EXPORT = ["insDir", "template", "browseToInstallDirectory", "createTheScaf
 var insDir = null; //nsILocalFlie
 
 var template = {
-  key:                         "!",
+  key:                         "#",
   modifiers:                   "control",
   rootname:                    "default",
   namespace:                   "Default",
@@ -23,10 +23,18 @@ var template = {
   targetApplicationMaxVersion: "3.7a1pre"
 };
 
+function getExtensionsDir() {
+  const EXTENSION_ID = "matchfox@mozdev.org";
+  var em = Matchfox.Cc["@mozilla.org/extensions/manager;1"].
+             getService(Matchfox.Ci.nsIExtensionManager);
+  return em.getInstallLocation(EXTENSION_ID).location;
+}
+
 function browseToInstallDirectory() {
-  var filePicker = Cc['@mozilla.org/filepicker;1']
-                     .createInstance(Ci.nsIFilePicker);
+  var filePicker = Matchfox.Cc['@mozilla.org/filepicker;1']
+                     .createInstance(Matchfox.Ci.nsIFilePicker);
   filePicker.init(window, "Install to...", Ci.nsIFilePicker.modeGetFolder);
+  filePicker.displayDirectory = getExtensionsDir();
   var result = filePicker.show();
   switch (result) {
   case Ci.nsIFilePicker.returnOK:       //FALLTHROUGH
@@ -130,11 +138,11 @@ function makeDirectoryTree() {
 function exportSourceFiles() {
   function cat(obj) {
     var f = appendPath(Matchfox.insDir, obj.path);
-    var stream = Cc['@mozilla.org/network/file-output-stream;1']
-                   .createInstance(Ci.nsIFileOutputStream);
+    var stream = Matchfox.Cc['@mozilla.org/network/file-output-stream;1']
+                   .createInstance(Matchfox.Ci.nsIFileOutputStream);
     stream.init(f, 0x02 | 0x08 | 0x20, 0664, 0); // write, create, truncate
-    var os = Cc["@mozilla.org/intl/converter-output-stream;1"]
-               .createInstance(Ci.nsIConverterOutputStream);
+    var os = Matchfox.Cc["@mozilla.org/intl/converter-output-stream;1"]
+               .createInstance(Matchfox.Ci.nsIConverterOutputStream);
     os.init(stream, "UTF-8", 0, 0x0000);
     os.writeString(obj.content);
     os.close();
@@ -179,8 +187,8 @@ function appendPath(ansIFile, aPath) {
 
 function copySkinClassicImages() {
   const extensionId = "matchfox@mozdev.org";
-  var extensionDir = Cc["@mozilla.org/extensions/manager;1"]
-                       .getService(Components.interfaces.nsIExtensionManager)
+  var extensionDir = Matchfox.Cc["@mozilla.org/extensions/manager;1"]
+                       .getService(Matchfox.Ci.nsIExtensionManager)
                        .getInstallLocation(extensionId)
                        .getItemLocation(extensionId);
   var imageDir = appendPath(extensionDir,    "chrome/skin/classic/images");
@@ -192,7 +200,7 @@ function copySkinClassicImages() {
 
 function createTheScaffold() {
   if (!checkForm()) {
-    alert("Please fill in them all.");
+    alert("Please fill in all.");
     return;
   }
   Matchfox.template = readForm();
