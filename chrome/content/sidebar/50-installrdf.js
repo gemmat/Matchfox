@@ -1,7 +1,7 @@
 const EXPORT = ["installrdf"];
 
-var file =
-<file>
+function file() {
+  return <file>
   <RDF xmlns="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
        xmlns:em="http://www.mozilla.org/2004/em-rdf#">
     <Description about="urn:mozilla:install-manifest">
@@ -38,9 +38,12 @@ var file =
     </Description>
   </RDF>
 </file>;
+}
 
-var nsRDF = new Namespace("http://www.w3.org/1999/02/22-rdf-syntax-ns#");
-var installrdf = {
-  path: "/install.rdf",
-  content: "<?xml version=\"1.0\"?>\n\n" + file.nsRDF::RDF.toXMLString()
-};
+function installrdf() {
+  var nsRDF = new Namespace("http://www.w3.org/1999/02/22-rdf-syntax-ns#");
+  return {
+    path: "install.rdf",
+    content: "<?xml version=\"1.0\"?>\n\n" + file().nsRDF::RDF.toXMLString()
+  };
+}

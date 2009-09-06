@@ -1,7 +1,7 @@
 const EXPORT = ["resourcesmodules20Databasejsm"];
 
-var file =
-<file>
+function file() {
+  return <file>
 const EXPORTED_SYMBOLS = ["Database", "Model", "Entity"];
 Components.utils.import("resource://{Matchfox.template.rootname}/modules/00-utils.jsm");
 
@@ -622,8 +622,11 @@ extend(Entity, {"{"}
     {"}"}
 {"}"});
 </file>;
+}
 
-var resourcesmodules20Databasejsm = {
-  path: "/resources/modules/20-Database.jsm",
-  content: file.toString()
-};
+function resourcesmodules20Databasejsm() {
+  return {
+    path: "resources/modules/20-Database.jsm",
+    content: file().toString()
+  };
+}

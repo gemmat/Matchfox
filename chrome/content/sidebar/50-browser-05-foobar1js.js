@@ -1,7 +1,7 @@
 const EXPORT = ["browser05foobar1js"];
 
-var file =
-<file>
+function file() {
+  return <file>
 const EXPORT = ['browserFoobar1'];
 
 function browserFoobar1() {"{"}
@@ -10,8 +10,11 @@ function browserFoobar1() {"{"}
 function notExported() {"{"}
 {"}"}
 </file>;
+}
 
-var browser05foobar1js = {
-  path: "/chrome/content/browser/05-foobar1.js",
-  content: file.toString()
-};
+function browser05foobar1js() {
+  return {
+    path: "chrome/content/browser/05-foobar1.js",
+    content: file().toString()
+  };
+}

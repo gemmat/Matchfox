@@ -1,6 +1,6 @@
 /*
  * In this utils file,
- * global variables and functions are exported,
+ * global vars and funcs are exported,
  * unless the name is prefixed with "_".
  */
 

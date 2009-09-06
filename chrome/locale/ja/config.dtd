@@ -1,8 +1,8 @@
 <!ENTITY Matchfox.config.title "Matchfoxの設定">
-<!ENTITY Matchfox.config.pane0 "Pane0">
-<!ENTITY Matchfox.config.pane1 "Pane1">
-<!ENTITY Matchfox.config.version "バージョン">
-<!ENTITY Matchfox.config.versionNumber "Matchfoxのバージョンの数">
+<!ENTITY Matchfox.config.pane0 "about:config">
+<!ENTITY Matchfox.config.pane1 "pane1">
+<!ENTITY Matchfox.config.prefsfordev "開発者におすすめの設定">
+
 
 
 

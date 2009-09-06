@@ -12,60 +12,66 @@
     xmlns:html="http://www.w3.org/1999/xhtml"
     title="&Matchfox.config.title;"
     >
-  <prefpane 
+  <prefpane
      image="chrome://matchfox/skin/images/transparent.png"
      id="prefpane0" label="&Matchfox.config.pane0;" flex="1">
     <preferences>
-      <preference 
-         id="extensions.matchfox.version"
-         name="extensions.matchfox.version"
-         type="int"/>
+      <preference
+         id="javascript.options.showInConsole"
+         name="javascript.options.showInConsole"
+         type="bool"/>
+      <preference
+         id="javascript.options.strict"
+         name="javascript.options.strict"
+         type="bool"/>
+      <preference
+         id="browser.dom.window.dump.enabled"
+         name="browser.dom.window.dump.enabled"
+         type="bool"/>
+      <preference
+         id="nglayout.debug.disable_xul_cache"
+         name="nglayout.debug.disable_xul_cache"
+         type="bool"/>
     </preferences>
     <vbox>
       <groupbox orient="vertical">
-        <caption label="&Matchfox.config.version;" />
-        <vbox flex="1">
-          <hbox flex="1" align="center">
-            <label value="&Matchfox.config.versionNumber;"
-                   control="versionNumber0"/>
-            <textbox id="versionNumber0"
-                     preference="extensions.matchfox.version"
-                     type="number" min="1" increment="1" max="200"
-                     style="width: 5em;"
-                     />
-          </hbox>
-        </vbox>
+        <caption label="&Matchfox.config.prefsfordev;" />
+        <grid>
+          <columns>
+            <column flex="1"/>
+            <column/>
+          </columns>
+          <rows>
+            <row>
+              <label value="javascript.options.showInConsole" control="checkbox0"/>
+              <checkbox id="checkbox0" preference="javascript.options.showInConsole"/>
+            </row>
+            <row>
+              <label value="javascript.options.strict" control="checkbox1"/>
+              <checkbox id="checkbox1" preference="javascript.options.strict"/>
+            </row>
+            <row>
+              <label value="browser.dom.window.dump.enabled" control="checkbox2"/>
+              <checkbox id="checkbox2" preference="browser.dom.window.dump.enabled"/>
+            </row>
+            <row>
+              <label value="nglayout.debug.disable_xul_cache" control="checkbox3"/>
+              <checkbox id="checkbox3" preference="nglayout.debug.disable_xul_cache"/>
+            </row>
+          </rows>
+        </grid>
       </groupbox>
     </vbox>
   </prefpane>
-
-  <prefpane 
+  <prefpane
      image="chrome://matchfox/skin/images/transparent.png"
      id="prefpane1" label="&Matchfox.config.pane1;" flex="1">
     <preferences>
-      <preference 
-         id="extensions.matchfox.version"
-         name="extensions.matchfox.version"
-         type="int"/>
     </preferences>
     <vbox>
-      <groupbox orient="vertical">
-        <caption label="&Matchfox.config.version;" />
-        <vbox flex="1">
-          <hbox flex="1" align="center">
-            <label value="&Matchfox.config.versionNumber;"
-                   control="versionNumber1"/>
-            <textbox id="versionNumber1"
-                     preference="extensions.matchfox.version"
-                     type="number" min="1" increment="1" max="200"
-                     style="width: 5em;"
-                     />
-          </hbox>
-        </vbox>
-      </groupbox>
+      <label>Under construction.</label>
     </vbox>
   </prefpane>
-
   <script type="application/x-javascript" src="chrome://browser/content/utilityOverlay.js"></script>
   <script type="application/javascript; version=1.8" charset="utf-8" src="chrome://matchfox/content/autoloader.js" />
 </prefwindow>

@@ -1,10 +1,10 @@
 const EXPORT = ["resourcesmodules00utilsjsm"];
 
-var file =
-<file>
+function file() {
+  return <file>
 /*
  * In this utils file,
- * global variables and functions are exported,
+ * global vars and funcs are exported,
  * unless the name is prefixed with "_".
  */
 
@@ -89,8 +89,11 @@ function update(self, obj) {"{"}
 var EXPORTED_SYMBOLS = [m for (m in new Iterator(this, true))
                           if (m[0] !== "_" {"&&"} m !== "EXPORTED_SYMBOLS")];
 </file>;
+}
 
-var resourcesmodules00utilsjsm = {
-  path: "/resources/modules/00-utils.jsm",
-  content: file.toString()
-};
+function resourcesmodules00utilsjsm() {
+  return {
+    path: "resources/modules/00-utils.jsm",
+    content: file().toString()
+  };
+}

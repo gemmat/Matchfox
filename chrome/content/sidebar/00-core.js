@@ -1,10 +1,11 @@
 //const EXPORT = ["test", "prefsForDeveloppers"];
 
 var template = {
-  rootname:                    "matchfox",
-  namespace:                   "Matchfox",
+  installdir:                  "/home/teruaki/sample",
   key:                         "!",
   modifiers:                   "control",
+  rootname:                    "matchfox",
+  namespace:                   "Matchfox",
   extensionId:                 "matchfox@mozdev.org",
   extensionVer:                "20.0.0",
   extensionType:               "2",
@@ -13,6 +14,7 @@ var template = {
   descEnCreater:               "Teruaki Gemma",
   descEnHomepageURL:           "http://d.hatena.ne.jp/Gemma",
   descJaName:                  "Matchfox Firefox Extension",
+  descJaDesc:                  "description in Japanese",
   descJaCreater:               "Teruaki Gemma",
   descJaHomepageURL:           "http://d.hatena.ne.jp/Gemma",
   targetApplicationId:         "{ec8030f7-c20a-464f-9b0e-13a3a9e97384}",
@@ -31,7 +33,7 @@ function browseToInstallDirectory() {
   case Ci.nsIFilePicker.returnOK:       //FALLTHROUGH
   case Ci.nsIFilePicker.returnReplace:
     if (filePicker.file) {
-      document.getElementById("textbox-install-dir").value = filePicker.file.path;
+      document.getElementById("textbox-installdir").value = filePicker.file.path;
     }
     break;
   case Ci.nsIFilePicker.returnCancel:
@@ -39,67 +41,149 @@ function browseToInstallDirectory() {
   }
 }
 
+function checkForm() {
+  function checkValue(id) {
+    return document.getElementById(id).value.length;
+  }
+  return ["textbox-installdir",
+          "textbox-key",
+          "textbox-modifiers",
+          "textbox-rootname",
+          "textbox-namespace",
+          "textbox-extensionId",
+          "textbox-extensionVer",
+          "textbox-extensionType",
+          "textbox-descEnName",
+          "textbox-descEnDesc",
+          "textbox-descEnCreater",
+          "textbox-descEnHomepageURL",
+          "textbox-descJaName",
+          "textbox-descJaDesc",
+          "textbox-descJaCreater",
+          "textbox-descJaHomepageURL",
+          "textbox-targetApplicationId",
+          "textbox-targetApplicationMinVersion",
+          "textbox-targetApplicationMaxVersion"].every(checkValue);
+}
+
+function readForm() {
+  function f(id) {
+    return document.getElementById(id).value;
+  }
+  function readmodifires() {
+    var res = [];
+    ["control", "alt", "meta", "shift", "accel"].forEach(function(x) {
+      if (document.getElementById("modifiers-" + x).checked) res.push(x);
+    });
+    return res.join(" ");
+  }
+  return {
+    installdir:                  f("textbox-installdir"),
+    key:                         f("textbox-key"),
+    modifiers:                   readmodifires(),
+    rootname:                    f("textbox-rootname"),
+    namespace:                   f("textbox-namespace"),
+    extensionId:                 f("textbox-extensionId"),
+    extensionVer:                f("textbox-extensionVer"),
+    extensionType:               f("textbox-extensionType"),
+    descEnName:                  f("textbox-descEnName"),
+    descEnDesc:                  f("textbox-descEnDesc"),
+    descEnCreater:               f("textbox-descEnCreater"),
+    descEnHomepageURL:           f("textbox-descEnHomepageURL"),
+    descJaName:                  f("textbox-descJaName"),
+    descJaDesc:                  f("textbox-descJaDesc"),
+    descJaCreater:               f("textbox-descJaCreater"),
+    descJaHomepageURL:           f("textbox-descJaHomepageURL"),
+    targetApplicationId:         f("textbox-targetApplicationId"),
+    targetApplicationMinVersion: f("textbox-targetApplicationMinVersion"),
+    targetApplicationMaxVersion: f("textbox-targetApplicationMaxVersion")
+  };
+}
+
+
 function makeDirectoryTree() {
-  ["/home/teruaki/eve",
-   "/home/teruaki/eve/chrome",
-   "/home/teruaki/eve/chrome/content",
-   "/home/teruaki/eve/chrome/content/browser",
-   "/home/teruaki/eve/chrome/content/common",
-   "/home/teruaki/eve/chrome/content/sidebar",
-   "/home/teruaki/eve/chrome/icons",
-   "/home/teruaki/eve/chrome/icons/default",
-   "/home/teruaki/eve/chrome/locale",
-   "/home/teruaki/eve/chrome/locale/en-US",
-   "/home/teruaki/eve/chrome/locale/ja",
-   "/home/teruaki/eve/chrome/skin",
-   "/home/teruaki/eve/chrome/skin/classic",
-   "/home/teruaki/eve/chrome/skin/classic/images",
-   "/home/teruaki/eve/components",
-   "/home/teruaki/eve/defaults",
-   "/home/teruaki/eve/defaults/preferences",
-   "/home/teruaki/eve/resources",
-   "/home/teruaki/eve/resources/modules",
-   "/home/teruaki/eve/tests",
-   "/home/teruaki/eve/tests/javascripts"].forEach(mkdir);
+  var insDir =  Cc["@mozilla.org/file/local;1"]
+                  .createInstance(Ci.nsILocalFile);
+  insDir.initWithPath(template.installdir);
+  ["chrome",
+   "chrome/content",
+   "chrome/content/browser",
+   "chrome/content/common",
+   "chrome/content/sidebar",
+   "chrome/icons",
+   "chrome/icons/default",
+   "chrome/locale",
+   "chrome/locale/en-US",
+   "chrome/locale/ja",
+   "chrome/skin",
+   "chrome/skin/classic",
+   "chrome/skin/classic/images",
+   "components",
+   "defaults",
+   "defaults/preferences",
+   "resources",
+   "resources/modules",
+   "tests",
+   "tests/javascripts"].forEach(function(x) {
+     var f = appendPath(insDir, x);
+     if (!f.exists() || !f.isDirectory()) {
+       f.create(f.DIRECTORY_TYPE, 0775);
+     }
+   });
 }
 
 function exportSourceFiles() {
-  function process(obj) {
-    cat("/home/teruaki/eve" + obj.path, obj.content);
+  var insDir =  Cc["@mozilla.org/file/local;1"]
+                  .createInstance(Ci.nsILocalFile);
+  insDir.initWithPath(template.installdir);
+
+  function cat(obj) {
+    var f = appendPath(insDir, obj.path);
+    var stream = Cc['@mozilla.org/network/file-output-stream;1']
+                   .createInstance(Ci.nsIFileOutputStream);
+    stream.init(f, 0x02 | 0x08 | 0x20, 0664, 0); // write, create, truncate
+    var os = Cc["@mozilla.org/intl/converter-output-stream;1"]
+               .createInstance(Ci.nsIConverterOutputStream);
+    os.init(stream, "UTF-8", 0, 0x0000);
+    os.writeString(obj.content);
+    os.close();
   }
 
-  [autoloaderjs,
-   browser00foobar0js,
-   browser05foobar1js,
-   chromemanifest,
-   common02utilsjs,
-   common05foobar1js,
-   configxul,
-   installrdf,
-   localeenUSbrowserdtd,
-   localeenUSconfigdtd,
-   localeenUSsidebardtd,
-   localejabrowserdtd,
-   localejaconfigdtd,
-   localejasidebardtd,
-   overlayxul,
-   resourcesmodules00utilsjsm,
-   resourcesmodules20Prefsjsm,
-   resourcesmodules20Databasejsm,
-   sidebar00foobar0js,
-   sidebar05foobar1js,
-   sidebarxul,
-   {path: "/chrome/skin/classic/browser.css", content: ""},
-   {path: "/chrome/skin/classic/browser.osx.css", content: ""},
-   {path: "/chrome/skin/classic/config.css", content: ""},
-   {path: "/chrome/skin/classic/sidebar.css", content: ""}
-  ].forEach(process);
+  [autoloaderjs(),
+   browser00foobar0js(),
+   browser05foobar1js(),
+   chromemanifest(),
+   common02utilsjs(),
+   common05foobar1js(),
+   configxul(),
+   installrdf(),
+   localeenUSbrowserdtd(),
+   localeenUSconfigdtd(),
+   localeenUSsidebardtd(),
+   localejabrowserdtd(),
+   localejaconfigdtd(),
+   localejasidebardtd(),
+   overlayxul(),
+   resourcesmodules00utilsjsm(),
+   resourcesmodules20Prefsjsm(),
+   resourcesmodules20Databasejsm(),
+   sidebar00foobar0js(),
+   sidebar05foobar1js(),
+   sidebarxul(),
+   {path: "chrome/skin/classic/browser.css", content: ""},
+   {path: "chrome/skin/classic/browser.osx.css", content: ""},
+   {path: "chrome/skin/classic/config.css", content: ""},
+   {path: "chrome/skin/classic/sidebar.css", content: ""}
+  ].forEach(cat);
 }
 
+// without side-effect.
 function appendPath(ansIFile, aPath) {
+  var f = ansIFile.clone();
   aPath.split("/").forEach(function(x) {
-    ansIFile.append(x);
+    f.append(x);
   });
+  return f;
 }
 
 function copySkinClassicImages() {
@@ -108,27 +192,24 @@ function copySkinClassicImages() {
                        .getService(Components.interfaces.nsIExtensionManager)
                        .getInstallLocation(extensionId)
                        .getItemLocation(extensionId);
-  appendPath(extensionDir, "chrome/skin/classic/images");
+  var imageDir = appendPath(extensionDir, "chrome/skin/classic/images");
 
-  // get a component for the directory to copy to
-  var destDir = Cc["@mozilla.org/file/local;1"]
+  var insDir =  Cc["@mozilla.org/file/local;1"]
                   .createInstance(Ci.nsILocalFile);
-  // next, assign URLs to the file component.
-  destDir.initWithPath("/home/teruaki/eve/chrome/skin/classic/images");
+  insDir.initWithPath(template.installdir);
+  var destDir = appendPath(insDir, "chrome/skin/classic/images");
 
-  var tmp;
-  tmp = extensionDir.clone();
-  tmp.append("favicon.ico");
-  tmp.copyTo(destDir, null);
-  tmp = extensionDir.clone();
-  tmp.append("favicon32.png");
-  tmp.copyTo(destDir, null);
-  tmp = extensionDir.clone();
-  tmp.append("transparent.png");
-  tmp.copyTo(destDir, null);
+  ["favicon.ico", "favicon32.png", "transparent.png"].forEach(function(x) {
+    appendPath(imageDir, x).copyTo(destDir, null);
+  });
 }
 
-function test() {
+function createTheScaffold() {
+  if (!checkForm()) {
+    alert("Please fill in them all.");
+    return;
+  }
+  Matchfox.template = readForm();
   makeDirectoryTree();
   exportSourceFiles();
   copySkinClassicImages();
@@ -142,26 +223,6 @@ function prefsForDeveloppers() {
   p1.set("enabled", true);
   var p2 = new Matchfox.Prefs("nglayout.debug.");
   p2.set("disable_xul_cache", true);
-}
-
-function cat(aPath, aContent) {
-  var localFile=  Cc["@mozilla.org/file/local;1"]
-                    .createInstance(Ci.nsILocalFile);
-  localFile.initWithPath(aPath);
-  var stream = Cc['@mozilla.org/network/file-output-stream;1']
-                 .createInstance(Ci.nsIFileOutputStream);
-  stream.init(localFile, 0x02 | 0x08 | 0x20, 0664, 0); // write, create, truncate
-  stream.write(aContent, aContent.length);
-  stream.close();
-}
-
-function mkdir(aPath) {
-  var localFile=  Cc["@mozilla.org/file/local;1"]
-                    .createInstance(Ci.nsILocalFile);
-  localFile.initWithPath(aPath);
-  if (!localFile.exists() || !localFile.isDirectory()) {
-    localFile.create(localFile.DIRECTORY_TYPE, 0775);
-  }
 }
 
 var EXPORT = [m for (m in new Iterator(this, true))

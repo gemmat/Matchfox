@@ -1,7 +1,7 @@
 <!ENTITY Matchfox.sidebar.title "Matchfox Sidebar">
 <!ENTITY Matchfox.sidebar.label.installdir.value "A directory to install">
 <!ENTITY Matchfox.sidebar.button.browse.label "Browse...">
-<!ENTITY Matchfox.sidebar.label.key "A shortcut key to open the sidebar">
+<!ENTITY Matchfox.sidebar.label.key "A shortcut key to open the extension's sidebar">
 <!ENTITY Matchfox.sidebar.label.modifiers "A shortcut key modifiers">
 <!ENTITY Matchfox.sidebar.label.rootname "A Chrome directory name for the extension">
 <!ENTITY Matchfox.sidebar.label.namespace "A Javascript namespace for the extension">

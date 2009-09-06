@@ -1,7 +1,7 @@
 const EXPORT = ["configxul"];
 
-var file =
-<file>
+function file() {
+  return <file>
   <prefwindow
       id={Matchfox.template.namespace + "-config"}
       xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
@@ -63,17 +63,21 @@ var file =
 <script type="application/javascript; version=1.8" charset="utf-8" src={"chrome://" + Matchfox.template.rootname + "/content/autoloader.js"}></script>
   </prefwindow>
 </file>;
+}
 
-var head =
-  "<?xml version=\"1.0\"?>\n" +
-  "<?xml-stylesheet href=\"chrome://global/skin\" type=\"text/css\"?>\n" +
-  "<?xml-stylesheet href=\"chrome://mozapps/content/preferences/preferences.css\"?>\n" +
-  "<?xml-stylesheet href=\"chrome://browser/skin/preferences/preferences.css\"?>\n" +
-  "<?xml-stylesheet href=\"chrome://" + Matchfox.template.rootname + "/skin/config.css\"?>\n" +
-  "<!DOCTYPE dialog SYSTEM \"chrome://" + Matchfox.template.rootname + "/locale/config.dtd\">\n\n";
+function head() {
+  return "<?xml version=\"1.0\"?>\n" +
+         "<?xml-stylesheet href=\"chrome://global/skin\" type=\"text/css\"?>\n" +
+         "<?xml-stylesheet href=\"chrome://mozapps/content/preferences/preferences.css\"?>\n" +
+         "<?xml-stylesheet href=\"chrome://browser/skin/preferences/preferences.css\"?>\n" +
+         "<?xml-stylesheet href=\"chrome://" + Matchfox.template.rootname + "/skin/config.css\"?>\n" +
+         "<!DOCTYPE dialog SYSTEM \"chrome://" + Matchfox.template.rootname + "/locale/config.dtd\">\n\n";
+}
 
-var nsXUL = new Namespace("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
-var configxul = {
-  path: "/chrome/content/config.xul",
-  content: head + file.nsXUL::prefwindow.toXMLString().replace(/&amp;/g,"&")
-};
+function configxul() {
+  var nsXUL = new Namespace("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
+  return {
+    path: "chrome/content/config.xul",
+    content: head() + file().nsXUL::prefwindow.toXMLString().replace(/&amp;/g,"&")
+  };
+}

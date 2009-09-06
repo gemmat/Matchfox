@@ -1,7 +1,7 @@
 const EXPORT = ["overlayxul"];
 
-var file =
-<file>
+function file() {
+  return <file>
   <overlay id={Matchfox.template.namespace + "Overlay"}
       xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
       xmlns:html="http://www.w3.org/1999/xhtml">
@@ -26,16 +26,19 @@ var file =
     </broadcasterset>
   </overlay>
 </file>;
+}
 
+function head() {
+  return "<?xml version=\"1.0\" ?>\n" +
+         "<?xml-stylesheet type=\"text/css\" href=\"chrome://" + Matchfox.template.rootname + "/skin/browser.css\"?>\n" +
+         "<!DOCTYPE overlay SYSTEM \"chrome://" + Matchfox.template.rootname + "/locale/browser.dtd\">\n\n";
+}
 
-var head =
-  "<?xml version=\"1.0\" ?>\n" +
-  "<?xml-stylesheet type=\"text/css\" href=\"chrome://" + Matchfox.template.rootname + "/skin/browser.css\"?>\n" +
-  "<!DOCTYPE overlay SYSTEM \"chrome://" + Matchfox.template.rootname + "/locale/browser.dtd\">\n\n";
-
-var nsXUL = new Namespace("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
-var overlayxul = {
-  path: "/chrome/content/overlay.xul",
-  content: head + file.nsXUL::overlay.toXMLString().replace(/&amp;/g,"&")
-};
+function overlayxul() {
+  var nsXUL = new Namespace("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
+  return {
+    path: "chrome/content/overlay.xul",
+    content: head() + file().nsXUL::overlay.toXMLString().replace(/&amp;/g,"&")
+  };
+}
 

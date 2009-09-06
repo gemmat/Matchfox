@@ -1,7 +1,7 @@
 const EXPORT = ["resourcesmodules20Prefsjsm"];
 
-var file =
-<file>
+function file() {
+  return <file>
 const EXPORTED_SYMBOLS = ["Prefs"];
 Components.utils.import("resource://{Matchfox.template.rootname}/modules/00-utils.jsm");
 
@@ -112,8 +112,11 @@ Prefs.prototype = {"{"}
   {"}"}
 {"}"};
 </file>;
+}
 
-var resourcesmodules20Prefsjsm = {
-  path: "/resources/modules/20-Prefs.jsm",
-  content: file.toString()
-};
+function resourcesmodules20Prefsjsm() {
+  return {
+    path: "resources/modules/20-Prefs.jsm",
+    content: file().toString()
+  };
+}

@@ -1,12 +1,12 @@
 const EXPORT = ["autoloaderjs"];
 
-var file =
-<file>
-if (!{Matchfox.template.ns})
-  var {Matchfox.template.ns} = {"{}"};
+function file() {
+  return <file>
+if (!{Matchfox.template.namespace})
+  var {Matchfox.template.namespace} = {"{}"};
 
 Components.utils.import("resource://{Matchfox.template.rootname}/modules/00-utils.jsm",
-                        {Matchfox.template.ns});
+                        {Matchfox.template.namespace});
 
 /**
  * load script files at the specified URI.
@@ -15,7 +15,7 @@ Components.utils.import("resource://{Matchfox.template.rootname}/modules/00-util
  *                     When it's terminated with "/",
  *                     loads the directory recursively.
  */
-{Matchfox.template.ns}.load = function (uri) {"{"}
+{Matchfox.template.namespace}.load = function (uri) {"{"}
   if (uri.charAt(uri.length - 1) === "/") {"{"}
     var load = arguments.callee;
     load.getScriptURIs(uri)
@@ -31,10 +31,10 @@ Components.utils.import("resource://{Matchfox.template.rootname}/modules/00-util
       env.EXPORT.forEach(function (name) this[name] = env[name], this);
 {"}"};
 
-{Matchfox.template.ns}.load.getScriptURIs = function (dirURI) {"{"}
+{Matchfox.template.namespace}.load.getScriptURIs = function (dirURI) {"{"}
   const Cc = Components.classes;
   const Ci = Components.interfaces;
-  const EXTENSION_ID = {Matchfox.template.extensionId};
+  const EXTENSION_ID = "{Matchfox.template.extensionId}";
   var uris = [];
   var dirPath = dirURI.replace(/^[\w-]+:\/\/[\w.:-]+\//, "");
   var em = Cc["@mozilla.org/extensions/manager;1"]
@@ -53,14 +53,17 @@ Components.utils.import("resource://{Matchfox.template.rootname}/modules/00-util
   return uris.sort();
 {"}"};
 
-if (!("autoload" in {Matchfox.template.ns}) || {Matchfox.template.ns}.autoload) {"{"}
-  {Matchfox.template.ns}.loadModules();
-  {Matchfox.template.ns}.load("chrome://{Matchfox.template.rootname}/content/common/");
-  {Matchfox.template.ns}.load(location.href.replace(/\.\w+$/, "/"));
+if (!("autoload" in {Matchfox.template.namespace}) || {Matchfox.template.namespace}.autoload) {"{"}
+  {Matchfox.template.namespace}.loadModules();
+  {Matchfox.template.namespace}.load("chrome://{Matchfox.template.rootname}/content/common/");
+  {Matchfox.template.namespace}.load(location.href.replace(/\.\w+$/, "/"));
 {"}"}
 </file>;
+}
 
-var autoloaderjs = {
-  path: "/chrome/content/autoloader.js",
-  content: file.toString()
-};
+function autoloaderjs() {
+  return {
+    path: "chrome/content/autoloader.js",
+    content: file().toString()
+  };
+}
