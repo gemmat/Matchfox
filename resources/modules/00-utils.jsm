@@ -9,6 +9,8 @@ const Ci = Components.interfaces;
 const Cr = Components.results;
 const Cu = Components.utils;
 
+const IOService        = Cc["@mozilla.org/network/io-service;1"].
+                           getService(Ci.nsIIOService);
 const WindowMediator   = Cc["@mozilla.org/appshell/window-mediator;1"].
                            getService(Ci.nsIWindowMediator);
 const PrefService      = Cc["@mozilla.org/preferences-service;1"].

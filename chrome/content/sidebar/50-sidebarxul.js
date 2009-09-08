@@ -7,7 +7,7 @@ function file() {
         title={"&" + Matchfox.template.namespace + ".sidebar.title;"}>
     <script type="application/javascript" src="autoloader.js"></script>
     <script type="application/javascript" src="chrome://browser/content/utilityOverlay.js"></script>
-    <button oncommand="alert('hello, world');" label={"&" + Matchfox.template.namespace + ".sidebar.test;"}/>
+    <button oncommand={Matchfox.template.namespace + ".sidebarFoobar0();"} label={"&" + Matchfox.template.namespace + ".sidebar.test;"}/>
   </page>
 </file>;
 }

@@ -29,5 +29,6 @@
 <!ENTITY Matchfox.sidebar.label.targetApplicationId "targetApplicationId">
 <!ENTITY Matchfox.sidebar.label.targetApplicationMinVersion "targetApplicationMinVersion">
 <!ENTITY Matchfox.sidebar.label.targetApplicationMaxVersion "targetApplicationMaxVersion">
+<!ENTITY Matchfox.sidebar.label.success "Finished. Please restart the Firefox">
 <!ENTITY Matchfox.sidebar.button.create.label "Create the scaffold">
 

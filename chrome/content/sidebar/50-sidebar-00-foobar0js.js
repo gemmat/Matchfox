@@ -5,6 +5,7 @@ function file() {
 const EXPORT = ['sidebarFoobar0'];
 
 function sidebarFoobar0() {"{"}
+  alert("hello, world");
 {"}"}
 
 function notExported() {"{"}

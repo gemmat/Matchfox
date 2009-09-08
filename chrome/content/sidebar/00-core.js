@@ -207,4 +207,7 @@ function createTheScaffold() {
   makeDirectoryTree();
   exportSourceFiles();
   copySkinClassicImages();
+  document.getElementById("label-success").style.visibility = "visible";
+  var fileURI = Matchfox.IOService.newFileURI(Matchfox.insDir);
+  if (fileURI && fileURI.spec) openTopWin(fileURI.spec);
 }

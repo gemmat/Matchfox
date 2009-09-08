@@ -140,6 +140,7 @@
         </row>
       </rows>
     </grid>
+    <label id="label-success"  value="&Matchfox.sidebar.label.success;"/>
     <button oncommand="Matchfox.createTheScaffold();"
             label="&Matchfox.sidebar.button.create.label;"/>
     </arrowscrollbox>
