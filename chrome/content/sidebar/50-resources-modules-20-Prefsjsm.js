@@ -34,7 +34,7 @@ Prefs.prototype = {"{"}
     try {"{"}
       switch (aType) {"{"}
       case PrefService.PREF_INT:      //FALLTHROUGH
-      case "integer":
+      case "number":
         return prefs.getIntPref(aPrefName);
       case PrefService.PREF_BOOL:     //FALLTHROUGH
       case "boolean":
@@ -68,7 +68,7 @@ Prefs.prototype = {"{"}
     aRelFilePrefRelToKey = aRelFilePrefRelToKey || "ProfD";
     switch (aType) {"{"}
     case PrefService.PREF_INT:      //FALLTHROUGH
-    case "integer":
+    case "number":
       return prefs.setIntPref(aPrefName, +aValue);
     case PrefService.PREF_BOOL:     //FALLTHROUGH
     case "boolean":
