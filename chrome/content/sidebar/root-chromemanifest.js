@@ -1,12 +1,12 @@
 const EXPORT = ["chromemanifest"];
 
 function file() {
-  return <file>content	  {Matchfox.template.rootname} chrome/content/
-overlay   chrome://browser/content/browser.xul chrome://{Matchfox.template.rootname}/content/overlay.xul
-resource  {Matchfox.template.rootname}  resources/
-skin      {Matchfox.template.rootname}  classic/1.0	chrome/skin/classic/
-locale    {Matchfox.template.rootname}  en-US       chrome/locale/en-US/
-locale    {Matchfox.template.rootname}  ja          chrome/locale/ja/
+  return <file>content	  {Template.rootname} chrome/content/
+overlay   chrome://browser/content/browser.xul chrome://{Template.rootname}/content/overlay.xul
+resource  {Template.rootname}  resources/
+skin      {Template.rootname}  classic/1.0	chrome/skin/classic/
+locale    {Template.rootname}  en-US       chrome/locale/en-US/
+locale    {Template.rootname}  ja          chrome/locale/ja/
 </file>;
 }
 

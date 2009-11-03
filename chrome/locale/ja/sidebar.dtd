@@ -29,7 +29,7 @@
 <!ENTITY Matchfox.sidebar.label.targetApplicationId "targetApplicationId">
 <!ENTITY Matchfox.sidebar.label.targetApplicationMinVersion "targetApplicationMinVersion">
 <!ENTITY Matchfox.sidebar.label.targetApplicationMaxVersion "targetApplicationMaxVersion">
-<!ENTITY Matchfox.sidebar.label.success "完了しました。Firefoxを再起動してください。">
+<!ENTITY Matchfox.sidebar.label.success "完了しました。">
 <!ENTITY Matchfox.sidebar.button.create.label "骨組みを作る">
 
 

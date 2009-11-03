@@ -3,7 +3,7 @@ const EXPORT = ["resourcesmodules20Prefsjsm"];
 function file() {
   return <file>
 const EXPORTED_SYMBOLS = ["Prefs"];
-Components.utils.import("resource://{Matchfox.template.rootname}/modules/00-utils.jsm");
+Components.utils.import("resource://{Template.rootname}/modules/00-utils.jsm");
 
 function Prefs(aBranchName) {"{"}
   if (aBranchName {"&&"} aBranchName[aBranchName.length - 1] != ".")

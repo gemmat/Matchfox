@@ -34,7 +34,7 @@ const StorageStatementWrapper = Components.Constructor(
                                   "mozIStorageStatementWrapper",
                                   "initialize");
 
-const _MODULE_BASE_URI = "resource://{Matchfox.template.rootname}/modules/";
+const _MODULE_BASE_URI = "resource://{Template.rootname}/modules/";
 
 function loadModules() {"{"}
     var uris = _getModuleURIs();

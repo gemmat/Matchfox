@@ -64,68 +64,22 @@
           <label control="textbox-extensionType">&Matchfox.sidebar.label.extensionType;</label>
           <textbox id="textbox-extensionType" value="2"/>
         </row>
-      </rows>
-    </grid>
-    <groupbox>
-      <caption label="&Matchfox.sidebar.caption.descEn;"/>
-      <grid>
-        <columns>
-          <column/>
-          <column flex="1"/>
-        </columns>
-        <rows>
-          <row>
-            <label control="textbox-descEnName">&Matchfox.sidebar.label.descEnName;</label>
-            <textbox id="textbox-descEnName" value="&Matchfox.sidebar.textbox.descEnName.value;"/>
-          </row>
-          <row>
-            <label control="textbox-descEnDesc">&Matchfox.sidebar.label.descEnDesc;</label>
-            <textbox id="textbox-descEnDesc" value="&Matchfox.sidebar.textbox.descEnDesc.value;"/>
-          </row>
-          <row>
-            <label control="textbox-descEnCreater">&Matchfox.sidebar.label.descEnCreater;</label>
-            <textbox id="textbox-descEnCreater" value="&Matchfox.sidebar.textbox.descEnCreater.value;"/>
-          </row>
-          <row>
-            <label control="textbox-descEnHomepageURL">&Matchfox.sidebar.label.descEnHomepageURL;</label>
-            <textbox id="textbox-descEnHomepageURL" value="&Matchfox.sidebar.textbox.descEnHomepageURL.value;"/>
-          </row>
-        </rows>
-      </grid>
-    </groupbox>
-    <groupbox>
-      <caption label="&Matchfox.sidebar.caption.descJa;"/>
-      <grid>
-        <columns>
-          <column/>
-          <column flex="1"/>
-        </columns>
-        <rows>
-          <row>
-            <label control="textbox-descJaName">&Matchfox.sidebar.label.descJaName;</label>
-            <textbox id="textbox-descJaName" value="&Matchfox.sidebar.textbox.descJaName.value;"/>
-          </row>
-          <row>
-            <label control="textbox-descJaDesc">&Matchfox.sidebar.label.descJaDesc;</label>
-            <textbox id="textbox-descJaDesc" value="&Matchfox.sidebar.textbox.descJaDesc.value;"/>
-          </row>
-          <row>
-            <label control="textbox-descJaCreater">&Matchfox.sidebar.label.descJaCreater;</label>
-            <textbox id="textbox-descJaCreater" value="&Matchfox.sidebar.textbox.descJaCreater.value;"/>
-          </row>
-          <row>
-            <label control="textbox-descJaHomepageURL">&Matchfox.sidebar.label.descJaHomepageURL;</label>
-            <textbox id="textbox-descJaHomepageURL" value="&Matchfox.sidebar.textbox.descJaHomepageURL.value;"/>
-          </row>
-        </rows>
-      </grid>
-    </groupbox>
-    <grid>
-      <columns>
-        <column/>
-        <column flex="1"/>
-      </columns>
-      <rows>
+        <row>
+          <label control="textbox-descEnName">&Matchfox.sidebar.label.descEnName;</label>
+          <textbox id="textbox-descEnName" value="&Matchfox.sidebar.textbox.descEnName.value;"/>
+        </row>
+        <row>
+          <label control="textbox-descEnDesc">&Matchfox.sidebar.label.descEnDesc;</label>
+          <textbox id="textbox-descEnDesc" value="&Matchfox.sidebar.textbox.descEnDesc.value;"/>
+        </row>
+        <row>
+          <label control="textbox-descEnCreater">&Matchfox.sidebar.label.descEnCreater;</label>
+          <textbox id="textbox-descEnCreater" value="&Matchfox.sidebar.textbox.descEnCreater.value;"/>
+        </row>
+        <row>
+          <label control="textbox-descEnHomepageURL">&Matchfox.sidebar.label.descEnHomepageURL;</label>
+          <textbox id="textbox-descEnHomepageURL" value="&Matchfox.sidebar.textbox.descEnHomepageURL.value;"/>
+        </row>
         <row>
           <label control="textbox-targetApplicationId">&Matchfox.sidebar.label.targetApplicationId;</label>
           <textbox id="textbox-targetApplicationId" value="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}"/>

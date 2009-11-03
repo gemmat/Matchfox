@@ -5,34 +5,34 @@ function file() {
   <RDF xmlns="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
        xmlns:em="http://www.mozilla.org/2004/em-rdf#">
     <Description about="urn:mozilla:install-manifest">
-      <em:id>{Matchfox.template.extensionId}</em:id>
-      <em:version>{Matchfox.template.extensionVer}</em:version>
-      <em:type>{Matchfox.template.extensionType}</em:type>
-      <em:optionsURL>chrome://{Matchfox.template.rootname}/content/config.xul</em:optionsURL>
-      <em:iconURL>chrome://{Matchfox.template.rootname}/skin/images/favicon32.png</em:iconURL>
+      <em:id>{Template.extensionId}</em:id>
+      <em:version>{Template.extensionVer}</em:version>
+      <em:type>{Template.extensionType}</em:type>
+      <em:optionsURL>chrome://{Template.rootname}/content/config.xul</em:optionsURL>
+      <em:iconURL>chrome://{Template.rootname}/skin/images/favicon32.png</em:iconURL>
       <em:localized>
         <Description>
-          <em:name>{Matchfox.template.descEnName}</em:name>
+          <em:name>{Template.descEnName}</em:name>
           <em:locale>en-US</em:locale>
-          <em:description>{Matchfox.template.descEnDesc}</em:description>
-          <em:creator>{Matchfox.template.descEnCreater}</em:creator>
-          <em:homepageURL>{Matchfox.template.descEnHomepageURL}</em:homepageURL>
+          <em:description>{Template.descEnDesc}</em:description>
+          <em:creator>{Template.descEnCreater}</em:creator>
+          <em:homepageURL>{Template.descEnHomepageURL}</em:homepageURL>
         </Description>
       </em:localized>
       <em:localized>
         <Description>
-          <em:name>{Matchfox.template.descJaName}</em:name>
+          <em:name>{Template.descJaName}</em:name>
           <em:locale>ja</em:locale>
-          <em:description>{Matchfox.template.descJaDesc}</em:description>
-          <em:creator>{Matchfox.template.descJaCreater}</em:creator>
-          <em:homepageURL>{Matchfox.template.descJaHomepageURL}</em:homepageURL>
+          <em:description>{Template.descJaDesc}</em:description>
+          <em:creator>{Template.descJaCreater}</em:creator>
+          <em:homepageURL>{Template.descJaHomepageURL}</em:homepageURL>
         </Description>
       </em:localized>
       <em:targetApplication>
         <Description>
-          <em:id>{Matchfox.template.targetApplicationId}</em:id>
-          <em:minVersion>{Matchfox.template.targetApplicationMinVersion}</em:minVersion>
-          <em:maxVersion>{Matchfox.template.targetApplicationMaxVersion}</em:maxVersion>
+          <em:id>{Template.targetApplicationId}</em:id>
+          <em:minVersion>{Template.targetApplicationMinVersion}</em:minVersion>
+          <em:maxVersion>{Template.targetApplicationMaxVersion}</em:maxVersion>
         </Description>
       </em:targetApplication>
     </Description>

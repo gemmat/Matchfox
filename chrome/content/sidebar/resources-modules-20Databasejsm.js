@@ -3,7 +3,7 @@ const EXPORT = ["resourcesmodules20Databasejsm"];
 function file() {
   return <file>
 const EXPORTED_SYMBOLS = ["Database", "Model", "Entity"];
-Components.utils.import("resource://{Matchfox.template.rootname}/modules/00-utils.jsm");
+Components.utils.import("resource://{Template.rootname}/modules/00-utils.jsm");
 
 /*
  * original codes from tombloo
