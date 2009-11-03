@@ -13,12 +13,20 @@ const Ci = Components.interfaces;
 const Cr = Components.results;
 const Cu = Components.utils;
 
+const Application      = Cc["@mozilla.org/fuel/application;1"].
+                           getService(Ci.fuelIApplication);
+const IOService        = Cc["@mozilla.org/network/io-service;1"].
+                           getService(Ci.nsIIOService);
 const WindowMediator   = Cc["@mozilla.org/appshell/window-mediator;1"].
                            getService(Ci.nsIWindowMediator);
 const PrefService      = Cc["@mozilla.org/preferences-service;1"].
                            getService(Ci.nsIPrefService).
                            QueryInterface(Ci.nsIPrefBranch).
                            QueryInterface(Ci.nsIPrefBranch2);
+const DirectoryService = Cc["@mozilla.org/file/directory_service;1"].
+                           getService(Ci.nsIProperties);
+const StringBundleService =  Cc["@mozilla.org/intl/stringbundle;1"].
+                               getService(Ci.nsIStringBundleService);
 const StorageService   = Cc["@mozilla.org/storage/service;1"].
                            getService(Ci.mozIStorageService);
 const StorageStatementWrapper = Components.Constructor(

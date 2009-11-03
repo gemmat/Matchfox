@@ -164,15 +164,22 @@ function exportSourceFiles() {
    localejasidebardtd(),
    overlayxul(),
    resourcesmodules00utilsjsm(),
+   resourcesmodules10Stringsjsm(),
    resourcesmodules20Prefsjsm(),
    resourcesmodules20Databasejsm(),
    sidebar00foobar0js(),
    sidebar05foobar1js(),
    sidebarxul(),
-   {path: "chrome/skin/classic/browser.css", content: ""},
-   {path: "chrome/skin/classic/browser.osx.css", content: ""},
-   {path: "chrome/skin/classic/config.css", content: ""},
-   {path: "chrome/skin/classic/sidebar.css", content: ""}
+   {path: "chrome/locale/en-US/browser.properties", content: ""},
+   {path: "chrome/locale/en-US/config.properties",  content: ""},
+   {path: "chrome/locale/en-US/sidebar.properties", content: ""},
+   {path: "chrome/locale/ja/browser.properties",    content: ""},
+   {path: "chrome/locale/ja/config.properties",     content: ""},
+   {path: "chrome/locale/ja/sidebar.properties",    content: ""},
+   {path: "chrome/skin/classic/browser.css",        content: ""},
+   {path: "chrome/skin/classic/browser.osx.css",    content: ""},
+   {path: "chrome/skin/classic/config.css",         content: ""},
+   {path: "chrome/skin/classic/sidebar.css",        content: ""}
   ].forEach(cat);
 }
 
