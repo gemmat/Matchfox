@@ -155,6 +155,7 @@ function exportSourceFiles() {
    common02utilsjs(),
    common05foobar1js(),
    configxul(),
+   defprefjs(),
    installrdf(),
    localeenUSbrowserdtd(),
    localeenUSconfigdtd(),
