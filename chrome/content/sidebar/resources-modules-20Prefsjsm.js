@@ -21,20 +21,14 @@ Prefs.prototype = {"{"}
   get prefs() {"{"}
     return this._prefs;
   {"}"},
-  /* ComplexValueType       : aType  table
-   *
-   * nsISupportsString      : nsISupportsString,      "string",   (PREF_STRING as a default)
-   * nsIPrefLocalizedString : nsIPrefLocalizedString, "localized"
-   * nsILocalFile           : nsILocalFile,           "file"
-   * nsIRelativeFilePref    : nsIRelativeFilePref,    "relFile"
-   */
   get: function PrefsGet(aPrefName, aDefValue, aType) {"{"}
     var prefs = this.prefs;
     aType = aType || prefs.getPrefType(aPrefName);
     try {"{"}
       switch (aType) {"{"}
       case PrefService.PREF_INT:      //FALLTHROUGH
-      case "number":
+      case "number":                  //FALLTHROUGH
+      case "integer":
         return prefs.getIntPref(aPrefName);
       case PrefService.PREF_BOOL:     //FALLTHROUGH
       case "boolean":
@@ -68,7 +62,8 @@ Prefs.prototype = {"{"}
     aRelFilePrefRelToKey = aRelFilePrefRelToKey || "ProfD";
     switch (aType) {"{"}
     case PrefService.PREF_INT:      //FALLTHROUGH
-    case "number":
+    case "number":                  //FALLTHROUGH
+    case "integer":
       return prefs.setIntPref(aPrefName, +aValue);
     case PrefService.PREF_BOOL:     //FALLTHROUGH
     case "boolean":
