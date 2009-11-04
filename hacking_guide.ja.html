@@ -1,0 +1,434 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja" xml:lang="ja">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link type="text/css" href="hacking_guide.css" rel="stylesheet" />
+    <title>Reference Manual</title>
+  </head>
+  <body>
+<h3>Strings.jsm</h3>
+文字列のローカライズ。
+<h4>使用例</h4>
+<ul><li>javascript</li></ul>
+<pre class="syntax-highlight">
+<span class="synIdentifier">function</span> hello() <span class="synIdentifier">{</span>
+  <span class="synIdentifier">var</span> strings = <span class="synStatement">new</span> Strings(<span class="synConstant">"chrome://sample/locale/sidebar.properties"</span>);
+  <span class="synStatement">alert</span>(strings.get(<span class="synConstant">"hello"</span>));
+<span class="synIdentifier">}</span>
+</pre>
+
+<ul><li>locale/en-US/sidebar.properties</li></ul>
+<pre class="syntax-highlight">hello = hello,world.
+</pre>
+
+<ul><li>locale/ja/sidebar.properties</li></ul>
+<pre class="syntax-highlight">hello = こんにちは、世界。
+</pre>
+
+<h4>リファレンスマニュアル</h4>
+<pre><span class="bold">function:</span> Strings aPropertiesFile
+新しいインスタンスを作ります。
+aPropertiesFile StringBundleに使うpropertiesファイルのURI。文字列。
+
+<span class="bold">function:</span> get aName <span class="italic">&optional</span> aArgs
+ローカライズ文字列を取得します。
+aName 項目名。文字列。
+aArgs printfのような文字列フォーマットに渡す引数。文字列の配列。
+</pre>
+<hr/>
+<h3>Database.jsm</h3>
+<h4>使用例</h4>
+<pre class="syntax-highlight"><span class="synComment">// Bookmarkモデルを生成。</span>
+<span class="synIdentifier">var</span> Bookmark = Entity(<span class="synIdentifier">{</span>
+    name : <span class="synConstant">'bookmarks'</span>,
+    fields : <span class="synIdentifier">{</span>
+        id           : <span class="synConstant">'INTEGER PRIMARY KEY'</span>,
+        url          : <span class="synConstant">'TEXT UNIQUE NOT NULL'</span>,
+        title        : <span class="synConstant">'TEXT'</span>,
+        date         : <span class="synConstant">'TIMESTAMP NOT NULL'</span>,
+        last_visited : <span class="synConstant">'TIMESTAMP'</span>,
+        comment      : <span class="synConstant">'TEXT'</span>,
+    <span class="synIdentifier">}</span>
+<span class="synIdentifier">}</span>)
+<span class="synComment">// データベースのファイル("ProfD/hogehoge/hogehoge.sqlite")を取得。</span>
+<span class="synIdentifier">function</span> dbFile() <span class="synIdentifier">{</span>
+  <span class="synIdentifier">var</span> pd = DirectoryService.get(<span class="synConstant">"ProfD"</span>, Ci.nsIFile);
+  pd.append(<span class="synConstant">"hogehoge"</span>);
+  <span class="synStatement">if</span> (!pd.exists() || !pd.isDirectory()) <span class="synIdentifier">{</span>
+    pd.create(Ci.nsIFile.DIRECTORY_TYPE, 0755);
+  <span class="synIdentifier">}</span>
+  pd.append(<span class="synConstant">"hogehoge.sqlite"</span>);
+  <span class="synStatement">return</span> pd;
+<span class="synIdentifier">}</span>
+<span class="synComment">// Databaseインスタンスを生成</span>
+<span class="synIdentifier">var</span> db = <span class="synStatement">new</span> Database(dbFile());
+<span class="synComment">// BookmarkモデルにDatabaseインスタンスをセット</span>
+Bookmark.db = db;
+<span class="synComment">// Bookmarkモデルを初期化</span>
+Bookmark.initialize();
+...
+<span class="synComment">//Bookmark.insert     作成、</span>
+<span class="synComment">//Bookmark.find       検索、</span>
+<span class="synComment">//Bookmark.update     更新、</span>
+<span class="synComment">//Bookmark.deleteById 削除、などなど</span>
+...
+<span class="synComment">// データベースを閉じる</span>
+db.close();
+</pre>
+<h4>TIMESTAMP型、LIST型</h4>
+<p>TIMESTAMP型を指定すると、JavascriptのDateオブジェクトを透過的に読み書きできます。</p>
+<p>(SQLiteには日付型がないので実際にはINTEGER型で"Date.getTime()の値"をデータベースに保存しています)</p>
+<p>同様に、LIST型を指定すると、JavascriptのArrayオブジェクトを透過的に読み書きできます。</p>
+<p>(実際にはTEXT型で"Arrayから作った<a href="http://d.hatena.ne.jp/keyword/CSV" class="keyword">CSV</a>的な文字列"を保存しています。)</p>
+<h4>findByFoo, findByFooAndBar, countByFoo、countByFooAndBar</h4>
+<p>モデルのFooやBarの値で、検索やカウントができます。これは__noSuchMethod__をフックして実現してます。</p>
+<h4>リファレンスマニュアル</h4>
+<h5>Databaseクラス</h5>
+<pre><span class="bold">function:</span> Database aFile
+Databaseのインスタンスを生成します。
+aFile SQLiteのデータベースファイルの場所。nsIFlieのインスタンス。
+
+
+getter: version
+データベースのバージョンを取得します。
+PRAGMAのuser_versionに相当します(schema_versionではない)。
+
+
+setter: version
+データベースのバージョンを設定します。
+
+
+<span class="bold">function:</span> getPragma aName
+PRAGMAの値を取得します。
+aName PRAGMAの名前。文字列。
+
+
+<span class="bold">function:</span> setPragma aName aVal
+PRAGMAの値を設定します。
+aName PRAGMAの名前。文字列。
+aVal  設定する値。文字列。
+
+
+<span class="bold">function:</span> createStatement aSQL
+ステートメントを生成します。mozIStorageStatementWrapperを返します。
+aSQL  SQL文。文字列。
+
+
+<span class="bold">function:</span> bindParams aWrapper aParams
+ステートメントにパラメーターをバインドします。バインドしたステートメントをmozIStorageStatementWrapperで返します。
+aWrapper ステートメント。mozIStorageStatementWrapperのインスタンス。
+aParams  パラメーター。
+Objectの場合、名前付きパラメーターとみなします。
+Arrayの場合、出現順に先頭からバインドします。
+単値の場合、先頭のパラメーターにバインドします。
+nullの場合、処理を行いません。
+
+
+<span class="bold">function:</span> getParamNames aWrapper
+ステートメント内に含まれる名前付きパラメーターのリストを、配列で返します。
+aWrapper ステートメント。mozIStorageStatementWrapperのインスタンス。
+
+
+<span class="bold">function:</span> getColumnNames aStatement
+ステートメントの列名のリストを、配列で返します。
+aStatement ステートメント。mozIStorageStatementかmozIStorageStatementWrapperのインスタンス。
+
+
+<span class="bold">function:</span> getRow aRow aColumnNames
+テーブル行をオブジェクトに変換したものを返します。
+aRow テーブル行。mozIStorageStatementRowのインスタンス。
+aColumnNames 列名のリスト。配列。
+
+
+<span class="bold">function:</span> execute aSQL aParams
+SQLを実行します。DDL/DML共に利用できます。
+aSQL    SQL文。文字列かmozIStorageStatementWrapper。
+aParams SQL文のパラメータ。オブジェクトか配列か文字列。bindParamsと同じです。
+
+
+<span class="bold">function:</span> transaction aProc
+トランザクション内で処理を実行します。
+パフォーマンスを考慮する必要のある一括追加部分などで用います。
+例外が発生した場合は、トランザクションがロールバックします。
+それ以外は、自動的にコミットします。
+既にトランザクションが始まっていたら新たなトランザクションは開始しません。
+aProc   実行する処理。引数なしの関数。
+
+
+<span class="bold">function:</span> beginTransaction
+トランザクションを開始します。
+トランザクションが既に開始していた場合でも、例外を発生しません。
+
+
+<span class="bold">function:</span> commitTransaction
+トランザクションをコミットします。
+トランザクションが開始していない場合でも、例外を発生しません。
+
+
+<span class="bold">function:</span> rollbackTransaction
+トランザクションをロールバックします。
+トランザクションが開始していない場合でも、例外を発生しません。
+
+
+<span class="bold">function:</span> throwException aError
+データベースの例外を解釈し再発生します。
+aError データベースの例外。
+
+
+<span class="bold">function:</span> close
+データベースを閉じます。
+閉じないと、ファイルがロックし削除できません。
+
+
+<span class="bold">function:</span> tableExists aName
+テーブルが存在するかを確認します。
+aName テーブル名。文字列。
+
+
+<span class="bold">function:</span> vacuum
+データベースの無駄な領域を除去します。
+</pre>
+<h5>Modelクラス</h5>
+<pre><span class="bold">function:</span> save
+Modelをデータベースに保存します。初回はinsert、次からはupdateで保存します。
+特にinsert時には、Modelにidを割り振ります。
+
+
+<span class="bold">function:</span> remove
+Modelをデータベースから削除します。内部的にはdeleteByIdです。
+
+
+property: definitions
+ModelのEntityの定義を示したオブジェクトです。
+
+
+<span class="bold">function:</span> initialize
+テーブルをCREATEします。内部的には以下のSQLを実行します。
+CREATE TABLE IF NOT EXISTS {def.name} (
+  {def.fields.join(', ')}
+)
+
+
+<span class="bold">function:</span> deinitialize
+テーブルをDROPします。内部的には以下のSQLを実行します。
+DROP TABLE {def.name}
+
+
+<span class="bold">function:</span> insert
+ModelをINSERTします。内部的には以下のSQLを実行します。
+INSERT INTO {def.name} (
+  {fields.join(', ')}
+) VALUES (
+  {params.join(', ')}
+)
+
+
+<span class="bold">function:</span> update
+ModelをUPDATEします。内部的には以下のSQLを実行します。
+UPDATE {def.name}
+  SET {fields}
+  WHERE id = :id
+
+
+<span class="bold">function:</span> deleteById aId
+ModelをIDでDELETEします。内部的には以下のSQLを実行します。
+aId ModelのID。整数。
+DELETE FROM {def.name}
+  WHERE id = :id
+
+
+<span class="bold">function:</span> deleteAll
+Modelを全てDELETEします。内部的には以下のSQLを実行します。
+DELETE FROM {def.name}
+
+
+<span class="bold">function:</span> countAll
+Modelの数をカウントします。内部的には以下のSQLを実行します。
+SELECT count(*) AS count
+  FROM {def.name}
+
+
+<span class="bold">function:</span> findAll
+Modelを全て検索します。内部的には以下のSQLを実行します。
+SELECT *
+  FROM {def.name}
+
+
+<span class="bold">function:</span> findFirst aParams
+ModelをパラメータでLIMIT 1で検索します。内部的には以下のSQLを実行します。
+aParams パラメータ。Database.executeと同様。
+SELECT *
+  FROM {def.name}
+  ...aParamsの内容...
+  LIMIT 1 OFFSET 0
+
+
+<span class="bold">function:</span> find aSQL aParams
+Modelをパラメータで検索します。
+aSQL    オブジェクトかmozIStorageStatementWrapperのインスタンス。
+aParams パラメータ。Database.executeと同様。
+aParamsがnullで、aSQLがオブジェクトで、aSQL.whereが文字列のとき、内部的には以下のSQLを実行します。
+SELECT *
+  FROM {def.name}
+  WHERE {sql.where}
+aParamsがnullで、aSQLがオブジェクトのとき、内部的には以下のSQLを実行します。
+SELECT *
+  FROM {def.name}
+それ以外のとき、内部的にはDatabase.executeを実行します。
+Model.db.execute(sql, params).map(Model.rowToObject);
+
+
+<span class="bold">function:</span> findByFoo aFoo
+<span class="bold">function:</span> findByFooAndBarAnd... aFoo aBar ...
+ModelをFooやBarの値で検索します。__noSuchMethod__をフックして実現しています。
+内部的には以下のSQLを実行します。
+SELECT *
+  FROM {def.name}
+  WHERE foo = aFoo and bar = aBar and ...
+
+
+<span class="bold">function:</span> countByFoo aFoo
+<span class="bold">function:</span> countByFooAndBar... aFoo aBar ...
+ModelをFooやBarの値でカウントします。__noSuchMethod__をフックして実現しています。
+内部的には以下のSQLを実行します。
+SELECT count(id) AS count
+  FROM {def.name}
+  WHERE foo = aFoo and bar = aBar and ...
+
+
+<span class="bold">function:</span> rowToObject aObject
+オブジェクトからModelのインスタンスを生成します。ただし、saveのときupdateが動きます。
+aObject Entityの定義に沿った内容のオブジェクト。
+</pre>
+<h5>Entityクラス</h5>
+<pre><span class="bold">function:</span> Entity aDefinition
+エンティティ定義に沿ったModelのインスタンスを生成します。
+aDefinition エンティティ定義を示したオブジェクト。
+(nameプロパティでテーブル名、fieldsプロパティで、エンティティ名と型の対応。)
+例.
+var Bookmark = Entity({
+    name : 'bookmarks',
+    fields : {
+        id           : 'INTEGER PRIMARY KEY',
+        url          : 'TEXT UNIQUE NOT NULL',
+        title        : 'TEXT',
+        date         : 'TIMESTAMP NOT NULL',
+        last_visited : 'TIMESTAMP',
+        comment      : 'TEXT',
+    }
+})
+
+
+<span class="bold">function:</span> createWhereClause aFields
+WHERE節を示した文字列を作ります。
+aFields WHEREするパラメータ名をリストにした配列。
+
+
+<span class="bold">function:</span> createInitializeSQL aDefinition
+CREATE TABLE IF NOT EXISTS...文を示した文字列を作ります。
+aDefinition エンティティ定義を示したオブジェクト。Entityのものと同様。
+
+
+<span class="bold">function:</span> createInsertSQL aDefinition
+INSERT INTO...文を示した文字列を作ります。
+aDefinition エンティティ定義を示したオブジェクト。Entityのものと同様。
+
+
+<span class="bold">function:</span> createUpdateSQL aDefinition
+UPDATE ... 文を示した文字列を作ります。
+aDefinition エンティティ定義を示したオブジェクト。Entityのものと同様。
+
+
+<span class="bold">function:</span> compactSQL aSQL
+SQL文から不要な空白などを取り除き短く整形したSQL文の文字列を作ります。
+表記のぶれを無くし、解析後の文のキャッシュヒットを増やす目的があります。
+aSQL SQL文の文字列。
+</pre>
+<h4>参考文献</h4>
+<ul>
+  <li> <a target="_blank" href="https://developer.mozilla.org/ja/Storage">Storage - MDC</a></li>
+  <li> <a target="_blank" href="https://developer.mozilla.org/en/mozIStorageStatement">mozIStorageStatement - MDC</a></li>
+  <li> <a target="_blank" href="https://developer.mozilla.org/en/mozIStorageStatementWrapper">mozIStorageStatementWrapper - MDC</a></li>
+</ul>
+<hr/>
+<h3>Prefs.jsm</h3>
+<h4>ユーザ設定とは</h4>
+<ul>
+  <li> <a target="_blank" href="http://developer.mozilla.org/en/nsIPrefBranch">nsIPrefBranch - MDC</a></li>
+  <li> <a target="_blank" href="http://developer.mozilla.org/ja/Code_snippets/Preferences">Preferences - MDC</a></li>
+</ul>
+
+<h5> ユーザ設定の項目の値には型があるので気をつけます。</h5>
+<ul>
+<li> boolean (真偽値)</li>
+<li> integer (整数)</li>
+<li> string  (文字列)</li>
+<li> など。</li>
+</ul>
+<h5> 項目名が他人様のとカブらないように気をつけます。</h5>
+<p>"ブランチ"にまとめるように心がけましょう。</p>
+<p>例えば拡張で使う項目名には"extensions."ブランチを使いましょう。</p>
+<h4>使用例</h4>
+<p>"javascript.options.strict"オプションを扱う</p>
+<p>1. ライブラリを new する。</p>
+<pre class="syntax-highlight"><span class="synComment">//ブランチを指定します。ピリオドで終わるのがポイント。</span>
+<span class="synIdentifier">var</span> prefs = <span class="synStatement">new</span> Prefs(<span class="synConstant">"javascript.options."</span>);
+</pre>
+<p>2. trueにする</p>
+<pre class="syntax-highlight">prefs.set(<span class="synConstant">"strict"</span>, <span class="synConstant">true</span>);
+</pre>
+<p>3. 取得する</p>
+<pre class="syntax-highlight"><span class="synIdentifier">var</span> v = prefs.get(<span class="synConstant">"strict"</span>);
+</pre>
+<p>項目の型はライブラリが自動で判断してくれます(手動で指定もできます)。</p>
+<h4> リファレンスマニュアル</h4>
+<pre><span class="bold">function:</span> Prefs aBranchName
+新しいインスタンスを作ります。
+aBranchName ブランチ名。文字列。ブランチ名はピリオドで終わる必要があります。
+
+<span class="bold">function:</span> get aPrefName <span class="italic">&optional</span> aDefaultValue aType
+項目の値を取得します。
+aPrefName 項目名。文字列。
+aDefaultValue 取得に失敗したとき返す値。
+aType 項目の型。文字列。下表1参照。
+
+<span class="bold">function:</span> set aPrefName aValue <span class="italic">&optional</span> aType aRelFileRelativeToKey
+項目の値をセットします。
+aPrefName 項目名。文字列。
+aValue セットする値。
+aType 項目の型。文字列。下表2参照。
+aRelFileRelativeToKey 相対ファイルパスの元ディレクトリ。"ProfD"など。文字列。
+
+<span class="bold">function:</span> clear aPrefName
+項目を削除します。
+aPrefName 項目名。文字列。
+
+<span class="bold">function:</span> getChildList <span class="italic">&optional</span> aStartingAt
+ブランチ以下の項目名たちを配列で返します。
+aStartingAt ブランチ名。文字列。
+</pre>
+<p>表1(getのaType)</p>
+<table>
+<tbody><tr><th>型</th><th>aType</th><th>動作</th></tr>
+<tr><td>真偽値</td><td>"boolean"</td><td>getBoolPref(aPrefName)</td></tr>
+<tr><td>整数</td><td>"integer"</td><td>getIntPref(aPrefName)</td></tr>
+<tr><td>文字列</td><td>"string"</td><td>getComplexValue(aPrefName, Ci.nsISupportsString).data</td></tr>
+<tr><td>地域化文字列</td><td>"localized"</td><td>getComplexValue(aPrefName, Ci.nsIPrefLocalizedString).data</td></tr>
+<tr><td>絶対ファイルパス</td><td>"file"</td><td>getComplexValue(aPrefName, Ci.nsILocalFile)</td></tr>
+<tr><td>相対ファイルパス</td><td>"relFile"</td><td>getComplexValue(aPrefName, Ci.nsIRelativeFilePref)</td></tr>
+
+</tbody></table>
+<p>表2(setのaType)</p>
+<table>
+<tbody><tr><th>型</th><th>aType</th><th>動作</th></tr>
+<tr><td>真偽値</td><td>"boolean"</td><td>setBoolPref(aPrefName, !!aValue)</td></tr>
+<tr><td>整数</td><td>"integer"</td><td>setIntPref(aPrefName, +aValue)</td></tr>
+<tr><td>文字列</td><td>"string"</td><td>setComplexValue(aPrefName, Ci.nsISupportsString, nsISupportsStringのインスタンス)</td></tr>
+<tr><td>地域化文字列</td><td>"localized"</td><td>setComplexValue(aPrefName, Ci.nsIPrefLocalizedString, nsIPrefLocalizedStringのインスタンス</td></tr>
+<tr><td>絶対ファイルパス</td><td>"file"</td><td>setComplexValue(aPrefName, Ci.nsILocalFile, aValue)</td></tr>
+<tr><td>相対ファイルパス</td><td>"relFile"</td><td>setComplexValue(aPrefName, Ci.nsIRelativeFilePref, nsIRelativeFilePrefのインスタンス)</td></tr>
+</tbody></table>
+<p>相対ファイルパスについては<a target="_blank" href="https://developer.mozilla.org/ja/Code_snippets/File_I%2f%2fO#.e7.9b.b8.e5.af.be.e3.83.91.e3.82.b9_(nsIRelativeFilePref)">File I/O - MDC</a>参照。</p>
+</body>
+</html>

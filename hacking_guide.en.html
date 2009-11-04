@@ -1,0 +1,383 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja" xml:lang="ja">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link type="text/css" href="hacking_guide.css" rel="stylesheet" />
+    <title>Reference Manual</title>
+  </head>
+  <body>
+    <h3 class="post-title entry-title" annotation="true">Strings.jsm</h3>
+    <div class="post-body entry-content">
+      Localized string.
+<h4>Example</h4>
+<ul><li>javascript</li></ul>
+<pre class="syntax-highlight">
+<span class="synIdentifier">function</span> hello() <span class="synIdentifier">{</span>
+  <span class="synIdentifier">var</span> strings = <span class="synStatement">new</span> Strings(<span class="synConstant">"chrome://sample/locale/sidebar.properties"</span>);
+  <span class="synStatement">alert</span>(strings.get(<span class="synConstant">"hello"</span>));
+<span class="synIdentifier">}</span>
+</pre>
+
+<ul><li>locale/en-US/sidebar.properties</li></ul>
+<pre class="syntax-highlight">hello = hello,world.
+</pre>
+
+<ul><li>locale/ja/sidebar.properties</li></ul>
+<pre class="syntax-highlight">hello = こんにちは、世界。
+</pre>
+<h4>Reference Manual</h4>
+<br>
+<span style="font-weight: bold;">function:</span> Strings aPropertiesFile<br/>Construct an instance of the Strings class.<br/>aPropertiesFile An URI for a properties file. String.<br/><br/><span style="font-weight: bold;">function:</span> get aName &optional aArgs<br/>Get a localized string.<br/>aName A name of key. String.<br/>aArgs An arguments for a formatted string like the printf. Array of string.
+    <hr/>
+    <h3 class="post-title entry-title" annotation="true">Database.jsm</h3>
+<div class="post-body entry-content">
+  OR Mapper for the SQLite RDBMS builted in the Firefox. Developped by tombloo.<br/>
+<br/>
+<h4>Example</h4>
+<pre class="syntax-highlight"><span class="synComment">// Make a Model for "Bookmark".</span>
+<span class="synIdentifier">var</span> Bookmark = Entity(<span class="synIdentifier">{</span>
+    name : <span class="synConstant">'bookmarks'</span>,
+    fields : <span class="synIdentifier">{</span>
+        id           : <span class="synConstant">'INTEGER PRIMARY KEY'</span>,
+        url          : <span class="synConstant">'TEXT UNIQUE NOT NULL'</span>,
+        title        : <span class="synConstant">'TEXT'</span>,
+        date         : <span class="synConstant">'TIMESTAMP NOT NULL'</span>,
+        last_visited : <span class="synConstant">'TIMESTAMP'</span>,
+        comment      : <span class="synConstant">'TEXT'</span>,
+    <span class="synIdentifier">}</span>
+<span class="synIdentifier">}</span>)
+<span class="synComment">// Get the file of database(at "ProfD/foobar/foobar.sqlite").</span>
+<span class="synIdentifier">function</span> dbFile() <span class="synIdentifier">{</span>
+  <span class="synIdentifier">var</span> pd = DirectoryService.get(<span class="synConstant">"ProfD"</span>, Ci.nsIFile);
+  pd.append(<span class="synConstant">"hogehoge"</span>);
+  <span class="synStatement">if</span> (!pd.exists() || !pd.isDirectory()) <span class="synIdentifier">{</span>
+    pd.create(Ci.nsIFile.DIRECTORY_TYPE, 0755);
+  <span class="synIdentifier">}</span>
+  pd.append(<span class="synConstant">"hogehoge.sqlite"</span>);
+  <span class="synStatement">return</span> pd;
+<span class="synIdentifier">}</span>
+<span class="synComment">// Construct an instance of the Database class.</span>
+<span class="synIdentifier">var</span> db = <span class="synStatement">new</span> Database(dbFile());
+<span class="synComment">// Set the instance to the model of Bookmark.</span>
+Bookmark.db = db;
+<span class="synComment">// initialize the model.</span>
+Bookmark.initialize();
+...
+<span class="synComment">//Bookmark.insert, find, update, deleteById, and so on.</span>
+...
+<span class="synComment">// Close the database.</span>
+db.close();
+</pre>
+<h4>Remarks#1: TIMESTAMP type, LIST type.</h4>
+<br/>By specifing a TIMESTAMP type, you can read and write the Javascript's Date object transparently.<br/>(Note: Actually the SQLite doesn't have the Date type, so the library store the value of "Date.getTime()" as INTEGER type.)<br/>
+<br/>Similarly, by specifing a LIST type, you can do the Array object transparently.<br/>(Note: The library store the value of "A CSV-format string made from the array" as TEXT type.)<br/>
+<br/>
+<h4>Remarks#2: findByFoo, findByFooAndBar, countByFoo、countByFooAndBar</h4>
+<br/>You can find and count the model with its value of "Foo" or "Bar". This is realized by hooking the __noSuchMethod__.<br/>
+<br/>
+<h4>Reference Manual</h4>
+<br/>
+<h5>Database Class</h5>
+<br/>
+<span style="font-weight: bold;">function:</span> Database aFile<br/>Construct an instance of the Database class.<br/>aFile a file path of the database file of the SQLite. An instance of nsIFlie.<br/>
+<br/>
+<span style="font-weight: bold;">getter:</span> version<br/>Get the version of the database, corresponding to the PRAGMA's user_version(not to the schema_version).<br/>
+<br/>
+<span style="font-weight: bold;">setter:</span> version<br/>Set the version of the database.<br/>
+<br/>
+<span style="font-weight: bold;">function:</span> getPragma aName<br/>Get the value of the PRAGMA.<br/>aName A name of the PRAGMA. String.<br/>
+<br/>
+<span style="font-weight: bold;">function:</span> setPragma aName aVal<br/>Set the value of the PRAGMA.<br/>aName A name of the PRAGMA. String.<br/>aVal  A value to set. String.<br/>
+<br/>
+<span style="font-weight: bold;">function:</span> createStatement aSQL<br/>Create a statement. It returns a mozIStorageStatementWrapper.<br/>aSQL  A SQL statement. String.<br/>
+<br/>
+<span style="font-weight: bold;">function:</span> bindParams aWrapper aParams<br/>Bind a parameter to the statement. It returns a mozIStorageStatementWrapper of the binded statement.<br/>aWrapper A statement. An instance of the mozIStorageStatementWrapper.<br/>aParams  A parameter. Dispatch for its type in the followings manner.<br/>
+<br/>object: bind as a named parameter.<br/>array: bind the elements in order in the array.<br/>value: bind to the first parameter.<br/>null: do nothing.<br/>
+<br/>
+<span style="font-weight: bold;">function:</span> getParamNames aWrapper<br/>Get an array of the named parameters of the statement.<br/>aWrapper A statement. An instance of the mozIStorageStatementWrapper.<br/>
+<br/>
+<span style="font-weight: bold;">function:</span> getColumnNames aStatement<br/>Get an array of the column names of the statement.<br/>aStatement A statement. An instance of the mozIStorageStatement or the mozIStorageStatementWrapper.<br/>
+<br/>
+<span style="font-weight: bold;">function:</span> getRow aRow aColumnNames<br/>Get a object which converted the table rows.<br/>aRow A table row. An instance of the mozIStorageStatementRow.<br/>aColumnNames A list of the column names. Array.<br/>
+<br/>
+<span style="font-weight: bold;">function:</span> execute aSQL aParams<br/>Execute the SQL query. You can use both DDL and DML.<br/>aSQL    A SQL statement. String or mozIStorageStatementWrapper.<br/>aParams A parameter for the SQL statement. Object or Array or Statement, same with the bindParams.<br/>
+<br/>
+<span style="font-weight: bold;">function:</span> transaction aProc<br/>Execute operations in a transaction.<br/>Use for a batch processing which requires high performance.<br/>When it raise an error, we'll rollback the transaction.<br/>Otherwise, we'll commit it automatically.<br/>If another transaction was already started, we don't start any transaction.<br/>aProc   A oparation. A function with no arguments.<br/>
+<br/>
+<span style="font-weight: bold;">function:</span> beginTransaction<br/>Begin a transaction.<br/>We don't raise error still the transaction is already started.<br/>
+<br/>
+<span style="font-weight: bold;">function:</span> commitTransaction<br/>Commit a transaction.<br/>We don't raise error still the transaction is not started.<br/>
+<br/>
+<span style="font-weight: bold;">function:</span> rollbackTransaction<br/>Rollback a transaction.<br/>We don't raise error still the transaction is not started.<br/>
+<br/>
+<span style="font-weight: bold;">function:</span> throwException aError<br/>Interpret an error of the database and throw it again.<br/>aError An error of the database.<br/>
+<br/>
+<span style="font-weight: bold;">function:</span> close<br/>Close the database.<br/>You have to close it to delete the file, as it's locked.<br/>
+<br/>
+<span style="font-weight: bold;">function:</span> tableExists aName<br/>Check wheather a database exists or not.<br/>aName A name of the tabel. String.<br/>
+<br/>
+<span style="font-weight: bold;">function:</span> vacuum<br/>Vacuum a waste of the data area in the database.<br/>
+<br/>
+<h5>Model Class</h5>
+<br/>
+<span style="font-weight: bold;">function:</span> save<br/>Save a model to the database. Firstly do with "insert" with a generated id, nextly with "update".<br/>
+<br/>
+<span style="font-weight: bold;">function:</span> remove<br/>Remove a model from the database. We use deleteById internally.<br/>
+<br/>
+<span style="font-weight: bold;">property:</span> definitions<br/>An object indicates the entity definition of the model.<br/>
+<br/>
+<span style="font-weight: bold;">function:</span> initialize<br/>CREATE a table.<br/>We execute the following SQL internally.<br/>
+<pre>CREATE TABLE IF NOT EXISTS {def.name} (<br/>  {def.fields.join(', ')}<br/>)</pre>
+<span style="font-weight: bold;">function:</span> deinitialize<br/>DROP a table.<br/>We execute the following SQL internally.<br/>
+<pre>DROP TABLE {def.name}</pre>
+<span style="font-weight: bold;">function:</span> insert<br/>INSERT a model.<br/>We execute the following SQL internally.<br/>
+<pre>INSERT INTO {def.name} (<br/>  {fields.join(', ')}<br/>) VALUES (<br/>  {params.join(', ')}<br/>)<br/>
+</pre>
+<span style="font-weight: bold;">function:</span> update<br/>UPDATE a model.<br/>We execute the following SQL internally.<br/>
+<pre>UPDATE {def.name}<br/>  SET {fields}<br/>  WHERE id = :id</pre>
+<span style="font-weight: bold;">function:</span> deleteById aId<br/>DELETE a model by id.<br/>aId An id of the model. Integer.<br/>We execute the following SQL internally.<br/>
+<pre>DELETE FROM {def.name}<br/>  WHERE id = :id</pre>
+<span style="font-weight: bold;">function:</span> deleteAll<br/>DELETE all of models.<br/>We execute the following SQL internally.<br/>
+<pre>DELETE FROM {def.name}</pre>
+<span style="font-weight: bold;">function:</span> countAll<br/>Count all of models.<br/>We execute the following SQL internally.<br/>
+<pre>SELECT count(*) AS count<br/>  FROM {def.name}</pre>
+<span style="font-weight: bold;">function:</span> findAll<br/>Find all of models.<br/>We execute the following SQL internally.<br/>
+<pre>SELECT *<br/>  FROM {def.name}</pre>
+<span style="font-weight: bold;">function:</span> findFirst aParams<br/>Find a model with a parameter "LIMIT 1".<br/>aParams A parameter, same with Database.execute.<br/>We execute the following SQL internally.<br/>
+<pre>SELECT *<br/>  FROM {def.name}<br/>  ...Contents of aParams...<br/>  LIMIT 1 OFFSET 0</pre>
+<span style="font-weight: bold;">function:</span> find aSQL aParams<br/>Find models with a parameter.<br/>aSQL    An object or an instance of the mozIStorageStatementWrapper.<br/>aParams A parameter, same with Database.execute.<br/>We execute the following SQL internally when aParams is null, aSQL is object, and aSQL.where is string.
+<pre>SELECT *<br/>  FROM {def.name}<br/>  WHERE {sql.where}</pre>
+We execute the following SQL internally when aParams is null, aSQL is object.<br/>
+<pre>SELECT *<br/>  FROM {def.name}</pre>
+Otherwise, We do the Database.execute internally.<br/>
+<pre>Model.db.execute(sql, params).map(Model.rowToObject);</pre>
+<span style="font-weight: bold;">function:</span> findByFoo aFoo<br/>
+<span style="font-weight: bold;">function:</span> findByFooAndBarAnd... aFoo aBar ...<br/>Find models by a value of the Foo or the Bar. This is realized by hooking the __noSuchMethod__.<br/>We execute the following SQL internally.<br/>
+<pre>SELECT *<br/>  FROM {def.name}<br/>  WHERE foo = aFoo and bar = aBar and ...</pre>
+<span style="font-weight: bold;">function:</span> countByFoo aFoo<br/>
+<span style="font-weight: bold;">function:</span> countByFooAndBar... aFoo aBar ...<br/>Count models by a value of the Foo or the Bar. This is realized by hooking the __noSuchMethod__.<br/>
+We execute the following SQL internally.<br/>
+<pre>SELECT count(id) AS count<br/>  FROM {def.name}<br/>  WHERE foo = aFoo and bar = aBar and ...</pre>
+<span style="font-weight: bold;">function:</span> rowToObject aObject<br/>Construct an instance of the model from an object, except when you call the "save" method, we will call the "update".<br/>aObject An object with proper elements for the entity definition.<br/><br/>
+<h5>Entity Class</h5>
+<br/>
+<span style="font-weight: bold;">function:</span> Entity aDefinition<br/>Construct an instance of the model with the entity definition.<br/>aDefinition An object indicates the entity definition.<br/>(name property is a name of the table, fields property is a mapping between a name of entity and its type.<br/>
+<br/>
+<h4>Example.</h4>
+<br/>
+<pre>var Bookmark = Entity({
+    name : 'bookmarks',
+    fields : {
+        id           : 'INTEGER PRIMARY KEY',
+        url          : 'TEXT UNIQUE NOT NULL',
+        title        : 'TEXT',
+        date         : 'TIMESTAMP NOT NULL',
+        last_visited : 'TIMESTAMP',
+        comment      : 'TEXT',
+    }
+})
+</pre>
+<br/>
+<span style="font-weight: bold;">function:</span> createWhereClause aFields<br/>Create a string for a WHERE clause.<br/>aFields An array of parameters' name for WHERE.<br/>
+<br/>
+<span style="font-weight: bold;">function:</span> createInitializeSQL aDefinition<br/>Create a string for a "CREATE TABLE IF NOT EXISTS..." statement.<br/>aDefinition An object indicates the entity definition, same with Entity.<br/>
+<br/>
+<span style="font-weight: bold;">function:</span> createInsertSQL aDefinition<br/>Create a string for a "INSERT INTO..." statement.<br/>aDefinition An object indicates the entity definition, same with Entity.<br/>
+<br/>
+<span style="font-weight: bold;">function:</span> createUpdateSQL aDefinition<br/>Create a string for a "UPDATE ..." statement.<br/>aDefinition An object indicates the entity definition, same with Entity.<br/>
+<br/>
+<span style="font-weight: bold;">function:</span> compactSQL aSQL<br/>Remove useless whitespaces from a SQL statement and create a compact string of it.<br/>This aims to hold the variation of the statement's representation to a minimum and increase a cache-hit rate of interpreted statements.<br/>
+<br/>aSQL A string of the SQL statements.<br/>
+<br/>
+<span style="font-size: 130%;">Bibliography</span>
+<br/>
+<ul>
+  <li> <a target="_blank" href="https://developer.mozilla.org/en/Storage">Storage - MDC</a></li>
+  <li> <a target="_blank" href="https://developer.mozilla.org/en/mozIStorageStatement">mozIStorageStatement - MDC</a></li>
+  <li> <a target="_blank" href="https://developer.mozilla.org/en/mozIStorageStatementWrapper">mozIStorageStatementWrapper - MDC</a></li>
+</ul>
+<hr/>
+<h3 class="post-title entry-title" annotation="true">Prefs.jsm</h3>
+<div class="post-body entry-content">
+  <h4>What is the User Preferences?  </h4>
+  <ul>
+    <li>
+      <a href="https://developer.mozilla.org/en/nsIPrefBranch" target="_blank">
+        <span id="SPELLING_ERROR_3" class="blsp-spelling-error">nsIPrefBranch</span> - <span id="SPELLING_ERROR_4" class="blsp-spelling-error">MDC</span>
+      </a>
+    </li>
+  </ul>
+  <ul>
+    <li>
+      <a href="http://developer.mozilla.org/en/Code_snippets/Preferences" target="_blank">Preferences - <span id="SPELLING_ERROR_5" class="blsp-spelling-error">MDC</span>
+      </a>
+    </li>
+  </ul>
+  <h4>Remarks #1</h4>
+  <br/>Every preferences have a type. There are three simple types and some complex types.
+  <ul>
+    <li>
+      <span id="SPELLING_ERROR_6" class="blsp-spelling-error">boolean</span>
+    </li>
+    <li>integer</li>
+    <li>string</li>
+    <li>and some complex types.<br/>
+    </li>
+  </ul>
+  <h4>Remarks #2</h4>
+  <br/>
+  </span>Don't overlap your preference's name to others. Keep to use your original branch (ex. "extensions." or something like that) is a good manner.<br/>
+  <br/>
+  <h4>Example #1: How to handle the "javascript.options.strict" preference.</h4>
+  <ul>
+    <li>Construct a instance of <span id="SPELLING_ERROR_7" class="blsp-spelling-error">Prefs</span> Class.</li>
+  </ul>
+  <pre>//Specify a branch. Note: you must terminate it with a period.<br/>var <span id="SPELLING_ERROR_8" class="blsp-spelling-error">prefs</span> = new <span id="SPELLING_ERROR_9" class="blsp-spelling-error">Prefs</span>("javascript.options.");</pre>
+  <ul>
+    <li>Set the value of preference to true.</li>
+  </ul>
+  <pre><span id="SPELLING_ERROR_10" class="blsp-spelling-error">prefs</span>.set("strict", true);</span></pre>
+  <ul>
+    <li> Get the value of preference.</li>
+  </ul>
+  <pre><span style="font-family: times new roman;">var v = <span id="SPELLING_ERROR_11" class="blsp-spelling-error">prefs</span>.get("strict");</span></pre>
+  That's all. The library can infer a proper type for the preference automatically (and you can specify it manually if you want).<br/>
+  <br/>
+  <h4>Reference Manual</h4>
+  <br/>
+  <span style="font-weight: bold;">function:</span> <span id="SPELLING_ERROR_12" class="blsp-spelling-error">Prefs</span> <span id="SPELLING_ERROR_13" class="blsp-spelling-error">aBranchName</span>
+  <br/>Construct a new instance.<br/>
+  <span id="SPELLING_ERROR_14" class="blsp-spelling-error">aBranchName</span> A branch's name. String. You must terminate it with a period.<br/>
+  <br/>
+  <span style="font-weight: bold;">function:</span> get <span id="SPELLING_ERROR_15" class="blsp-spelling-error">aPrefName</span> <span style="font-style: italic;">&optional</span> <span id="SPELLING_ERROR_16" class="blsp-spelling-error">aDefaultValue</span> <span id="SPELLING_ERROR_17" class="blsp-spelling-error">aType</span>
+  <br/>Get the value of preference.<br/>
+  <span id="SPELLING_ERROR_18" class="blsp-spelling-error">aPrefName</span> A preference's name. String.<br/>
+  <span id="SPELLING_ERROR_19" class="blsp-spelling-error">aDefaultValue</span> A return value when the function failed to get.<br/>
+  <span id="SPELLING_ERROR_20" class="blsp-spelling-error">aType</span> A type of preference. String. Please see the table.1 below.<br/>
+  <br/>
+  <span style="font-weight: bold;">function:</span> set <span id="SPELLING_ERROR_21" class="blsp-spelling-error">aPrefName</span> <span id="SPELLING_ERROR_22" class="blsp-spelling-error">aValue</span> <span style="font-style: italic;">&optional</span> <span id="SPELLING_ERROR_23" class="blsp-spelling-error">aType</span> <span id="SPELLING_ERROR_24" class="blsp-spelling-error">aRelFileRelativeToKey</span>
+  <br/>Set the value of preference.<br/>
+  <span id="SPELLING_ERROR_25" class="blsp-spelling-error">aPrefName</span> A preference's name. String.<br/>
+  <span id="SPELLING_ERROR_26" class="blsp-spelling-error">aValue</span> A value to set.<br/>
+  <span id="SPELLING_ERROR_27" class="blsp-spelling-error">aType</span> A type of preference. String. Please see the table.2 below.<br/>
+  <span id="SPELLING_ERROR_28" class="blsp-spelling-error">aRelFileRelativeToKey</span> A keyword for the relative file path's root directory(ex. "<span id="SPELLING_ERROR_29" class="blsp-spelling-error">ProfD</span>", etc). String.<br/>
+  <br/>
+  <span style="font-weight: bold;">function:</span> clear <span id="SPELLING_ERROR_30" class="blsp-spelling-error">aPrefName</span>
+  <br/>Clear the preference.<br/>
+  <span id="SPELLING_ERROR_31" class="blsp-spelling-error">aPrefName</span> A preference's name. String.<br/>
+  <br/>
+  <span style="font-weight: bold;">function:</span> <span id="SPELLING_ERROR_32" class="blsp-spelling-error">getChildList</span>
+  <span style="font-style: italic;"> &optional</span> <span id="SPELLING_ERROR_33" class="blsp-spelling-error">aStartingAt</span>
+  <br/>Get the array of preferences' name of below the branch.<br/>
+  <span id="SPELLING_ERROR_34" class="blsp-spelling-error">aStartingAt</span> A branch's name. String.<br/>
+  <br/>
+  <span style="font-weight: bold;">Table.1: <span id="SPELLING_ERROR_35" class="blsp-spelling-error">aType</span> for get</span>
+  <br/>
+  <table border="1">
+    <tbody>
+      <tr>
+        <td style="vertical-align: top;">type<br/>
+        </td>
+        <td style="vertical-align: top;">
+          <span id="SPELLING_ERROR_36" class="blsp-spelling-error">aType</span>
+          <br/>
+        </td>
+        <td style="vertical-align: top;">calls internally<br/>
+        </td>
+      </tr>
+      <tr>
+        <td style="vertical-align: top;">
+          <span id="SPELLING_ERROR_37" class="blsp-spelling-error">boolean</span>
+        </td>
+        <td style="vertical-align: top;">"<span id="SPELLING_ERROR_38" class="blsp-spelling-error">boolean</span>"</td>
+        <td style="vertical-align: top;">
+          <span id="SPELLING_ERROR_39" class="blsp-spelling-error">getBoolPref</span>(<span id="SPELLING_ERROR_40" class="blsp-spelling-error">aPrefName</span>)</td>
+      </tr>
+      <tr>
+        <td style="vertical-align: top;">integer</td>
+        <td style="vertical-align: top;">"integer"</td>
+        <td style="vertical-align: top;">
+          <span id="SPELLING_ERROR_41" class="blsp-spelling-error">getIntPref</span>(<span id="SPELLING_ERROR_42" class="blsp-spelling-error">aPrefName</span>)</td>
+      </tr>
+      <tr>
+        <td style="vertical-align: top;">string</td>
+        <td style="vertical-align: top;">"string"</td>
+        <td style="vertical-align: top;">   <span id="SPELLING_ERROR_43" class="blsp-spelling-error">getComplexValue</span>(<span id="SPELLING_ERROR_44" class="blsp-spelling-error">aPrefName</span>, Ci.nsISupportsString).data<br/>
+        </td>
+      </tr>
+      <tr>
+        <td style="vertical-align: top;">localized string</td>
+        <td style="vertical-align: top;">"localized"</td>
+        <td style="vertical-align: top;">   <span id="SPELLING_ERROR_45" class="blsp-spelling-error">getComplexValue</span>(<span id="SPELLING_ERROR_46" class="blsp-spelling-error">aPrefName</span>, Ci.nsIPrefLocalizedString).data</td>
+      </tr>
+      <tr>
+        <td style="vertical-align: top;">absolute file path</td>
+        <td style="vertical-align: top;">"file"</td>
+        <td style="vertical-align: top;">
+          <span id="SPELLING_ERROR_47" class="blsp-spelling-error">getComplexValue</span>(<span id="SPELLING_ERROR_48" class="blsp-spelling-error">aPrefName</span>, Ci.<span id="SPELLING_ERROR_49" class="blsp-spelling-error">nsILocalFile</span>)</td>
+      </tr>
+      <tr>
+        <td style="vertical-align: top;">relative file path</td>
+        <td style="vertical-align: top;">"<span id="SPELLING_ERROR_50" class="blsp-spelling-error">relFile</span>"</td>
+        <td style="vertical-align: top;">   <span id="SPELLING_ERROR_51" class="blsp-spelling-error">getComplexValue</span>(<span id="SPELLING_ERROR_52" class="blsp-spelling-error">aPrefName</span>, Ci.<span id="SPELLING_ERROR_53" class="blsp-spelling-error">nsIRelativeFilePref</span>)</td>
+      </tr>
+    </tbody>
+  </table>
+  <br/>
+  <span style="font-weight: bold;">Table.2: <span id="SPELLING_ERROR_54" class="blsp-spelling-error">aType</span> for set</span>
+  <br/>
+  <br/>
+  <table border="1">
+    <tbody>
+      <tr>
+        <td style="vertical-align: top;">type<br/>
+        </td>
+        <td style="vertical-align: top;">
+          <span id="SPELLING_ERROR_55" class="blsp-spelling-error">aType</span>
+          <br/>
+        </td>
+        <td style="vertical-align: top;">calls internally<br/>
+        </td>
+      </tr>
+      <tr>
+        <td style="vertical-align: top;">
+          <span id="SPELLING_ERROR_56" class="blsp-spelling-error">boolean</span>
+        </td>
+        <td style="vertical-align: top;">"<span id="SPELLING_ERROR_57" class="blsp-spelling-error">boolean</span>"</td>
+        <td style="vertical-align: top;">   <span id="SPELLING_ERROR_58" class="blsp-spelling-error">setBoolPref</span>(<span id="SPELLING_ERROR_59" class="blsp-spelling-error">aPrefName</span>, !!<span id="SPELLING_ERROR_60" class="blsp-spelling-error">aValue</span>)</td>
+      </tr>
+      <tr>
+        <td style="vertical-align: top;">integer</td>
+        <td style="vertical-align: top;">"integer"</td>
+        <td style="vertical-align: top;">
+          <span id="SPELLING_ERROR_61" class="blsp-spelling-error">setIntPref</span>(<span id="SPELLING_ERROR_62" class="blsp-spelling-error">aPrefName</span>, +<span id="SPELLING_ERROR_63" class="blsp-spelling-error">aValue</span>)</td>
+      </tr>
+      <tr>
+        <td style="vertical-align: top;">string</td>
+        <td style="vertical-align: top;">"string"</td>
+        <td style="vertical-align: top;">   <span id="SPELLING_ERROR_64" class="blsp-spelling-error">setComplexValue</span>(<span id="SPELLING_ERROR_65" class="blsp-spelling-error">aPrefName</span>, Ci.<span id="SPELLING_ERROR_66" class="blsp-spelling-error">nsISupportsString</span>, <span id="SPELLING_ERROR_67" class="blsp-spelling-error">nsISupportsString's</span> instance)</td>
+      </tr>
+      <tr>
+        <td style="vertical-align: top;">localized string</td>
+        <td style="vertical-align: top;">"localized"</td>
+        <td style="vertical-align: top;">   <span id="SPELLING_ERROR_68" class="blsp-spelling-error">setComplexValue</span>(<span id="SPELLING_ERROR_69" class="blsp-spelling-error">aPrefName</span>, Ci.<span id="SPELLING_ERROR_70" class="blsp-spelling-error">nsIPrefLocalizedString</span>, <span id="SPELLING_ERROR_71" class="blsp-spelling-error">nsIPrefLocalizedString's</span> instance</td>
+      </tr>
+      <tr>
+        <td style="vertical-align: top;">absolute file path</td>
+        <td style="vertical-align: top;">"file"</td>
+        <td style="vertical-align: top;">   <span id="SPELLING_ERROR_72" class="blsp-spelling-error">setComplexValue</span>(<span id="SPELLING_ERROR_73" class="blsp-spelling-error">aPrefName</span>, Ci.<span id="SPELLING_ERROR_74" class="blsp-spelling-error">nsILocalFile</span>, <span id="SPELLING_ERROR_75" class="blsp-spelling-error">aValue</span>)</td>
+      </tr>
+      <tr>
+        <td style="vertical-align: top;">relative file path</td>
+        <td style="vertical-align: top;">"<span id="SPELLING_ERROR_76" class="blsp-spelling-error">relFile</span>"</td>
+        <td style="vertical-align: top;">      <span id="SPELLING_ERROR_77" class="blsp-spelling-error">setComplexValue</span>(<span id="SPELLING_ERROR_78" class="blsp-spelling-error">aPrefName</span>, Ci.<span id="SPELLING_ERROR_79" class="blsp-spelling-error">nsIRelativeFilePref</span>, <span id="SPELLING_ERROR_80" class="blsp-spelling-error">nsIRelativeFilePref's</span> instance)</td>
+      </tr>
+    </tbody>
+  </table>
+  <br/>Please refer the <a href="https://developer.mozilla.org/en/Code_snippets/File_I%2f%2fO#.e7.9b.b8.e5.af.be.e3.83.91.e3.82.b9_%28nsIRelativeFilePref%29" target="_blank">File I/O - <span id="SPELLING_ERROR_81" class="blsp-spelling-error">MDC</span>
+  </a> about the relative file path.
+  <div style="clear: both;"/>
+</div>
+  </body>
+</html>
