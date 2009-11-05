@@ -3,16 +3,52 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="ja" xml:lang="ja">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link type="text/css" href="hacking_guide.css" rel="stylesheet" />
-    <title>マッチFOXハッキングガイド</title>
+    <link type="text/css" href="guide.css" rel="stylesheet" />
+    <title>マッチFOXガイド</title>
   </head>
   <body>
-<h3>Firefox拡張簡単キット"マッチFOX"</h3>
+<ul>
+  <li><a href="#h3_0">Firefox拡張簡単キット"マッチFOX"</a></li>
+  <ul>
+    <li><a href="#h4_1">使い方</a></li>
+    <li><a href="#h4_2">補足</a></li>
+  </ul>
+  <li><a href="#h3_1">Strings.jsm</a></li>
+  <ul>
+    <li><a href="#h4_3">使用例</a></li>
+    <li><a href="#h4_4">リファレンスマニュアル</a></li>
+  </ul>
+  <li><a href="h3_2">Database.jsm</a></li>
+  <ul>
+    <li><a href="#h4_5">使用例</a></li>
+    <li><a href="#h4_6">TIMESTAMP型、LIST型</a></li>
+    <li><a href="#h4_7">findByFoo, findByFooAndBar, countByFoo、countByFooAndBar</a></li>
+    <li><a href="#h4_8">リファレンスマニュアル</a>
+      <ul>
+        <li><a href="#h5_0">Databaseクラス</a></li>
+        <li><a href="#h5_1">Modelクラス</a></li>
+        <li><a href="#h5_2">Entityクラス</a></li>
+      </ul>
+    </li>
+    <li><a href="#h4_9">参考文献</a></li>
+  </ul>
+  <li><a href="#h3_3">Prefs.jsm</a></li>
+  <ul>
+    <li><a href="#h4_10">ユーザ設定とは</a></li>
+    <ul>
+      <li><a href="#h5_3">ユーザ設定の項目の値には型があるので気をつけます。</a></li>
+      <li><a href="#h5_4">項目名が他人様のとカブらないように気をつけます。</a></li>
+    </ul>
+    <li><a href="#h4_11">使用例</a></li>
+    <li><a href="#h4_12">リファレンスマニュアル</a></li>
+  </ul>
+</ul>
+<h3><a name="h3_0">Firefox拡張簡単キット"マッチFOX"</a></h3>
 <p>Firefox拡張を作りたいけど、ややこしくて手がつけられない、そんなあなたに・・・！</p>
 <p>Ruby on Rails みたいに、scaffold(骨組み)を作ってくれます。</p>
 <p>この骨組みには、はてなブックマーク拡張から取り出したエッセンスが入っていて、</p>
 <p>その道のプロフェッショナルと同じスタートラインから開発できます。</p>
-<h4>使い方</h4>
+<h4><a name="h4_1">使い方</a></h4>
 <p>インストールしたら、Matchfoxサイドバー(Ctrl+!)を開きます。</p>
 <img src="guide00.png" alt="guide00.png"/>
 <p>骨組みの、"インストール先のディレクトリ"を"参照..."します。</p>
@@ -20,14 +56,14 @@
 <p>新しいフォルダの作成(M)で、"sample@mozdev.org"というちょっと変な名前のフォルダを作ります。</p>
 
 <p>最後に、一番下の"骨組みを作る"を押します。</p>
-<h4>補足</h4>
+<h4><a name="h4_2">補足</a></h4>
 <p>なぜサイドバーがキットに入っているのかというと、サイドバーはパカパカするだけでリロードできて</p>
 <p>プログラムの確認が楽なんで、はじめのうちはサイドバーで動くものを作るのがおすすめだからです。</p>
 <p>おまけで、アドオンの"設定"から"開発者におすすめの設定"ができます。</p>
 <img src="guide03.png" alt="guide03.png"/>
-<h3>Strings.jsm</h3>
+<h3><a name="h3_1">Strings.jsm</a></h3>
 文字列のローカライズ。
-<h4>使用例</h4>
+<h4><a name="h4_3">使用例</a></h4>
 <ul><li>javascript</li></ul>
 <pre class="syntax-highlight">
 <span class="synIdentifier">function</span> hello() <span class="synIdentifier">{</span>
@@ -44,7 +80,7 @@
 <pre class="syntax-highlight">hello = こんにちは、世界。
 </pre>
 
-<h4>リファレンスマニュアル</h4>
+<h4><a name="h4_4">リファレンスマニュアル</a></h4>
 <pre><span class="bold">function:</span> Strings aPropertiesFile
 新しいインスタンスを作ります。
 aPropertiesFile StringBundleに使うpropertiesファイルのURI。文字列。
@@ -55,8 +91,8 @@ aName 項目名。文字列。
 aArgs printfのような文字列フォーマットに渡す引数。文字列の配列。
 </pre>
 <hr/>
-<h3>Database.jsm</h3>
-<h4>使用例</h4>
+<h3><a name="h3_2">Database.jsm</a></h3>
+<h4><a name="h4_5">使用例</a></h4>
 <pre class="syntax-highlight"><span class="synComment">// Bookmarkモデルを生成。</span>
 <span class="synIdentifier">var</span> Bookmark = Entity(<span class="synIdentifier">{</span>
     name : <span class="synConstant">'bookmarks'</span>,
@@ -94,15 +130,15 @@ Bookmark.initialize();
 <span class="synComment">// データベースを閉じる</span>
 db.close();
 </pre>
-<h4>TIMESTAMP型、LIST型</h4>
+<h4><a name="h4_6">TIMESTAMP型、LIST型</a></h4>
 <p>TIMESTAMP型を指定すると、JavascriptのDateオブジェクトを透過的に読み書きできます。</p>
 <p>(SQLiteには日付型がないので実際にはINTEGER型で"Date.getTime()の値"をデータベースに保存しています)</p>
 <p>同様に、LIST型を指定すると、JavascriptのArrayオブジェクトを透過的に読み書きできます。</p>
 <p>(実際にはTEXT型で"Arrayから作った<a href="http://d.hatena.ne.jp/keyword/CSV" class="keyword">CSV</a>的な文字列"を保存しています。)</p>
-<h4>findByFoo, findByFooAndBar, countByFoo、countByFooAndBar</h4>
+<h4><a name="h4_7">findByFoo, findByFooAndBar, countByFoo、countByFooAndBar</a></h4>
 <p>モデルのFooやBarの値で、検索やカウントができます。これは__noSuchMethod__をフックして実現してます。</p>
-<h4>リファレンスマニュアル</h4>
-<h5>Databaseクラス</h5>
+<h4><a name="h4_8">リファレンスマニュアル</a></h4>
+<h5><a name="h5_0">Databaseクラス</a></h5>
 <pre><span class="bold">function:</span> Database aFile
 Databaseのインスタンスを生成します。
 aFile SQLiteのデータベースファイルの場所。nsIFlieのインスタンス。
@@ -207,7 +243,7 @@ aName テーブル名。文字列。
 <span class="bold">function:</span> vacuum
 データベースの無駄な領域を除去します。
 </pre>
-<h5>Modelクラス</h5>
+<h5><a name="h5_1">Modelクラス</a></h5>
 <pre><span class="bold">function:</span> save
 Modelをデータベースに保存します。初回はinsert、次からはupdateで保存します。
 特にinsert時には、Modelにidを割り振ります。
@@ -319,7 +355,7 @@ SELECT count(id) AS count
 オブジェクトからModelのインスタンスを生成します。ただし、saveのときupdateが動きます。
 aObject Entityの定義に沿った内容のオブジェクト。
 </pre>
-<h5>Entityクラス</h5>
+<h5><a name="h5_2">Entityクラス</a></h5>
 <pre><span class="bold">function:</span> Entity aDefinition
 エンティティ定義に沿ったModelのインスタンスを生成します。
 aDefinition エンティティ定義を示したオブジェクト。
@@ -363,31 +399,31 @@ SQL文から不要な空白などを取り除き短く整形したSQL文の文�
 表記のぶれを無くし、解析後の文のキャッシュヒットを増やす目的があります。
 aSQL SQL文の文字列。
 </pre>
-<h4>参考文献</h4>
+<h4><a name="h4_9">参考文献</a></h4>
 <ul>
   <li> <a target="_blank" href="https://developer.mozilla.org/ja/Storage">Storage - MDC</a></li>
   <li> <a target="_blank" href="https://developer.mozilla.org/en/mozIStorageStatement">mozIStorageStatement - MDC</a></li>
   <li> <a target="_blank" href="https://developer.mozilla.org/en/mozIStorageStatementWrapper">mozIStorageStatementWrapper - MDC</a></li>
 </ul>
 <hr/>
-<h3>Prefs.jsm</h3>
-<h4>ユーザ設定とは</h4>
+<h3><a name="h3_3">Prefs.jsm</h3></h3>
+<h4><a name="h4_10">ユーザ設定とは</a></h4>
 <ul>
   <li> <a target="_blank" href="http://developer.mozilla.org/en/nsIPrefBranch">nsIPrefBranch - MDC</a></li>
   <li> <a target="_blank" href="http://developer.mozilla.org/ja/Code_snippets/Preferences">Preferences - MDC</a></li>
 </ul>
 
-<h5> ユーザ設定の項目の値には型があるので気をつけます。</h5>
+<h5><a name="h5_3">ユーザ設定の項目の値には型があるので気をつけます。</a></h5>
 <ul>
 <li> boolean (真偽値)</li>
 <li> integer (整数)</li>
 <li> string  (文字列)</li>
 <li> など。</li>
 </ul>
-<h5> 項目名が他人様のとカブらないように気をつけます。</h5>
+<h5><a name="h5_4">項目名が他人様のとカブらないように気をつけます。</a></h5>
 <p>"ブランチ"にまとめるように心がけましょう。</p>
 <p>例えば拡張で使う項目名には"extensions."ブランチを使いましょう。</p>
-<h4>使用例</h4>
+<h4><a name="h4_11">使用例</a></h4>
 <p>"javascript.options.strict"オプションを扱う</p>
 <p>1. ライブラリを new する。</p>
 <pre class="syntax-highlight"><span class="synComment">//ブランチを指定します。ピリオドで終わるのがポイント。</span>
@@ -400,7 +436,7 @@ aSQL SQL文の文字列。
 <pre class="syntax-highlight"><span class="synIdentifier">var</span> v = prefs.get(<span class="synConstant">"strict"</span>);
 </pre>
 <p>項目の型はライブラリが自動で判断してくれます(手動で指定もできます)。</p>
-<h4> リファレンスマニュアル</h4>
+<h4><a name="h4_12">リファレンスマニュアル</a></h4>
 <pre><span class="bold">function:</span> Prefs aBranchName
 新しいインスタンスを作ります。
 aBranchName ブランチ名。文字列。ブランチ名はピリオドで終わる必要があります。

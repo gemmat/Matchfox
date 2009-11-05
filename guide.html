@@ -3,14 +3,51 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="ja" xml:lang="ja">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link type="text/css" href="hacking_guide.css" rel="stylesheet" />
-    <title>Hacking Guide for The Matchfox</title>
+    <link type="text/css" href="guide.css" rel="stylesheet" />
+    <title>Matchfox Guide</title>
   </head>
   <body>
-<h3>Firefox add-on Kit "Matchfox"</h3>
+<ul>
+  <li><a href="#h3_0">Firefox add-on Kit "Matchfox"</a></li>
+  <ul>
+    <li><a href="#h4_1">How to use</a></li>
+    <li><a href="#h4_2">Note</a></li>
+  </ul>
+  <li><a href="#h3_1">Strings.jsm</a></li>
+  <ul>
+    <li><a href="#h4_3">Example</a></li>
+    <li><a href="#h4_4">Reference Manual</a></li>
+  </ul>
+  <li><a href="h3_2">Database.jsm</a></li>
+  <ul>
+    <li><a href="#h4_5">Example</a></li>
+    <li><a href="#h4_6">Remarks#1: TIMESTAMP type, LIST type.</a></li>
+    <li><a href="#h4_7">Remarks#2: findByFoo, findByFooAndBar, countByFoo、countByFooAndBar</a></li>
+    <li><a href="#h4_8">Reference Manual</a>
+      <ul>
+        <li><a href="#h5_0">Database Class</a></li>
+        <li><a href="#h5_1">Model Class</a></li>
+        <li><a href="#h5_2">Entity Class</a></li>
+      </ul>
+    </li>
+    <li><a href="#h4_9">Example</a></li>
+  </ul>
+  <li><a href="#h3_3">Prefs.jsm</a></li>
+  <ul>
+    <li><a href="#h4_10">What is the User Preferences? </a></li>
+    <ul>
+      <li><a href="#h5_3">Remarks #1: Every preferences have a type.</a></li>
+      <li><a href="#h5_4">Remarks #2: Don't overlap your preference's name to others.</a></li>
+    </ul>
+    <li><a href="#h4_11">Example #1: How to handle the "javascript.options.strict" preference.</a></li>
+    <li><a href="#h4_12">Reference Manual</a></li>
+  </ul>
+</ul>
+
+<h3><a name="h3_0">Firefox add-on Kit "Matchfox"</a></h3>
 <p>The best generator of a scaffold for Firefox add-on developpers.</p>
 <p>This scaffolds contains some essencial libraries and you can get started in 5 minites.
-<h4>How to use</h4>
+<h4><a name="h4_1">How to use</a></h4>
 <p>Install it, and open a sidebar of the Matchfox.(Ctrl+!)</p>
 <img src="guide00.png" alt="guide00.png"/>
 <p>Click "Browse..." for a target folder of the scaffold.</p>
@@ -18,15 +55,15 @@
 <p>Click "Create a new folder(M)", and create a folder named "sample@mozdev.org" (Yes, it's a strange name a bit.) or something like that.</p>
 <p>Lastly, click "Create a scaffold." at bottom.</p>
 
-<h4>Note</h4>
+<h4><a name="h4_2">Note</a></h4>
 <p>Why does the scaffold make a sidebar for you? Because we recommend you to develop something works in the sidebar then you can easily modify and check your codes by reloading it rapidly.</p>
 <p>Extra: From a "Preferences" of the Matchfox, you can configure your firefox suitable for developpers.</p>
 <img src="guide03.png" alt="guide03.png"/>
 
-    <h3 class="post-title entry-title" annotation="true">Strings.jsm</h3>
+    <h3 class="post-title entry-title" annotation="true"><a name="h3_1">Strings.jsm</a></h3>
     <div class="post-body entry-content">
       Localized string.
-<h4>Example</h4>
+<h4><a name="h4_3">Example</a></h4>
 <ul><li>javascript</li></ul>
 <pre class="syntax-highlight">
 <span class="synIdentifier">function</span> hello() <span class="synIdentifier">{</span>
@@ -42,15 +79,15 @@
 <ul><li>locale/ja/sidebar.properties</li></ul>
 <pre class="syntax-highlight">hello = こんにちは、世界。
 </pre>
-<h4>Reference Manual</h4>
+<h4><a name="h4_4">Reference Manual</a></h4>
 <br>
 <span style="font-weight: bold;">function:</span> Strings aPropertiesFile<br/>Construct an instance of the Strings class.<br/>aPropertiesFile An URI for a properties file. String.<br/><br/><span style="font-weight: bold;">function:</span> get aName &optional aArgs<br/>Get a localized string.<br/>aName A name of key. String.<br/>aArgs An arguments for a formatted string like the printf. Array of string.
     <hr/>
-    <h3 class="post-title entry-title" annotation="true">Database.jsm</h3>
+    <h3 class="post-title entry-title" annotation="true"><a name="h3_2">Database.jsm</a></h3>
 <div class="post-body entry-content">
   OR Mapper for the SQLite RDBMS builted in the Firefox. Developped by tombloo.<br/>
 <br/>
-<h4>Example</h4>
+<h4><a name="h4_5">Example</a></h4>
 <pre class="syntax-highlight"><span class="synComment">// Make a Model for "Bookmark".</span>
 <span class="synIdentifier">var</span> Bookmark = Entity(<span class="synIdentifier">{</span>
     name : <span class="synConstant">'bookmarks'</span>,
@@ -85,16 +122,16 @@ Bookmark.initialize();
 <span class="synComment">// Close the database.</span>
 db.close();
 </pre>
-<h4>Remarks#1: TIMESTAMP type, LIST type.</h4>
+<h4><a name="h4_6">Remarks#1: TIMESTAMP type, LIST type.</a></h4>
 <br/>By specifing a TIMESTAMP type, you can read and write the Javascript's Date object transparently.<br/>(Note: Actually the SQLite doesn't have the Date type, so the library store the value of "Date.getTime()" as INTEGER type.)<br/>
 <br/>Similarly, by specifing a LIST type, you can do the Array object transparently.<br/>(Note: The library store the value of "A CSV-format string made from the array" as TEXT type.)<br/>
 <br/>
-<h4>Remarks#2: findByFoo, findByFooAndBar, countByFoo、countByFooAndBar</h4>
+<h4><a name="h4_7">Remarks#2: findByFoo, findByFooAndBar, countByFoo、countByFooAndBar</a></h4>
 <br/>You can find and count the model with its value of "Foo" or "Bar". This is realized by hooking the __noSuchMethod__.<br/>
 <br/>
-<h4>Reference Manual</h4>
+<h4><a name="h4_8">Reference Manual</a></h4>
 <br/>
-<h5>Database Class</h5>
+<h5><a name="h5_0">Database Class</a></h5>
 <br/>
 <span style="font-weight: bold;">function:</span> Database aFile<br/>Construct an instance of the Database class.<br/>aFile a file path of the database file of the SQLite. An instance of nsIFlie.<br/>
 <br/>
@@ -135,7 +172,7 @@ db.close();
 <br/>
 <span style="font-weight: bold;">function:</span> vacuum<br/>Vacuum a waste of the data area in the database.<br/>
 <br/>
-<h5>Model Class</h5>
+<h5><a name="h5_1">Model Class</a></h5>
 <br/>
 <span style="font-weight: bold;">function:</span> save<br/>Save a model to the database. Firstly do with "insert" with a generated id, nextly with "update".<br/>
 <br/>
@@ -176,11 +213,11 @@ Otherwise, We do the Database.execute internally.<br/>
 We execute the following SQL internally.<br/>
 <pre>SELECT count(id) AS count<br/>  FROM {def.name}<br/>  WHERE foo = aFoo and bar = aBar and ...</pre>
 <span style="font-weight: bold;">function:</span> rowToObject aObject<br/>Construct an instance of the model from an object, except when you call the "save" method, we will call the "update".<br/>aObject An object with proper elements for the entity definition.<br/><br/>
-<h5>Entity Class</h5>
+<h5><a name="h5_2">Entity Class</a></h5>
 <br/>
 <span style="font-weight: bold;">function:</span> Entity aDefinition<br/>Construct an instance of the model with the entity definition.<br/>aDefinition An object indicates the entity definition.<br/>(name property is a name of the table, fields property is a mapping between a name of entity and its type.<br/>
 <br/>
-<h4>Example.</h4>
+<h4><a name="h4_9">Example</a></h4>
 <br/>
 <pre>var Bookmark = Entity({
     name : 'bookmarks',
@@ -214,9 +251,9 @@ We execute the following SQL internally.<br/>
   <li> <a target="_blank" href="https://developer.mozilla.org/en/mozIStorageStatementWrapper">mozIStorageStatementWrapper - MDC</a></li>
 </ul>
 <hr/>
-<h3 class="post-title entry-title" annotation="true">Prefs.jsm</h3>
+<h3 class="post-title entry-title" annotation="true"><a name="h3_3">Prefs.jsm</a></h3>
 <div class="post-body entry-content">
-  <h4>What is the User Preferences?  </h4>
+  <h4><a name="h4_10">What is the User Preferences?</a></h4>
   <ul>
     <li>
       <a href="https://developer.mozilla.org/en/nsIPrefBranch" target="_blank">
@@ -230,8 +267,8 @@ We execute the following SQL internally.<br/>
       </a>
     </li>
   </ul>
-  <h4>Remarks #1</h4>
-  <br/>Every preferences have a type. There are three simple types and some complex types.
+  <h5><a name="h5_3">Remarks #1: Every preferences have a type.</a></h5>
+  <br/>There are three simple types and some complex types.
   <ul>
     <li>
       <span id="SPELLING_ERROR_6" class="blsp-spelling-error">boolean</span>
@@ -241,11 +278,10 @@ We execute the following SQL internally.<br/>
     <li>and some complex types.<br/>
     </li>
   </ul>
-  <h4>Remarks #2</h4>
+  <h5><a name="h5_4">Remarks #2: Don't overlap your preference's name to others.</a></h5>
+  <br/> Keep to use your original branch (ex. "extensions." or something like that) is a good manner.<br/>
   <br/>
-  </span>Don't overlap your preference's name to others. Keep to use your original branch (ex. "extensions." or something like that) is a good manner.<br/>
-  <br/>
-  <h4>Example #1: How to handle the "javascript.options.strict" preference.</h4>
+  <h4><a name="h4_11">Example #1: How to handle the "javascript.options.strict" preference.</a></h4>
   <ul>
     <li>Construct a instance of <span id="SPELLING_ERROR_7" class="blsp-spelling-error">Prefs</span> Class.</li>
   </ul>
@@ -260,7 +296,7 @@ We execute the following SQL internally.<br/>
   <pre><span style="font-family: times new roman;">var v = <span id="SPELLING_ERROR_11" class="blsp-spelling-error">prefs</span>.get("strict");</span></pre>
   That's all. The library can infer a proper type for the preference automatically (and you can specify it manually if you want).<br/>
   <br/>
-  <h4>Reference Manual</h4>
+  <h4><a name="h4_12">Reference Manual</a></h4>
   <br/>
   <span style="font-weight: bold;">function:</span> <span id="SPELLING_ERROR_12" class="blsp-spelling-error">Prefs</span> <span id="SPELLING_ERROR_13" class="blsp-spelling-error">aBranchName</span>
   <br/>Construct a new instance.<br/>
